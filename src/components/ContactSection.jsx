@@ -13,7 +13,7 @@ export default function ContactSection({
   const [copied, setCopied] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const form = useRef();
+  const form = useRef(null);
   const sectionRef = useRef(null);
   const bigTextRef = useRef(null);
   const formRef = useRef(null);

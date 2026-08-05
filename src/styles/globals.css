@@ -37,23 +37,28 @@
   --border-accent: rgba(34, 211, 238, 0.25);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* These MUST stay inside @layer base. Unlayered CSS outranks every Tailwind
+   layer in v4, so an unlayered `*` reset would silently beat utilities like
+   px-6, py-20 and mx-auto and flatten the whole layout. */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-body {
-  font-family: var(--font-outfit);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  body {
+    font-family: var(--font-outfit);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
 }
 
 /* Scrollbar */
