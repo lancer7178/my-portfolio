@@ -7,7 +7,7 @@ export default function UiUxPageIntro({ designProcess = [] }) {
   return (
     <>
       <section className="relative overflow-hidden px-6 py-20 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#06060a] via-[#0a0a12] to-[#050508]" />
+        <div className="absolute inset-0 bg-linear-to-br from-dark via-[#0a0a12] to-[#050508]" />
         <div className="absolute top-10 left-8 w-72 h-72 rounded-full bg-[#3B82F6]/10 blur-3xl" />
         <div className="absolute bottom-0 right-10 w-72 h-72 rounded-full bg-[#6EE7B7]/10 blur-3xl" />
 
@@ -20,7 +20,7 @@ export default function UiUxPageIntro({ designProcess = [] }) {
           <span className="inline-block px-4 py-2 text-sm font-semibold text-[#6EE7B7] bg-[#6EE7B7]/10 border border-[#6EE7B7]/25 rounded-full mb-6">
             Dedicated Design Page
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight bg-linear-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] bg-clip-text text-transparent">
             UI/UX Experience & Figma Projects
           </h1>
           <p className="mt-6 text-gray-300 max-w-3xl mx-auto leading-relaxed">

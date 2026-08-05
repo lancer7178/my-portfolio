@@ -80,8 +80,8 @@ export default function Navbar() {
       }`}
     >
       <div className="flex items-center gap-1 px-4 py-3 rounded-full glass glow-accent">
-        <span className="hidden sm:flex items-center gap-1.5 mono text-[10px] text-[#555570] mr-3 whitespace-nowrap">
-          <span className="w-1.5 h-1.5 bg-[#22D3EE] rounded-full pulse-dot" />
+        <span className="hidden sm:flex items-center gap-1.5 mono text-[10px] text-txt-muted mr-3 whitespace-nowrap">
+          <span className="w-1.5 h-1.5 bg-accent-cyan rounded-full pulse-dot" />
           EG / {currentTime}
         </span>
 
@@ -94,12 +94,12 @@ export default function Navbar() {
               title={item.label}
               className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 group ${
                 isActive
-                  ? "bg-gradient-to-r from-[#22D3EE] via-[#818CF8] to-[#C084FC] text-white scale-110 shadow-lg shadow-[#818CF8]/30"
-                  : "text-[#555570] hover:text-[#EAEAEF] hover:bg-[#1A1A2C]"
+                  ? "bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet text-white scale-110 shadow-lg shadow-accent-indigo/30"
+                  : "text-txt-muted hover:text-txt-primary hover:bg-dark-elevated"
               }`}
             >
               <span className="text-base">{item.icon}</span>
-              <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-[10px] mono bg-[#1A1A2C] text-[#EAEAEF] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+              <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-[10px] mono bg-dark-elevated text-txt-primary opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                 {item.label}
               </span>
             </button>

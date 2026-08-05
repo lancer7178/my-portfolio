@@ -117,7 +117,7 @@ export default function SkillsSection() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-gradient-to-b from-[#06060A] via-[#08080F] to-[#06060A] text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-linear-to-b from-dark via-dark-surface to-dark text-white overflow-hidden"
     >
       <div
         ref={numberRef}
@@ -129,7 +129,7 @@ export default function SkillsSection() {
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <div ref={headerRef} className="mb-20">
-          <p className="mono text-xs text-[#22D3EE] tracking-[0.3em] mb-4">
+          <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">
             {"// TECH STACK"}
           </p>
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
@@ -137,9 +137,9 @@ export default function SkillsSection() {
             <span className="text-outline-accent">SET</span>
           </h2>
           <div className="flex gap-2 mt-6">
-            <div className="h-1 w-16 bg-gradient-to-r from-[#22D3EE] to-[#818CF8] rounded-full" />
-            <div className="h-1 w-8 bg-[#818CF8]/50 rounded-full" />
-            <div className="h-1 w-4 bg-[#C084FC]/40 rounded-full" />
+            <div className="h-1 w-16 bg-linear-to-r from-accent-cyan to-accent-indigo rounded-full" />
+            <div className="h-1 w-8 bg-accent-indigo/50 rounded-full" />
+            <div className="h-1 w-4 bg-accent-violet/40 rounded-full" />
           </div>
         </div>
 
@@ -150,13 +150,13 @@ export default function SkillsSection() {
           {skillCategories.map((category, catIdx) => (
             <div
               key={catIdx}
-              className="group p-4 sm:p-6 rounded-2xl bg-[#10101A]/70 border border-[#1A1A2C] hover:border-[#22D3EE]/25 transition-all duration-500 backdrop-blur-sm"
+              className="group p-4 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-elevated hover:border-accent-cyan/25 transition-all duration-500 backdrop-blur-sm"
             >
               <div className="flex items-center justify-between mb-6">
-                <span className="mono text-[10px] text-[#555570]">
+                <span className="mono text-[10px] text-txt-muted">
                   {category.label}
                 </span>
-                <span className="mono text-[10px] text-[#22D3EE]">
+                <span className="mono text-[10px] text-accent-cyan">
                   CAPACITY
                 </span>
               </div>
@@ -166,10 +166,10 @@ export default function SkillsSection() {
                   return (
                     <div key={skillIdx}>
                       <div className="flex justify-between mono text-xs mb-2">
-                        <span className="text-[#EAEAEF] font-medium">
+                        <span className="text-txt-primary font-medium">
                           {skill.name}
                         </span>
-                        <span className="text-[#555570]">{skill.level}%</span>
+                        <span className="text-txt-muted">{skill.level}%</span>
                       </div>
                       <div className="capacity-bar">
                         <div
@@ -226,7 +226,7 @@ export default function SkillsSection() {
           ].map((skill, idx) => (
             <span
               key={idx}
-              className="px-4 py-2 text-xs mono text-[#8888A0] bg-[#10101A]/50 border border-[#1A1A2C] rounded-full hover:border-[#22D3EE]/30 hover:text-[#22D3EE] transition-all duration-300 cursor-default"
+              className="px-4 py-2 text-xs mono text-txt-secondary bg-dark-card/50 border border-dark-elevated rounded-full hover:border-accent-cyan/30 hover:text-accent-cyan transition-all duration-300 cursor-default"
             >
               {skill}
             </span>

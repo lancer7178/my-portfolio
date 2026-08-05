@@ -63,28 +63,28 @@ function ExperienceCard({ item, idx }) {
       transition={{ delay: idx * 0.12, duration: 0.6, ease: "easeOut" }}
     >
       {/* Glow orb */}
-      <div className="absolute -top-8 -right-8 w-32 h-32 bg-[#22D3EE] rounded-full blur-[60px] opacity-0 group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none" />
+      <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent-cyan rounded-full blur-[60px] opacity-0 group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none" />
 
       {/* Step number */}
       <div className="flex items-center gap-3 mb-3">
-        <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#22D3EE]/15 to-[#818CF8]/10 border border-[#22D3EE]/20 text-[#22D3EE] text-sm font-bold font-mono">
+        <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-linear-to-br from-accent-cyan/15 to-accent-indigo/10 border border-accent-cyan/20 text-accent-cyan text-sm font-bold font-mono">
           {String(idx + 1).padStart(2, "0")}
         </span>
-        <span className="text-lg text-[#22D3EE]/60">
+        <span className="text-lg text-accent-cyan/60">
           {icons[idx % icons.length]}
         </span>
       </div>
 
-      <h3 className="text-lg font-bold font-outfit text-[#EAEAEF] group-hover:text-[#22D3EE] transition-colors duration-300 mb-2">
+      <h3 className="text-lg font-bold font-outfit text-txt-primary group-hover:text-accent-cyan transition-colors duration-300 mb-2">
         {item.title}
       </h3>
-      <div className="h-0.5 w-10 bg-gradient-to-r from-[#22D3EE]/50 to-[#818CF8]/30 rounded-full group-hover:w-16 transition-all duration-500 mb-4" />
-      <p className="text-sm text-[#555570] leading-relaxed flex-1">
+      <div className="h-0.5 w-10 bg-linear-to-r from-accent-cyan/50 to-accent-indigo/30 rounded-full group-hover:w-16 transition-all duration-500 mb-4" />
+      <p className="text-sm text-txt-muted leading-relaxed flex-1">
         {item.description}
       </p>
 
       {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#22D3EE]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-accent-cyan/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </motion.article>
   );
 }
@@ -100,7 +100,7 @@ function ProjectCard3D({ project, idx, isActive, onSelect }) {
       onMouseLeave={onMouseLeave}
       style={style}
       className={`project-card-3d group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer ${
-        isActive ? "ring-1 ring-[#22D3EE]/40" : ""
+        isActive ? "ring-1 ring-accent-cyan/40" : ""
       }`}
       initial={{ opacity: 0, y: 50, rotateY: -8 }}
       whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
@@ -108,7 +108,7 @@ function ProjectCard3D({ project, idx, isActive, onSelect }) {
       transition={{ delay: idx * 0.1, duration: 0.6, ease: "easeOut" }}
     >
       {/* Image */}
-      <div className="relative w-full h-52 overflow-hidden bg-gradient-to-br from-[#10101A] to-[#08080F]">
+      <div className="relative w-full h-52 overflow-hidden bg-linear-to-br from-dark-card to-dark-surface">
         <Image
           src={project.image || FALLBACK_DATA_URI}
           alt={project.title}
@@ -118,7 +118,7 @@ function ProjectCard3D({ project, idx, isActive, onSelect }) {
           unoptimized={!project.image || project.image.startsWith("http")}
         />
         {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#06060A] via-[#06060A]/30 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-linear-to-t from-dark via-dark/30 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
         {/* Type badge */}
         <span className="absolute top-3 left-3 mono text-[10px] text-white/70 bg-black/50 px-2.5 py-1 rounded-lg backdrop-blur-md border border-white/5">
           {project.type || "DESIGN"}
@@ -127,21 +127,21 @@ function ProjectCard3D({ project, idx, isActive, onSelect }) {
 
       {/* Content */}
       <div className="flex-1 flex flex-col p-6 gap-3 bg-[#0A0A14]/90">
-        <h4 className="text-lg font-bold font-outfit text-[#EAEAEF] group-hover:text-[#22D3EE] transition-colors duration-300">
+        <h4 className="text-lg font-bold font-outfit text-txt-primary group-hover:text-accent-cyan transition-colors duration-300">
           {project.title}
         </h4>
-        <div className="h-0.5 w-8 bg-gradient-to-r from-[#22D3EE]/50 to-[#818CF8]/30 rounded-full group-hover:w-14 transition-all duration-500" />
-        <p className="text-sm text-[#555570] leading-relaxed flex-grow line-clamp-3">
+        <div className="h-0.5 w-8 bg-linear-to-r from-accent-cyan/50 to-accent-indigo/30 rounded-full group-hover:w-14 transition-all duration-500" />
+        <p className="text-sm text-txt-muted leading-relaxed grow line-clamp-3">
           {project.description}
         </p>
 
         {/* Buttons */}
-        <div className="flex gap-3 pt-3 border-t border-[#1A1A2C]/60">
+        <div className="flex gap-3 pt-3 border-t border-dark-elevated/60">
           {(project.embedUrl || project.liveEmbedUrl) && (
             <button
               type="button"
               onClick={() => onSelect(idx)}
-              className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-[#22D3EE]/90 via-[#818CF8]/85 to-[#C084FC]/80 hover:from-[#22D3EE] hover:via-[#818CF8] hover:to-[#C084FC] transition-all duration-300 shadow-lg shadow-[#818CF8]/12 hover:shadow-[#818CF8]/25 hover:scale-[1.03] active:scale-95"
+              className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-sm text-white bg-linear-to-r from-accent-cyan/90 via-accent-indigo/85 to-accent-violet/80 hover:from-accent-cyan hover:via-accent-indigo hover:to-accent-violet transition-all duration-300 shadow-lg shadow-accent-indigo/12 hover:shadow-accent-indigo/25 hover:scale-[1.03] active:scale-95"
             >
               Preview
             </button>
@@ -151,7 +151,7 @@ function ProjectCard3D({ project, idx, isActive, onSelect }) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center px-4 py-2.5 rounded-xl font-semibold text-sm text-[#22D3EE] bg-[#22D3EE]/5 border border-[#22D3EE]/12 hover:border-[#22D3EE]/50 hover:bg-[#22D3EE]/10 transition-all duration-300 hover:scale-[1.03] active:scale-95"
+              className="flex-1 flex items-center justify-center px-4 py-2.5 rounded-xl font-semibold text-sm text-accent-cyan bg-accent-cyan/5 border border-accent-cyan/12 hover:border-accent-cyan/50 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-[1.03] active:scale-95"
             >
               Open Figma
             </a>
@@ -195,11 +195,11 @@ export default function UiUxFigmaSection({
   return (
     <section
       id="uiux"
-      className="relative pt-20 md:pt-1 pb-6 md:pb-20 px-6 md:px-12 bg-gradient-to-b from-[#06060A] via-[#05050A] to-[#06060A] text-white overflow-hidden"
+      className="relative pt-20 md:pt-1 pb-6 md:pb-20 px-6 md:px-12 bg-linear-to-b from-dark via-[#05050A] to-dark text-white overflow-hidden"
     >
       {/* Ambient glow blobs */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#818CF8] blur-[250px] opacity-[0.04] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#22D3EE] blur-[200px] opacity-[0.05] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-125 h-125 bg-accent-indigo blur-[250px] opacity-[0.04] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-accent-cyan blur-[200px] opacity-[0.05] rounded-full pointer-events-none" />
 
       {/* Orbiting dots */}
       <div className="orbit-container absolute top-20 right-20 w-32 h-32 pointer-events-none hidden lg:block">
@@ -232,17 +232,17 @@ export default function UiUxFigmaSection({
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <p className="mono text-xs text-[#22D3EE] tracking-[0.3em] mb-4">{`// UI/UX & FIGMA`}</p>
+          <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// UI/UX & FIGMA`}</p>
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
             <span className="text-white italic">DESIGN </span>
             <span className="text-outline-accent italic">PROJECTS</span>
           </h2>
           <div className="flex gap-2 mt-6">
-            <div className="h-1 w-16 bg-gradient-to-r from-[#22D3EE] to-[#818CF8] rounded-full" />
-            <div className="h-1 w-8 bg-[#818CF8]/50 rounded-full" />
-            <div className="h-1 w-4 bg-[#C084FC]/40 rounded-full" />
+            <div className="h-1 w-16 bg-linear-to-r from-accent-cyan to-accent-indigo rounded-full" />
+            <div className="h-1 w-8 bg-accent-indigo/50 rounded-full" />
+            <div className="h-1 w-4 bg-accent-violet/40 rounded-full" />
           </div>
-          <p className="mt-6 text-[#555570] max-w-2xl text-base leading-relaxed">
+          <p className="mt-6 text-txt-muted max-w-2xl text-base leading-relaxed">
             {summary ||
               "A complete showcase of my design workflow, Figma projects, and user-centered process from idea to handoff."}
           </p>
@@ -252,7 +252,7 @@ export default function UiUxFigmaSection({
         {uiuxExperience.length > 0 && (
           <div className="mb-16">
             <motion.p
-              className="mono text-xs text-[#818CF8] tracking-[0.3em] mb-8"
+              className="mono text-xs text-accent-indigo tracking-[0.3em] mb-8"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -260,7 +260,7 @@ export default function UiUxFigmaSection({
 
             <div className="relative grid md:grid-cols-3 gap-5">
               {/* Connector line (desktop) */}
-              <div className="step-connector hidden md:block absolute top-[34px] left-[calc(16.66%+20px)] right-[calc(16.66%+20px)] h-[2px]" />
+              <div className="step-connector hidden md:block absolute top-8.5 left-[calc(16.66%+20px)] right-[calc(16.66%+20px)] h-0.5" />
 
               {uiuxExperience.map((item, idx) => (
                 <ExperienceCard
@@ -282,32 +282,32 @@ export default function UiUxFigmaSection({
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <p className="mono text-xs text-[#22D3EE] tracking-[0.3em] mb-4">{`// LIVE PREVIEW`}</p>
+            <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// LIVE PREVIEW`}</p>
             <h3 className="text-2xl font-bold font-outfit text-white mb-6">
               Figma Interactive Preview
             </h3>
             <div className="preview-frame rounded-2xl p-1 sm:p-1.5 overflow-hidden">
-              <div className="bg-[#08080F] rounded-xl p-2 sm:p-3">
+              <div className="bg-dark-surface rounded-xl p-2 sm:p-3">
                 {/* Window chrome */}
                 <div className="flex items-center gap-2.5 mb-3 px-1">
                   <span className="w-3 h-3 rounded-full bg-[#FF5F57]/80" />
                   <span className="w-3 h-3 rounded-full bg-[#FFBD2E]/80" />
                   <span className="w-3 h-3 rounded-full bg-[#27C93F]/80" />
-                  <span className="flex-1 mx-4 h-6 rounded-md bg-[#10101A] border border-[#1A1A2C]" />
+                  <span className="flex-1 mx-4 h-6 rounded-md bg-dark-card border border-dark-elevated" />
                 </div>
                 <iframe
                   title={activeProject?.title || "Figma Project Preview"}
                   src={activeEmbedUrl}
-                  className="w-full h-[260px] sm:h-[360px] lg:h-[480px] rounded-lg"
+                  className="w-full h-65 sm:h-90 lg:h-120 rounded-lg"
                   allowFullScreen
                   style={{ border: "1px solid rgba(34, 211, 238, 0.08)" }}
                 />
               </div>
             </div>
             {activeProject?.title && (
-              <div className="mt-4 text-sm text-[#555570]">
+              <div className="mt-4 text-sm text-txt-muted">
                 Now viewing:{" "}
-                <span className="text-[#22D3EE] font-semibold">
+                <span className="text-accent-cyan font-semibold">
                   {activeProject.title}
                 </span>
               </div>
@@ -323,7 +323,7 @@ export default function UiUxFigmaSection({
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <p className="mono text-xs text-[#22D3EE] tracking-[0.3em] mb-3">{`// PORTFOLIO`}</p>
+            <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-3">{`// PORTFOLIO`}</p>
             <h3 className="text-3xl font-bold font-outfit text-white mb-6">
               Design Collection
             </h3>
@@ -342,7 +342,7 @@ export default function UiUxFigmaSection({
           </div>
 
           {projectsWithEmbed.length === 0 && figmaProjects.length > 0 && (
-            <p className="mt-4 text-sm text-[#555570]">
+            <p className="mt-4 text-sm text-txt-muted">
               Add an embed URL to your project object to enable live preview
               switching.
             </p>
