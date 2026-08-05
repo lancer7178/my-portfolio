@@ -9,6 +9,15 @@ import { FaStar, FaExternalLinkAlt } from "react-icons/fa";
 const FALLBACK_DATA_URI =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
+const AGENCIES = {
+  bowmen: { label: "BOWMEN", logo: "/bowmen.png", color: "#FF6B9D" },
+  "design-ways": {
+    label: "DESIGN WAYS",
+    logo: "/design-ways.png",
+    color: "#22D3EE",
+  },
+};
+
 function ProjectImage({ src, alt }) {
   const [imgSrc, setImgSrc] = useState(src);
   const [isLoading, setIsLoading] = useState(true);
@@ -150,17 +159,26 @@ export default function ProjectsSection({ projects = [] }) {
                 <div className="absolute top-3 left-3 mono text-[10px] text-white/30 bg-black/40 px-2 py-1 rounded-md backdrop-blur-sm">
                   #{String(startIdx + idx + 1).padStart(2, "0")}
                 </div>
-                {project.bowmen && (
-                  <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FF6B9D]/10 border border-[#FF6B9D]/25 backdrop-blur-sm">
+                {AGENCIES[project.agency] && (
+                  <div
+                    className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full border backdrop-blur-sm"
+                    style={{
+                      backgroundColor: `${AGENCIES[project.agency].color}1A`,
+                      borderColor: `${AGENCIES[project.agency].color}40`,
+                    }}
+                  >
                     <Image
-                      src="/bowmen.png"
-                      alt="Bowmen"
+                      src={AGENCIES[project.agency].logo}
+                      alt={AGENCIES[project.agency].label}
                       width={12}
                       height={12}
                       className="object-contain"
                     />
-                    <span className="mono text-[9px] text-[#FF6B9D]">
-                      BOWMEN
+                    <span
+                      className="mono text-[9px]"
+                      style={{ color: AGENCIES[project.agency].color }}
+                    >
+                      {AGENCIES[project.agency].label}
                     </span>
                   </div>
                 )}

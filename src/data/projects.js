@@ -7,7 +7,6 @@ export const projects = [
     link: "https://parallax-agency.vercel.app",
     rating: 5,
     technologies: ["react", "next.js", "Tailwind CSS", "TypeScript", "framer-motion"],
-    bowmen: false,
   },
   {
     title: "shot craft",
@@ -17,7 +16,6 @@ export const projects = [
     link: "https://shot-craft-web.vercel.app",
     rating: 5,
     technologies: ["react", "next.js", "Tailwind CSS", "TypeScript"],
-    bowmen: false,
   },
   {
     title: "orenda",
@@ -27,7 +25,16 @@ export const projects = [
     link: "https://orenda-care.vercel.app",
     rating: 5,
     technologies: ["react", "next.js", "Tailwind CSS", "framer-motion"],
-    bowmen: false,
+  },
+  {
+    title: "Sato pharmacy",
+    description:
+      "A corporate site for an Egyptian pharmaceutical manufacturer, showcasing its in-house and partner-sourced product catalog with filtering, company news, and career listings, with full bilingual (English/Arabic) support.",
+    image: "/sato.png",
+    link: "https://satopharma.com",
+    rating: 5,
+    technologies: ["react", "next.js", "Tailwind CSS", "framer-motion", "REST API"],
+    agency: "design-ways",
   },
   {
     title: "Medizen Medical Website",
@@ -44,7 +51,7 @@ export const projects = [
       "WordPress",
       "REST API",
     ],
-    bowmen: true,
+    agency: "bowmen",
   },
   {
     title: "Bowmen plus",
@@ -61,7 +68,7 @@ export const projects = [
       "REST API",
       "framer-motion",
     ],
-    bowmen: true,
+    agency: "bowmen",
   },
   {
     title: "Underground Heritage",
@@ -79,7 +86,7 @@ export const projects = [
       "Framer Motion",
       "Stripe",
     ],
-    bowmen: true,
+    agency: "bowmen",
   },
   {
     title: "Neuro Bridge",
@@ -95,7 +102,6 @@ export const projects = [
       "firebase",
       "framer-motion",
     ],
-    bowmen: false,
   },
   {
     title: "Nova Space",
@@ -111,7 +117,6 @@ export const projects = [
       "Three.js",
       "framer-motion",
     ],
-    bowmen: false,
   },
   {
     title: "Voyage AI",
@@ -127,7 +132,6 @@ export const projects = [
       "huggingface",
       "framer-motion",
     ],
-    bowmen: false,
   },
   {
     title: "Aurum",
@@ -143,7 +147,6 @@ export const projects = [
       "GoldAPI",
       "framer-motion",
     ],
-    bowmen: false,
   },
   {
     title: "Dr. Abdel-Moneim's Clinic",
@@ -160,7 +163,7 @@ export const projects = [
       "WordPress",
       "REST API",
     ],
-    bowmen: true,
+    agency: "bowmen",
   },
   {
     title: "Hayah Ava Healthcare",
@@ -177,7 +180,7 @@ export const projects = [
       "WordPress",
       "REST API",
     ],
-    bowmen: true,
+    agency: "bowmen",
   },
   {
     title: "Next Travel",
@@ -194,7 +197,7 @@ export const projects = [
       "strapi",
       "REST API",
     ],
-    bowmen: true,
+    agency: "bowmen",
   },
   {
     title: "Renova",
@@ -204,7 +207,7 @@ export const projects = [
     link: "https://dr-amirelboghdady.com",
     rating: 5,
     technologies: ["html", "Tailwind CSS", "php", "wordpress"],
-    bowmen: true,
+    agency: "bowmen",
   },
   {
     title: "Coza Store",
@@ -214,7 +217,6 @@ export const projects = [
     link: "https://lancer7178.github.io/Bdaya-e-commerce/",
     rating: 5,
     technologies: ["html", "css", "bootstrap", "js", "Jquery"],
-    bowmen: false,
   },
   {
     title: "AniWatched",
@@ -231,6 +233,5 @@ export const projects = [
       "javaScript",
       "Jquery",
     ],
-    bowmen: false,
   },
 ];
