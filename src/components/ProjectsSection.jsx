@@ -28,7 +28,7 @@ function ProjectImage({ src, alt }) {
           setImgSrc(FALLBACK_DATA_URI);
           setIsLoading(false);
         }}
-        onLoadingComplete={() => setIsLoading(false)}
+        onLoad={() => setIsLoading(false)}
         quality={85}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#06060A]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

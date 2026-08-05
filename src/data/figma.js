@@ -31,6 +31,33 @@ export const figmaProjects = [
   },
 ];
 
+export const designProcess = [
+  {
+    step: "01",
+    title: "Discovery",
+    detail:
+      "Understand goals, user needs, and business priorities before drawing screens.",
+  },
+  {
+    step: "02",
+    title: "Structure",
+    detail:
+      "Build wireframes and information architecture for clear navigation and content flow.",
+  },
+  {
+    step: "03",
+    title: "Visual Design",
+    detail:
+      "Apply typography, color hierarchy, spacing, and components with consistency.",
+  },
+  {
+    step: "04",
+    title: "Prototype & Handoff",
+    detail:
+      "Create interactive prototypes and developer-ready specs for implementation.",
+  },
+];
+
 export const figmaExperience = [
   {
     title: "Research & User Flow",

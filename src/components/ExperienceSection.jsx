@@ -89,7 +89,7 @@ export default function ExperienceSection({ experiences = [] }) {
         </div>
 
         <div ref={timelineRef} className="relative space-y-0">
-          <div className="absolute left-2 sm:left-4 md:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#22D3EE]/30 via-[#818CF8]/30 to-[#C084FC]/15\" />
+          <div className="absolute left-2 sm:left-4 md:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#22D3EE]/30 via-[#818CF8]/30 to-[#C084FC]/15" />
 
           {experiences.map((exp, idx) => (
             <div

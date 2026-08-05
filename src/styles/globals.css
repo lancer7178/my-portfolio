@@ -1,20 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ─── Design tokens (Tailwind v4 CSS-first config) ───
+   Every token here also becomes a utility, e.g. --color-accent-cyan
+   generates bg-accent-cyan / text-accent-cyan / border-accent-cyan. */
+@theme {
+  --color-dark: #06060a;
+  --color-dark-surface: #08080f;
+  --color-dark-card: #10101a;
+  --color-dark-elevated: #1a1a2c;
 
+  --color-accent-cyan: #22d3ee;
+  --color-accent-indigo: #818cf8;
+  --color-accent-violet: #c084fc;
+
+  --color-txt-primary: #eaeaef;
+  --color-txt-secondary: #8888a0;
+  --color-txt-muted: #555570;
+
+  --font-outfit: var(--font-outfit-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-code), ui-monospace, monospace;
+}
+
+/* Legacy aliases so the hand-written CSS below keeps reading naturally. */
 :root {
-  --bg-primary: #06060A;
-  --bg-surface: #08080F;
-  --bg-card: #10101A;
-  --bg-elevated: #1A1A2C;
-  --text-primary: #EAEAEF;
-  --text-secondary: #8888A0;
-  --text-muted: #555570;
-  --accent-cyan: #22D3EE;
-  --accent-indigo: #818CF8;
-  --accent-violet: #C084FC;
+  --bg-primary: var(--color-dark);
+  --bg-surface: var(--color-dark-surface);
+  --bg-card: var(--color-dark-card);
+  --bg-elevated: var(--color-dark-elevated);
+  --text-primary: var(--color-txt-primary);
+  --text-secondary: var(--color-txt-secondary);
+  --text-muted: var(--color-txt-muted);
+  --accent-cyan: var(--color-accent-cyan);
+  --accent-indigo: var(--color-accent-indigo);
+  --accent-violet: var(--color-accent-violet);
   --border: rgba(255, 255, 255, 0.06);
   --border-accent: rgba(34, 211, 238, 0.25);
 }
@@ -30,7 +48,7 @@ html {
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit);
   background: var(--bg-primary);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
@@ -164,7 +182,7 @@ body {
 
 /* Monospace label */
 .mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -201,7 +219,7 @@ body {
 
 /* Section number background */
 .section-number {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit);
   font-weight: 900;
   font-size: clamp(8rem, 20vw, 20rem);
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.02);
@@ -302,10 +320,4 @@ body {
   background: linear-gradient(90deg, rgba(34,211,238,0.2), rgba(129,140,248,0.15), rgba(192,132,252,0.2));
   border-radius: 1px;
   z-index: 0;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }

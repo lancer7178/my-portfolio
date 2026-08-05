@@ -8,7 +8,7 @@ import emailjs from "@emailjs/browser";
 
 export default function ContactSection({
   email = "abdlatefkhatib@email.com",
-  cvLink = "/public/AbdulatifSelemResume2.pdf",
+  cvLink = "/Abdulatif_Selem_CV.pdf",
 }) {
   const [copied, setCopied] = useState(false);
   const [submitted, setSubmitted] = useState(false);
