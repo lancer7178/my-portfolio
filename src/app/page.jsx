@@ -12,7 +12,7 @@ import { experiences } from "@/data/experience";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#06060A] text-white font-outfit">
+    <div className="min-h-screen bg-dark text-white font-outfit">
       <HeroSection
         name="Abdulatif"
         subtitle="A passionate Front-End Developer crafting beautiful web experiences with clean code and modern design."

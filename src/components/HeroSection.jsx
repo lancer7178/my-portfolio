@@ -151,12 +151,12 @@ export default function HeroSection({
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#06060A] px-4 sm:px-6 pt-6 pb-24"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-dark px-4 sm:px-6 pt-6 pb-24"
     >
       {/* Ambient Glow */}
-      <div className="absolute top-[-100px] left-[-100px] w-[500px] h-[500px] bg-[#22D3EE] blur-[220px] opacity-[0.07] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-120px] right-[-120px] w-[500px] h-[500px] bg-[#C084FC] blur-[220px] opacity-[0.05] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] bg-[#818CF8] blur-[180px] opacity-[0.06] rounded-full pointer-events-none" />
+      <div className="absolute -top-25 -left-25 w-125 h-125 bg-accent-cyan blur-[220px] opacity-[0.07] rounded-full pointer-events-none" />
+      <div className="absolute -bottom-30 -right-30 w-125 h-125 bg-accent-violet blur-[220px] opacity-[0.05] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-75 h-75 bg-accent-indigo blur-[180px] opacity-[0.06] rounded-full pointer-events-none" />
 
       {/* Floating Particles */}
       {particles.map((p, i) => (
@@ -178,14 +178,14 @@ export default function HeroSection({
 
       {/* Top bar */}
       <div className="absolute top-6 left-6 sm:left-10 flex items-center gap-3">
-        <div className="w-10 h-10 bg-[#10101A] border border-[#1A1A2C] rounded-xl flex items-center justify-center">
-          <span className="bg-gradient-to-r from-[#22D3EE] to-[#818CF8] bg-clip-text text-transparent font-bold text-sm font-mono">
+        <div className="w-10 h-10 bg-dark-card border border-dark-elevated rounded-xl flex items-center justify-center">
+          <span className="bg-linear-to-r from-accent-cyan to-accent-indigo bg-clip-text text-transparent font-bold text-sm font-mono">
             AS
           </span>
         </div>
       </div>
       <div className="absolute top-6 right-6 sm:right-10">
-        <span className="mono text-[11px] text-[#555570] tracking-widest">
+        <span className="mono text-[11px] text-txt-muted tracking-widest">
           FRONT-END DEVELOPER
         </span>
       </div>
@@ -196,20 +196,20 @@ export default function HeroSection({
           <h2 className="text-5xl sm:text-7xl lg:text-8xl font-outfit font-black tracking-tight leading-none mb-4">
             <span className="hero-name cursor-pointer">{name}</span>
           </h2>
-          <p className="mono text-xs sm:text-sm text-[#555570] tracking-[0.3em] mb-6">
+          <p className="mono text-xs sm:text-sm text-txt-muted tracking-[0.3em] mb-6">
             FRONTEND ENGINEER — CREATIVE DEVELOPER
           </p>
         </div>
 
         <div ref={contentRef} className="flex flex-col items-center gap-6">
-          <p className="text-base sm:text-lg text-[#8888A0] max-w-xl leading-relaxed">
+          <p className="text-base sm:text-lg text-txt-secondary max-w-xl leading-relaxed">
             {subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <a
               href="#contact"
-              className="hero-btn group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#22D3EE] via-[#818CF8] to-[#C084FC] text-black font-extrabold font-outfit rounded-full shadow-lg shadow-[#818CF8]/20"
+              className="hero-btn group flex items-center gap-3 px-8 py-4 bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet text-black font-extrabold font-outfit rounded-full shadow-lg shadow-accent-indigo/20"
               onClick={(e) => {
                 e.preventDefault();
                 const el = document.getElementById("contact");
@@ -226,7 +226,7 @@ export default function HeroSection({
 
             <a
               href="#projects"
-              className="flex items-center gap-2 text-[#555570] hover:text-[#EAEAEF] mono text-sm transition-colors link-underline"
+              className="flex items-center gap-2 text-txt-muted hover:text-txt-primary mono text-sm transition-colors link-underline"
               onClick={(e) => {
                 e.preventDefault();
                 const el = document.getElementById("projects");
@@ -237,7 +237,7 @@ export default function HeroSection({
                   });
               }}
             >
-              VIEW MY WORK <FaArrowRight className="text-[#22D3EE] text-xs" />
+              VIEW MY WORK <FaArrowRight className="text-accent-cyan text-xs" />
             </a>
           </div>
         </div>
@@ -251,19 +251,19 @@ export default function HeroSection({
         {/* Telemetry Card */}
         <div className="flex-1 hero-card">
           <div className="flex items-center justify-between mb-4">
-            <span className="mono text-[10px] text-[#555570]">
+            <span className="mono text-[10px] text-txt-muted">
               TELEMETRY / ACTIVE
             </span>
             <div className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-[#22D3EE] rounded-full pulse-dot" />
-              <span className="w-2 h-2 bg-[#22D3EE]/30 rounded-full" />
+              <span className="w-2 h-2 bg-accent-cyan rounded-full pulse-dot" />
+              <span className="w-2 h-2 bg-accent-cyan/30 rounded-full" />
             </div>
           </div>
           <div className="flex items-center gap-2 mb-1">
-            <FaMapMarkerAlt className="text-[#22D3EE] text-sm" />
+            <FaMapMarkerAlt className="text-accent-cyan text-sm" />
             <span className="text-xl font-bold font-outfit">EGYPT, EG</span>
           </div>
-          <div className="flex items-center gap-2 text-[#555570] text-sm">
+          <div className="flex items-center gap-2 text-txt-muted text-sm">
             <FaClock className="text-xs" />
             <span className="mono text-xs">{currentTime}</span>
           </div>
@@ -272,17 +272,17 @@ export default function HeroSection({
         {/* Tech Specs Card */}
         <div className="flex-1 hero-card">
           <div className="flex items-center justify-between mb-4">
-            <span className="mono text-[10px] text-[#555570]">
+            <span className="mono text-[10px] text-txt-muted">
               TECH SPECS / LOAD
             </span>
-            <FaBolt className="text-[#22D3EE] text-sm" />
+            <FaBolt className="text-accent-cyan text-sm" />
           </div>
           <div className="space-y-3">
             {topSkills.map((skill, i) => (
               <div key={i}>
                 <div className="flex justify-between mono text-xs mb-1">
-                  <span className="text-[#EAEAEF]">{skill.name}</span>
-                  <span className="text-[#555570]">{skill.level}%</span>
+                  <span className="text-txt-primary">{skill.name}</span>
+                  <span className="text-txt-muted">{skill.level}%</span>
                 </div>
                 <div className="capacity-bar">
                   <div

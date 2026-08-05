@@ -80,7 +80,7 @@ export default function AboutSection({ intro, values, approach }) {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-[#06060A] text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden"
     >
       <div
         ref={numberRef}
@@ -92,7 +92,7 @@ export default function AboutSection({ intro, values, approach }) {
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <div ref={headerRef} className="mb-20">
-          <p className="mono text-xs text-[#22D3EE] tracking-[0.3em] mb-4">
+          <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">
             {"// THE PROFILE"}
           </p>
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
@@ -100,28 +100,28 @@ export default function AboutSection({ intro, values, approach }) {
             <span className="text-outline-accent">ME</span>
           </h2>
           <div className="flex gap-2 mt-6">
-            <div className="h-1 w-16 bg-gradient-to-r from-[#22D3EE] to-[#818CF8] rounded-full" />
-            <div className="h-1 w-8 bg-[#818CF8]/50 rounded-full" />
-            <div className="h-1 w-4 bg-[#C084FC]/40 rounded-full" />
+            <div className="h-1 w-16 bg-linear-to-r from-accent-cyan to-accent-indigo rounded-full" />
+            <div className="h-1 w-8 bg-accent-indigo/50 rounded-full" />
+            <div className="h-1 w-4 bg-accent-violet/40 rounded-full" />
           </div>
         </div>
 
         <div ref={contentRef} className="space-y-12 mb-20">
-          <p className="text-lg sm:text-xl text-[#8888A0] leading-relaxed max-w-3xl">
+          <p className="text-lg sm:text-xl text-txt-secondary leading-relaxed max-w-3xl">
             {intro}
           </p>
           <div>
-            <h3 className="flex items-center gap-2 text-xl font-bold text-[#818CF8] mb-6 font-outfit">
-              <FaCheckCircle className="text-[#22D3EE]" /> Core Values
+            <h3 className="flex items-center gap-2 text-xl font-bold text-accent-indigo mb-6 font-outfit">
+              <FaCheckCircle className="text-accent-cyan" /> Core Values
             </h3>
             <ul className="grid sm:grid-cols-2 gap-3 sm:gap-4">
               {values.map((value, idx) => (
                 <li
                   key={idx}
-                  className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-[#10101A]/60 border border-[#1A1A2C] hover:border-[#22D3EE]/25 transition-all duration-300"
+                  className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-dark-card/60 border border-dark-elevated hover:border-accent-cyan/25 transition-all duration-300"
                 >
-                  <span className="w-2 h-2 mt-2 bg-gradient-to-r from-[#22D3EE] to-[#818CF8] rounded-full flex-shrink-0" />
-                  <span className="text-[#8888A0] text-sm">{value}</span>
+                  <span className="w-2 h-2 mt-2 bg-linear-to-r from-accent-cyan to-accent-indigo rounded-full flex-shrink-0" />
+                  <span className="text-txt-secondary text-sm">{value}</span>
                 </li>
               ))}
             </ul>
@@ -129,8 +129,8 @@ export default function AboutSection({ intro, values, approach }) {
         </div>
 
         <div>
-          <h3 className="flex items-center gap-2 text-xl font-bold text-[#C084FC] mb-8 font-outfit">
-            <FaCompass className="text-[#22D3EE]" /> My Approach
+          <h3 className="flex items-center gap-2 text-xl font-bold text-accent-violet mb-8 font-outfit">
+            <FaCompass className="text-accent-cyan" /> My Approach
           </h3>
           <div
             ref={cardsRef}
@@ -139,17 +139,17 @@ export default function AboutSection({ intro, values, approach }) {
             {approach.map((phase, idx) => (
               <div
                 key={idx}
-                className="group relative p-4 sm:p-6 rounded-lg sm:rounded-2xl bg-[#10101A] border border-[#1A1A2C] hover:border-[#22D3EE]/30 transition-all duration-500 overflow-hidden"
+                className="group relative p-4 sm:p-6 rounded-lg sm:rounded-2xl bg-dark-card border border-dark-elevated hover:border-accent-cyan/30 transition-all duration-500 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#22D3EE]/5 via-transparent to-[#C084FC]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-br from-accent-cyan/5 via-transparent to-accent-violet/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 <div className="relative z-10">
-                  <div className="mono text-[10px] text-[#555570] mb-3">
+                  <div className="mono text-[10px] text-txt-muted mb-3">
                     SYS.{String(idx + 1).padStart(2, "0")}
                   </div>
-                  <h4 className="text-lg font-bold text-[#22D3EE] mb-3 font-outfit">
+                  <h4 className="text-lg font-bold text-accent-cyan mb-3 font-outfit">
                     {phase.title}
                   </h4>
-                  <p className="text-[#555570] text-sm leading-relaxed">
+                  <p className="text-txt-muted text-sm leading-relaxed">
                     {phase.description}
                   </p>
                 </div>
