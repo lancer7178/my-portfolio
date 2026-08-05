@@ -30,6 +30,9 @@ const skillCategories = [
       { name: "Git / GitHub", level: 90 },
       { name: "WordPress", level: 85 },
       { name: "RESTful APIs", level: 88 },
+      { name: "Node.js", level: 86 },
+      { name: "Express.js", level: 84 },
+      { name: "PostgreSQL", level: 82 },
       { name: "Framer Motion", level: 82 },
     ],
   },
@@ -40,7 +43,7 @@ export default function SkillsSection() {
   const headerRef = useRef(null);
   const numberRef = useRef(null);
   const gridRef = useRef(null);
-  const barsRef = useRef([]);
+  const barsRef = useRef({});
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -87,7 +90,7 @@ export default function SkillsSection() {
         },
       );
 
-      barsRef.current.forEach((bar) => {
+      Object.values(barsRef.current).forEach((bar) => {
         if (!bar) return;
         const target = bar.dataset.level;
         gsap.fromTo(
@@ -159,7 +162,7 @@ export default function SkillsSection() {
               </div>
               <div className="space-y-5">
                 {category.skills.map((skill, skillIdx) => {
-                  const globalIdx = catIdx * 5 + skillIdx;
+                  const barKey = `${catIdx}-${skillIdx}`;
                   return (
                     <div key={skillIdx}>
                       <div className="flex justify-between mono text-xs mb-2">
@@ -170,7 +173,9 @@ export default function SkillsSection() {
                       </div>
                       <div className="capacity-bar">
                         <div
-                          ref={(el) => (barsRef.current[globalIdx] = el)}
+                          ref={(el) => {
+                            barsRef.current[barKey] = el;
+                          }}
                           data-level={skill.level}
                           className="capacity-fill"
                           style={{ width: 0 }}
@@ -196,6 +201,9 @@ export default function SkillsSection() {
             "React",
             "React Native",
             "Next.js",
+            "Node.js",
+            "Express.js",
+            "PostgreSQL",
             "Tailwind CSS",
             "Framer Motion",
             "GSAP",

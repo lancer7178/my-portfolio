@@ -75,8 +75,6 @@ const particles = [
 export default function HeroSection({
   name = "Abdulatif",
   subtitle = "A passionate Front-End Developer crafting beautiful web experiences.",
-  buttonText = "START ENGINE",
-  onButtonClick,
 }) {
   const sectionRef = useRef(null);
   const nameRef = useRef(null);
