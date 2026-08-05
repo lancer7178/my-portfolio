@@ -155,7 +155,7 @@ export default function HeroSection({
     >
       {/* Ambient Glow */}
       <div className="absolute -top-25 -left-25 w-125 h-125 bg-accent-cyan blur-[220px] opacity-[0.07] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-120px] right-[-120px] w-125 h-125 bg-accent-violet blur-[220px] opacity-[0.05] rounded-full pointer-events-none" />
+      <div className="absolute -bottom-30 -right-30 w-125 h-125 bg-accent-violet blur-[220px] opacity-[0.05] rounded-full pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 w-75 h-75 bg-accent-indigo blur-[180px] opacity-[0.06] rounded-full pointer-events-none" />
 
       {/* Floating Particles */}
