@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import {
   FaMapMarkerAlt,
-  FaClock,
   FaLayerGroup,
   FaArrowRight,
   FaDownload,
@@ -208,6 +207,10 @@ export default function HeroSection({
           <p className="text-base sm:text-lg text-txt-secondary max-w-xl leading-relaxed">
             {subtitle}
           </p>
+          <p className="text-sm text-txt-muted max-w-lg leading-relaxed -mt-2">
+            I care about how a product feels, how it works, and how the pieces
+            connect behind the interface.
+          </p>
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <a
               href="#work"
@@ -242,24 +245,29 @@ export default function HeroSection({
         ref={cardsRef}
         className="relative z-10 flex flex-col sm:flex-row gap-4 mt-12 sm:mt-16 w-full max-w-4xl px-2"
       >
-        {/* Telemetry Card */}
+        {/* Status Card */}
         <div className="flex-1 hero-card">
           <div className="flex items-center justify-between mb-4">
             <span className="mono text-[10px] text-txt-muted">
-              TELEMETRY / ACTIVE
+              STATUS / AVAILABLE
             </span>
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 bg-accent-cyan rounded-full pulse-dot" />
               <span className="w-2 h-2 bg-accent-cyan/30 rounded-full" />
             </div>
           </div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-3">
             <FaMapMarkerAlt className="text-accent-cyan text-sm" />
             <span className="text-xl font-bold font-outfit">EGYPT, EG</span>
+            <span className="mono text-[10px] text-txt-muted ml-1">
+              {currentTime}
+            </span>
           </div>
-          <div className="flex items-center gap-2 text-txt-muted text-sm">
-            <FaClock className="text-xs" />
-            <span className="mono text-xs">{currentTime}</span>
+          <div className="pt-3 border-t border-dark-elevated">
+            <span className="mono text-[10px] text-txt-muted">FOCUS / </span>
+            <span className="mono text-[10px] text-accent-cyan">
+              PRODUCT ENGINEERING
+            </span>
           </div>
         </div>
 

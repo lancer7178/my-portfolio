@@ -10,7 +10,7 @@ export const projects = [
     image: "/parallax.png",
     link: "https://parallax-agency.vercel.app",
     github: null,
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Product UX"],
     caseStudy: {
       problem:
         "Agencies run their work and their money in different tools — projects live in one app, client communication in another, approvals in email, and invoices in a spreadsheet. Nothing is connected, so nobody can answer a simple question: is this project actually profitable?",
@@ -57,7 +57,7 @@ export const projects = [
     image: "/orenda.png",
     link: "https://orenda-care.vercel.app",
     github: null,
-    technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+    technologies: ["Next.js", "Local-first", "Privacy-first", "Accessibility"],
     caseStudy: {
       problem:
         "Self-check-in tools for mental wellbeing often ask people to hand over sensitive answers to a server, and then hand back a blunt label. That's both a privacy risk and a design responsibility — a screening is not a diagnosis, and it shouldn't feel like one.",
@@ -104,7 +104,7 @@ export const projects = [
     image: "/shot-craft.png",
     link: "https://shot-craft-web.vercel.app",
     github: null,
-    technologies: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+    technologies: ["React", "TypeScript", "Client-side", "ZIP export"],
     caseStudy: {
       problem:
         "Shipping an app means preparing screenshots to strict, repetitive store specs — the right sizes for App Store Connect and Google Play, framed and cropped consistently. Doing it by hand in a design tool is slow, and most online converters ask you to upload your assets to their servers.",
