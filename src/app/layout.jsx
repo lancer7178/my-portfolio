@@ -15,14 +15,32 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const siteUrl = "https://abdullatif-selem.vercel.app";
+const siteDescription =
+  "Frontend Engineer and Creative Developer building thoughtful digital products, interactive interfaces, and modern web experiences.";
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Abdulatif | Front-End Developer Portfolio",
+    default: "Abdulatif — Frontend Engineer & Creative Developer",
     template: "%s | Abdulatif",
   },
-  description:
-    "Front-End Developer specializing in React, Next.js, and modern web technologies. Building beautiful, high-performance web experiences.",
+  description: siteDescription,
   icons: { icon: "/favicon.ico" },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    title: "Abdulatif — Frontend Engineer & Creative Developer",
+    description: siteDescription,
+    siteName: "Abdulatif Selem",
+    images: [{ url: "/parallax.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Abdulatif — Frontend Engineer & Creative Developer",
+    description: siteDescription,
+    images: ["/parallax.png"],
+  },
 };
 
 export const viewport = {

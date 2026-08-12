@@ -1,27 +1,32 @@
 export const aboutIntro =
-  "I prioritize client collaboration, fostering open communication. I'm very flexible with time zone communications and constantly try to improve. Tech enthusiast with a passion for development.";
+  "I build digital products where frontend engineering, interface design, and product thinking meet. I care about how a product feels, how it works, and how the pieces connect behind the interface — not just how the page looks.";
 
 export const aboutValues = [
-  "Open communication and collaboration",
-  "Flexibility with time zones and schedules",
-  "Continuous improvement and learning",
-  "Delivering seamless, user-friendly experiences",
+  "Understand the workflow before designing the screen",
+  "Build reusable systems, not one-off components",
+  "Treat spacing, motion, states and accessibility as part of the product",
+  "Choose technology that serves the experience",
 ];
 
 export const aboutApproach = [
   {
-    title: "Staying Updated with Industry Trends",
+    title: "Product first",
     description:
-      "I continuously explore the latest trends in web development, UI/UX design, and front-end technologies. I actively engage with the tech community and take online courses to keep my skills sharp and relevant.",
+      "I start from the problem and the workflow. Understanding what a product needs to do — and for whom — shapes every screen that follows.",
   },
   {
-    title: "Development & Progress Update",
+    title: "Systems over one-off components",
     description:
-      "Once we agree on the plan, I cue my lofi playlist and dive into coding. From initial sketches to polished code, I keep you updated every step of the way.",
+      "I build reusable UI and consistent patterns so a product stays coherent as it grows, instead of accumulating disconnected pieces.",
   },
   {
-    title: "Proactive Learning and Exploration",
+    title: "Details matter",
     description:
-      "I actively explore new tools and frameworks, mastering Figma for design or diving deeper into TypeScript for better code quality. I ensure I can adapt to any new challenge and build versatile, high-quality solutions.",
+      "Spacing, motion, responsiveness, accessibility and empty/loading/error states aren't polish — they're part of how the product actually feels to use.",
+  },
+  {
+    title: "Technology serves the experience",
+    description:
+      "I pick the right tools for the problem rather than reaching for technology for its own sake, and keep the underlying system clean and maintainable.",
   },
 ];
