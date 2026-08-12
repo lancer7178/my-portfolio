@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { FaMapMarkerAlt, FaClock, FaBolt, FaArrowRight } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaClock,
+  FaLayerGroup,
+  FaArrowRight,
+  FaDownload,
+} from "react-icons/fa";
+import { coreStack } from "@/data/skills";
 
 const particles = [
   {
@@ -74,7 +81,8 @@ const particles = [
 
 export default function HeroSection({
   name = "Abdulatif",
-  subtitle = "A passionate Front-End Developer crafting beautiful web experiences.",
+  subtitle = "I build digital products where engineering, interface design, and product thinking meet.",
+  cvLink = "/Abdulatif_Selem_CV.pdf",
 }) {
   const sectionRef = useRef(null);
   const nameRef = useRef(null);
@@ -100,6 +108,7 @@ export default function HeroSection({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -141,12 +150,6 @@ export default function HeroSection({
     return () => ctx.revert();
   }, []);
 
-  const topSkills = [
-    { name: "REACT / NEXT", level: 95 },
-    { name: "TAILWIND / CSS", level: 92 },
-    { name: "JAVASCRIPT / TS", level: 90 },
-  ];
-
   return (
     <section
       id="hero"
@@ -186,7 +189,7 @@ export default function HeroSection({
       </div>
       <div className="absolute top-6 right-6 sm:right-10">
         <span className="mono text-[11px] text-txt-muted tracking-widest">
-          FRONT-END DEVELOPER
+          PRODUCT-MINDED BUILDER
         </span>
       </div>
 
@@ -205,14 +208,13 @@ export default function HeroSection({
           <p className="text-base sm:text-lg text-txt-secondary max-w-xl leading-relaxed">
             {subtitle}
           </p>
-
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <a
-              href="#contact"
+              href="#work"
               className="hero-btn group flex items-center gap-3 px-8 py-4 bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet text-black font-extrabold font-outfit rounded-full shadow-lg shadow-accent-indigo/20"
               onClick={(e) => {
                 e.preventDefault();
-                const el = document.getElementById("contact");
+                const el = document.getElementById("work");
                 if (el)
                   window.scrollTo({
                     top: el.offsetTop - 20,
@@ -220,24 +222,16 @@ export default function HeroSection({
                   });
               }}
             >
-              GET IN TOUCH
+              VIEW MY WORK
               <FaArrowRight className="transition-transform group-hover:translate-x-1" />
             </a>
 
             <a
-              href="#projects"
-              className="flex items-center gap-2 text-txt-muted hover:text-txt-primary mono text-sm transition-colors link-underline"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById("projects");
-                if (el)
-                  window.scrollTo({
-                    top: el.offsetTop - 20,
-                    behavior: "smooth",
-                  });
-              }}
+              href={cvLink}
+              download
+              className="flex items-center gap-2 px-6 py-4 rounded-full bg-dark-card border border-dark-elevated text-txt-primary hover:border-accent-cyan/40 hover:text-accent-cyan mono text-sm transition-all duration-300"
             >
-              VIEW MY WORK <FaArrowRight className="text-accent-cyan text-xs" />
+              <FaDownload className="text-xs" /> DOWNLOAD CV
             </a>
           </div>
         </div>
@@ -269,30 +263,27 @@ export default function HeroSection({
           </div>
         </div>
 
-        {/* Tech Specs Card */}
+        {/* Core Stack Card */}
         <div className="flex-1 hero-card">
           <div className="flex items-center justify-between mb-4">
             <span className="mono text-[10px] text-txt-muted">
-              TECH SPECS / LOAD
+              CORE STACK / DAILY
             </span>
-            <FaBolt className="text-accent-cyan text-sm" />
+            <FaLayerGroup className="text-accent-cyan text-sm" />
           </div>
-          <div className="space-y-3">
-            {topSkills.map((skill, i) => (
-              <div key={i}>
-                <div className="flex justify-between mono text-xs mb-1">
-                  <span className="text-txt-primary">{skill.name}</span>
-                  <span className="text-txt-muted">{skill.level}%</span>
-                </div>
-                <div className="capacity-bar">
-                  <div
-                    className="capacity-fill"
-                    style={{ width: `${skill.level}%` }}
-                  />
-                </div>
-              </div>
+          <div className="flex flex-wrap gap-2">
+            {coreStack.map((tech) => (
+              <span
+                key={tech}
+                className="px-3 py-1.5 text-xs mono text-accent-cyan bg-accent-cyan/5 border border-accent-cyan/12 rounded-lg"
+              >
+                {tech}
+              </span>
             ))}
           </div>
+          <p className="mono text-[10px] text-txt-muted mt-4 leading-relaxed">
+            The tools I reach for to turn ideas into products.
+          </p>
         </div>
       </div>
     </section>

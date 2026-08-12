@@ -14,6 +14,7 @@ export default function AboutSection({ intro, values, approach }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -80,14 +81,14 @@ export default function AboutSection({ intro, values, approach }) {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
     >
       <div
         ref={numberRef}
         className="section-number top-10 left-0 sm:left-10 opacity-100"
         style={{ WebkitTextStroke: "1px rgba(34, 211, 238, 0.04)" }}
       >
-        01
+        03
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
@@ -112,7 +113,7 @@ export default function AboutSection({ intro, values, approach }) {
           </p>
           <div>
             <h3 className="flex items-center gap-2 text-xl font-bold text-accent-indigo mb-6 font-outfit">
-              <FaCheckCircle className="text-accent-cyan" /> Core Values
+              <FaCheckCircle className="text-accent-cyan" /> How I work
             </h3>
             <ul className="grid sm:grid-cols-2 gap-3 sm:gap-4">
               {values.map((value, idx) => (
@@ -129,12 +130,16 @@ export default function AboutSection({ intro, values, approach }) {
         </div>
 
         <div>
-          <h3 className="flex items-center gap-2 text-xl font-bold text-accent-violet mb-8 font-outfit">
-            <FaCompass className="text-accent-cyan" /> My Approach
+          <h3 className="flex items-center gap-2 text-2xl sm:text-3xl font-black text-white mb-3 font-outfit">
+            <FaCompass className="text-accent-cyan" /> I don&apos;t just build pages.
           </h3>
+          <p className="text-txt-muted max-w-2xl mb-8 leading-relaxed">
+            I think about the product behind the interface — here&apos;s what
+            that means in practice.
+          </p>
           <div
             ref={cardsRef}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+            className="grid sm:grid-cols-2 gap-4 sm:gap-6"
           >
             {approach.map((phase, idx) => (
               <div

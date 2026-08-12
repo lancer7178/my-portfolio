@@ -12,6 +12,7 @@ export default function ExperienceSection({ experiences = [] }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -62,14 +63,14 @@ export default function ExperienceSection({ experiences = [] }) {
     <section
       id="experience"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
     >
       <div
         ref={numberRef}
         className="section-number top-10 left-0 sm:left-10 opacity-100"
         style={{ WebkitTextStroke: "1px rgba(192, 132, 252, 0.04)" }}
       >
-        03
+        05
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -104,19 +105,50 @@ export default function ExperienceSection({ experiences = [] }) {
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3 mb-3">
                   <div>
                     <div className="mono text-[9px] sm:text-[10px] text-txt-muted mb-1">
-                      SYS.{String(idx + 1).padStart(2, "0")}
+                      {exp.company}
                     </div>
                     <h3 className="text-base sm:text-lg md:text-xl font-bold font-outfit text-white group-hover:text-accent-cyan transition-colors duration-300">
-                      {exp.title}
+                      {exp.role}
                     </h3>
                   </div>
-                  <span className="mono text-[8px] sm:text-[10px] text-accent-indigo bg-accent-indigo/10 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-accent-indigo/20 whitespace-nowrap self-start sm:self-auto">
-                    {exp.role}
-                  </span>
+                  {exp.period && (
+                    <span className="mono text-[8px] sm:text-[10px] text-accent-indigo bg-accent-indigo/10 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-accent-indigo/20 whitespace-nowrap self-start sm:self-auto">
+                      {exp.period}
+                    </span>
+                  )}
                 </div>
-                <p className="text-[#AAAABD] text-xs sm:text-sm leading-relaxed">
-                  {exp.description}
-                </p>
+
+                {exp.context && (
+                  <p className="text-[#AAAABD] text-xs sm:text-sm leading-relaxed mb-4">
+                    {exp.context}
+                  </p>
+                )}
+
+                {exp.bullets?.length > 0 && (
+                  <ul className="space-y-2 mb-4">
+                    {exp.bullets.map((bullet, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-linear-to-r from-accent-cyan to-accent-indigo flex-shrink-0" />
+                        <span className="text-txt-secondary text-xs sm:text-sm leading-relaxed">
+                          {bullet}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {exp.technologies?.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-dark-elevated">
+                    {exp.technologies.map((tech, i) => (
+                      <span
+                        key={`${tech}-${i}`}
+                        className="px-2.5 py-1 text-[10px] mono text-accent-cyan bg-accent-cyan/5 border border-accent-cyan/12 rounded-md"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}

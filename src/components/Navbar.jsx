@@ -1,21 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-  FaHome,
-  FaUser,
-  FaCode,
-  FaBriefcase,
-  FaEnvelope,
-  FaLaptopCode,
-} from "react-icons/fa";
+import { FaHome, FaUser, FaCode, FaBriefcase, FaEnvelope } from "react-icons/fa";
 
 const navItems = [
   { icon: <FaHome />, label: "Home", href: "#hero" },
+  { icon: <FaBriefcase />, label: "Work", href: "#work" },
   { icon: <FaUser />, label: "About", href: "#about" },
   { icon: <FaCode />, label: "Skills", href: "#skills" },
-  { icon: <FaLaptopCode />, label: "Experience", href: "#experience" },
-  { icon: <FaBriefcase />, label: "Projects", href: "#projects" },
   { icon: <FaEnvelope />, label: "Contact", href: "#contact" },
 ];
 

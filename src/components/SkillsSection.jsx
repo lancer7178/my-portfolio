@@ -3,50 +3,17 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-const skillCategories = [
-  {
-    label: "FRONTEND / CORE",
-    skills: [
-      { name: "React", level: 95 },
-      { name: "Next.js", level: 92 },
-      { name: "React Native", level: 85 },
-      { name: "JavaScript", level: 90 },
-      { name: "TypeScript", level: 80 },
-    ],
-  },
-  {
-    label: "STYLING / DESIGN",
-    skills: [
-      { name: "Tailwind CSS", level: 95 },
-      { name: "CSS / SCSS", level: 92 },
-      { name: "Figma", level: 85 },
-      { name: "UI/UX Design", level: 88 },
-    ],
-  },
-  {
-    label: "TOOLS / OTHER",
-    skills: [
-      { name: "Git / GitHub", level: 90 },
-      { name: "WordPress", level: 85 },
-      { name: "RESTful APIs", level: 88 },
-      { name: "Node.js", level: 86 },
-      { name: "Express.js", level: 84 },
-      { name: "PostgreSQL", level: 82 },
-      { name: "Framer Motion", level: 82 },
-    ],
-  },
-];
+import { skillCategories } from "@/data/skills";
 
 export default function SkillsSection() {
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const numberRef = useRef(null);
   const gridRef = useRef(null);
-  const barsRef = useRef({});
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -89,25 +56,6 @@ export default function SkillsSection() {
           },
         },
       );
-
-      Object.values(barsRef.current).forEach((bar) => {
-        if (!bar) return;
-        const target = bar.dataset.level;
-        gsap.fromTo(
-          bar,
-          { width: "0%" },
-          {
-            width: `${target}%`,
-            duration: 1.2,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: bar,
-              start: "top 90%",
-              toggleActions: "play none none none",
-            },
-          },
-        );
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -117,18 +65,18 @@ export default function SkillsSection() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-linear-to-b from-dark via-dark-surface to-dark text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-linear-to-b from-dark via-dark-surface to-dark text-white overflow-hidden scroll-mt-20"
     >
       <div
         ref={numberRef}
         className="section-number top-10 right-0 sm:right-10 opacity-100"
         style={{ WebkitTextStroke: "1px rgba(129, 140, 248, 0.04)" }}
       >
-        02
+        04
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <div ref={headerRef} className="mb-20">
+        <div ref={headerRef} className="mb-16">
           <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">
             {"// TECH STACK"}
           </p>
@@ -141,6 +89,10 @@ export default function SkillsSection() {
             <div className="h-1 w-8 bg-accent-indigo/50 rounded-full" />
             <div className="h-1 w-4 bg-accent-violet/40 rounded-full" />
           </div>
+          <p className="mt-6 text-txt-muted max-w-2xl text-base leading-relaxed">
+            The tools I actually use to build products — grouped by how they fit
+            into the work, not ranked by a number.
+          </p>
         </div>
 
         <div
@@ -150,86 +102,27 @@ export default function SkillsSection() {
           {skillCategories.map((category, catIdx) => (
             <div
               key={catIdx}
-              className="group p-4 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-elevated hover:border-accent-cyan/25 transition-all duration-500 backdrop-blur-sm"
+              className="group p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-elevated hover:border-accent-cyan/25 transition-all duration-500 backdrop-blur-sm"
             >
-              <div className="flex items-center justify-between mb-6">
-                <span className="mono text-[10px] text-txt-muted">
+              <div className="flex items-center justify-between mb-5">
+                <span className="text-base font-bold font-outfit text-txt-primary">
                   {category.label}
                 </span>
                 <span className="mono text-[10px] text-accent-cyan">
-                  CAPACITY
+                  {category.tag}
                 </span>
               </div>
-              <div className="space-y-5">
-                {category.skills.map((skill, skillIdx) => {
-                  const barKey = `${catIdx}-${skillIdx}`;
-                  return (
-                    <div key={skillIdx}>
-                      <div className="flex justify-between mono text-xs mb-2">
-                        <span className="text-txt-primary font-medium">
-                          {skill.name}
-                        </span>
-                        <span className="text-txt-muted">{skill.level}%</span>
-                      </div>
-                      <div className="capacity-bar">
-                        <div
-                          ref={(el) => {
-                            barsRef.current[barKey] = el;
-                          }}
-                          data-level={skill.level}
-                          className="capacity-fill"
-                          style={{ width: 0 }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill, skillIdx) => (
+                  <span
+                    key={skillIdx}
+                    className="px-3 py-1.5 text-xs mono text-txt-secondary bg-dark-card/60 border border-dark-elevated rounded-lg group-hover:border-accent-cyan/20 transition-colors duration-300"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className="mt-12 flex flex-wrap gap-3 justify-center">
-          {[
-            "HTML",
-            "CSS",
-            "SCSS",
-            "Bootstrap",
-            "jQuery",
-            "JavaScript",
-            "TypeScript",
-            "React",
-            "React Native",
-            "Next.js",
-            "Node.js",
-            "Express.js",
-            "PostgreSQL",
-            "Tailwind CSS",
-            "Framer Motion",
-            "GSAP",
-            "Three.js",
-            "WordPress",
-            "PHP",
-            "MySQL",
-            "Firebase",
-            "Strapi",
-            "REST APIs",
-            "Git / GitHub",
-            "Figma",
-            "C++",
-            "Responsive Design",
-            "SEO",
-            "UI/UX Design",
-            "Problem Solving",
-            "Animation & Motion",
-            "Component Libraries",
-          ].map((skill, idx) => (
-            <span
-              key={idx}
-              className="px-4 py-2 text-xs mono text-txt-secondary bg-dark-card/50 border border-dark-elevated rounded-full hover:border-accent-cyan/30 hover:text-accent-cyan transition-all duration-300 cursor-default"
-            >
-              {skill}
-            </span>
           ))}
         </div>
       </div>

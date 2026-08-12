@@ -3,7 +3,14 @@
 import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { FaRegCopy, FaCheck, FaDownload, FaPaperPlane } from "react-icons/fa";
+import {
+  FaRegCopy,
+  FaCheck,
+  FaDownload,
+  FaPaperPlane,
+  FaGithub,
+  FaLinkedin,
+} from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 
 export default function ContactSection({
@@ -50,6 +57,7 @@ export default function ContactSection({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -90,7 +98,7 @@ export default function ContactSection({
     <section
       id="contact"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
     >
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-100 bg-cyan-400/4 rounded-full blur-[200px] pointer-events-none" />
 
@@ -99,15 +107,15 @@ export default function ContactSection({
           <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-6">
             {"// GET IN TOUCH"}
           </p>
-          <h2 className="text-4xl sm:text-6xl lg:text-8xl font-outfit font-black tracking-tight leading-none">
-            <span className="text-white">LET&apos;S </span>
-            <span className="gradient-text">WORK</span>
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
+            <span className="text-white">HAVE A </span>
+            <span className="gradient-text">PRODUCT</span>
             <br />
-            <span className="text-outline-accent">TOGETHER</span>
+            <span className="text-outline-accent">IN MIND?</span>
           </h2>
           <p className="mt-8 text-txt-muted text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Ready to elevate your brand or start a new project? Let&apos;s
-            connect and build something amazing together.
+            Let&apos;s talk about what you&apos;re building. Whether it&apos;s a
+            product, an interface, or a client project — I&apos;m happy to help.
           </p>
         </div>
 
@@ -129,6 +137,24 @@ export default function ContactSection({
             className="flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet text-black font-bold mono text-xs hover:opacity-90 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-accent-indigo/15"
           >
             <FaDownload className="text-xs" /> DOWNLOAD CV
+          </a>
+          <a
+            href="https://github.com/lancer7178"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="flex items-center gap-2 px-6 py-3 rounded-full bg-dark-card border border-dark-elevated text-white hover:border-accent-cyan/30 hover:text-accent-cyan transition-all duration-300 hover:scale-105 active:scale-95 mono text-xs"
+          >
+            <FaGithub /> GITHUB
+          </a>
+          <a
+            href="https://linkedin.com/in/abdul-atif-selem-8521a7281"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="flex items-center gap-2 px-6 py-3 rounded-full bg-dark-card border border-dark-elevated text-white hover:border-accent-indigo/30 hover:text-accent-indigo transition-all duration-300 hover:scale-105 active:scale-95 mono text-xs"
+          >
+            <FaLinkedin /> LINKEDIN
           </a>
         </div>
 

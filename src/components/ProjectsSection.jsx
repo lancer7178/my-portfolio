@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
-import { FaStar, FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 const FALLBACK_DATA_URI =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
@@ -55,6 +55,7 @@ export default function ProjectsSection({ projects = [] }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       gsap.to(numberRef.current, {
@@ -86,6 +87,7 @@ export default function ProjectsSection({ projects = [] }) {
 
   useEffect(() => {
     if (!gridRef.current || typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.fromTo(
       gridRef.current.children,
       { y: 50, opacity: 0, scale: 0.95 },
@@ -116,22 +118,22 @@ export default function ProjectsSection({ projects = [] }) {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-linear-to-b from-dark via-[#05050A] to-dark text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-linear-to-b from-dark via-[#05050A] to-dark text-white overflow-hidden scroll-mt-20"
     >
       <div
         ref={numberRef}
         className="section-number top-10 right-0 sm:right-10 opacity-100"
         style={{ WebkitTextStroke: "1px rgba(34, 211, 238, 0.04)" }}
       >
-        04
+        02
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div ref={headerRef} className="mb-12">
-          <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// PORTFOLIO`}</p>
+          <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// SELECTED WORK`}</p>
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
             <span className="text-white italic">SELECTED </span>
-            <span className="text-outline-accent italic">WORKS</span>
+            <span className="text-outline-accent italic">WORK</span>
           </h2>
           <div className="flex gap-2 mt-6">
             <div className="h-1 w-16 bg-linear-to-r from-accent-cyan to-accent-indigo rounded-full" />
@@ -139,9 +141,9 @@ export default function ProjectsSection({ projects = [] }) {
             <div className="h-1 w-4 bg-accent-violet/40 rounded-full" />
           </div>
           <p className="mt-6 text-txt-muted max-w-2xl text-base leading-relaxed">
-            Explore a curated collection of innovative projects showcasing
-            cutting-edge web technologies, creative design, and seamless user
-            experiences.
+            Client and independent work across corporate, healthcare, commerce
+            and interactive web — a range of products built with a consistent
+            eye for interface and detail.
           </p>
         </div>
 
@@ -196,17 +198,11 @@ export default function ProjectsSection({ projects = [] }) {
                   {project.description}
                 </p>
 
-                <div className="flex items-center gap-1.5">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar
-                      key={i}
-                      className={`text-xs ${i < (project.rating || 5) ? "text-accent-cyan" : "text-dark-elevated"}`}
-                    />
-                  ))}
-                  <span className="mono text-[10px] text-txt-muted ml-1">
-                    {project.rating || 5}.0
+                {project.category && (
+                  <span className="mono text-[10px] text-accent-indigo tracking-wide">
+                    {project.category}
                   </span>
-                </div>
+                )}
 
                 {project.technologies?.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 pt-3 border-t border-dark-elevated">

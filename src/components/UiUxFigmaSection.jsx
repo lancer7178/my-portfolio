@@ -242,7 +242,10 @@ export default function UiUxFigmaSection({
             <div className="h-1 w-8 bg-accent-indigo/50 rounded-full" />
             <div className="h-1 w-4 bg-accent-violet/40 rounded-full" />
           </div>
-          <p className="mt-6 text-txt-muted max-w-2xl text-base leading-relaxed">
+          <p className="mt-6 text-lg text-txt-secondary max-w-2xl leading-relaxed">
+            Explore the thinking behind my interfaces.
+          </p>
+          <p className="mt-3 text-txt-muted max-w-2xl text-base leading-relaxed">
             {summary ||
               "A complete showcase of my design workflow, Figma projects, and user-centered process from idea to handoff."}
           </p>

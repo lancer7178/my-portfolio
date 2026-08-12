@@ -192,21 +192,6 @@
   text-transform: uppercase;
 }
 
-/* Capacity bar */
-.capacity-bar {
-  height: 3px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-}
-.capacity-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo));
-  border-radius: 2px;
-  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
 /* Pulse animation for status dot */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -325,4 +310,38 @@
   background: linear-gradient(90deg, rgba(34,211,238,0.2), rgba(129,140,248,0.15), rgba(192,132,252,0.2));
   border-radius: 1px;
   z-index: 0;
+}
+
+/* ─── Accessibility: visible keyboard focus ─── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .particle,
+  .orbit-dot,
+  .pulse-dot {
+    display: none !important;
+  }
+  .hero-name:hover {
+    animation: none !important;
+  }
 }
