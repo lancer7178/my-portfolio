@@ -240,7 +240,7 @@ export const projects = [
     description:
       "An immersive space exploration website featuring stunning 3D visuals and interactive elements. Powered by Three.js, it educates users about universe exploration and astronomy with smooth animations and captivating design.",
     image: "/nova.png",
-    link: "https://nova-space-mu.vercel.app",
+    link: "https://explore-nova.vercel.app",
     github: null,
     technologies: [
       "react",
