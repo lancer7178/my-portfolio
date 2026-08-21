@@ -1,4 +1,51 @@
 export const projects = [
+   {
+    title: "Aetheris",
+    slug: "aetheris",
+    featured: true,
+    category: "Product · Visual Knowledge Tools · Bilingual",
+    tagline: "Turn complex information into clear, interactive visual systems.",
+    description:
+      "An infinite node-based canvas for building mind maps, lore, timelines, system architectures, research structures, and knowledge graphs — anything that's easier to understand as a shape than a list. No account required, with full bilingual (English/Arabic) support.",
+    image: "/aetheris.png",
+    link: "https://aetheris-canvas.vercel.app/",
+    github: null,
+    technologies: ["Next.js", "React Flow", "TypeScript", "Tailwind CSS", "Local-first"],
+    caseStudy: {
+      problem:
+        "Complex information — a story's cast, a system's architecture, a research structure — naturally has shape: hierarchy, causality, connection. Most tools force it into a list or a slide deck anyway, flattening the structure and losing the relationships that mattered.",
+      idea:
+        "Give people an infinite canvas where nodes and connections are the primary unit, not an afterthought bolted onto a document editor — one tool for mind maps, lore bibles, timelines, architecture diagrams and knowledge graphs, anything that's easier to understand as a shape than a list.",
+      built: [
+        "Infinite pan-and-zoom canvas built on React Flow for node-based diagrams",
+        "Freeform node and edge creation for mind maps, timelines and knowledge graphs",
+        "Local-first boards — start building instantly with no account required",
+        "Full bilingual interface with English/Arabic and RTL support",
+        "Light and dark themes with a calm, focused visual language",
+        "A guided demo board to explore the canvas before building from scratch",
+      ],
+      decisions: [
+        {
+          title: "Shape over lists",
+          detail:
+            "The canvas treats nodes and connections as the core unit of the product, so structure that's normally lost in documents and slides stays visible and editable.",
+        },
+        {
+          title: "No account, no friction",
+          detail:
+            "Boards are stored on-device so anyone can start building the moment they land on the page, with accounts planned as an addition later rather than a gate up front.",
+        },
+        {
+          title: "Bilingual from the start",
+          detail:
+            "English/Arabic and RTL support are built into the interface itself rather than patched on after, so the canvas reads naturally in either direction.",
+        },
+      ],
+      technology: ["Next.js", "React Flow", "TypeScript", "Tailwind CSS"],
+      outcome:
+        "A focused canvas tool that treats structure as the point — where a mind map, a system diagram, or a piece of lore can be built and explored as the shape it actually is.",
+    },
+  },
   {
     title: "parallax",
     slug: "parallax",
@@ -140,6 +187,7 @@ export const projects = [
         "An open-source tool that turns a fiddly, privacy-sensitive chore into a fast, in-browser workflow — store-ready screenshots exported as a ZIP without a single upload.",
     },
   },
+ 
   {
     title: "Sato pharmacy",
     slug: "sato-pharmacy",
