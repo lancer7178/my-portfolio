@@ -187,7 +187,6 @@ export const projects = [
         "An open-source tool that turns a fiddly, privacy-sensitive chore into a fast, in-browser workflow — store-ready screenshots exported as a ZIP without a single upload.",
     },
   },
- 
   {
     title: "Sato pharmacy",
     slug: "sato-pharmacy",
@@ -270,7 +269,7 @@ export const projects = [
     description:
       "An innovative healthcare platform focusing on neurology and wellness services. Built with modern tech stack, it provides detailed information about neurological treatments, specialist consultations, and patient management.",
     image: "/neuro.png",
-    link: "https://neuro-bridge-bixz.vercel.app",
+    link: "https://neuro-bridge-website.vercel.app",
     github: null,
     technologies: [
       "react",
