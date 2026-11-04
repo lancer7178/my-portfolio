@@ -246,72 +246,6 @@
   background-clip: text;
 }
 
-/* ─── 3D Tilt Card ─── */
-.tilt-card {
-  background: rgba(8, 8, 15, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-.tilt-card:hover {
-  border-color: var(--border-accent);
-}
-
-/* ─── 3D Project Card ─── */
-.project-card-3d {
-  background: rgba(8, 8, 15, 0.9);
-  border: 1px solid var(--border);
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: border-color 0.4s ease;
-}
-.project-card-3d:hover {
-  border-color: rgba(34, 211, 238, 0.2);
-}
-
-/* ─── Orbiting Dots ─── */
-@keyframes orbit {
-  0%   { transform: rotate(0deg) translateX(var(--orbit-size, 50px)) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(var(--orbit-size, 50px)) rotate(-360deg); }
-}
-.orbit-container {
-  position: relative;
-}
-.orbit-dot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  margin: -2px 0 0 -2px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
-  opacity: 0.5;
-  animation: orbit var(--orbit-dur, 8s) linear infinite;
-  pointer-events: none;
-}
-
-/* ─── Preview Frame ─── */
-.preview-frame {
-  background: linear-gradient(135deg, rgba(34,211,238,0.15), rgba(129,140,248,0.12), rgba(192,132,252,0.1));
-  border: 1px solid rgba(34, 211, 238, 0.12);
-  position: relative;
-  transition: box-shadow 0.5s ease;
-}
-.preview-frame:hover {
-  box-shadow: 0 0 60px rgba(34, 211, 238, 0.08),
-              0 0 120px rgba(129, 140, 248, 0.04);
-}
-
-/* ─── Step Connector ─── */
-.step-connector {
-  background: linear-gradient(90deg, rgba(34,211,238,0.2), rgba(129,140,248,0.15), rgba(192,132,252,0.2));
-  border-radius: 1px;
-  z-index: 0;
-}
-
 /* ─── Accessibility: visible keyboard focus ─── */
 a:focus-visible,
 button:focus-visible,
@@ -337,7 +271,6 @@ textarea:focus-visible,
     scroll-behavior: auto !important;
   }
   .particle,
-  .orbit-dot,
   .pulse-dot {
     display: none !important;
   }

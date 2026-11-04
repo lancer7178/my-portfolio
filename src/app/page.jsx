@@ -10,7 +10,7 @@ import ContactSection from "@/components/ContactSection";
 import { aboutIntro, aboutValues, aboutApproach } from "@/data/about";
 import { featuredProjects, selectedProjects } from "@/data/projects";
 import { buildProcess } from "@/data/process";
-import { figmaProjects, figmaExperience } from "@/data/figma";
+import { designProjects, figmaExperience } from "@/data/figma";
 import { experiences } from "@/data/experience";
 
 const CV_LINK = "/Abdulatif_Selem_CV.pdf";
@@ -21,6 +21,12 @@ export default function Home() {
       <HeroSection name="Abdulatif" cvLink={CV_LINK} />
       <FeaturedWorkSection projects={featuredProjects} />
       <ProjectsSection projects={selectedProjects} />
+      <UiUxFigmaSection
+        summary="Apps and interfaces I have designed, from first wireframes to polished screens. Select any design to see it full size."
+        projects={designProjects}
+        process={figmaExperience}
+        previewCount={8}
+      />
       <HowIBuildSection steps={buildProcess} />
       <AboutSection
         intro={aboutIntro}
@@ -29,11 +35,6 @@ export default function Home() {
       />
       <SkillsSection />
       <ExperienceSection experiences={experiences} />
-      <UiUxFigmaSection
-        summary="I leverage Figma to design responsive, user-centric interfaces that bridge the gap between creativity and functionality. From wireframes to high-fidelity prototypes, I create design systems that maintain consistency while captivating users."
-        uiuxExperience={figmaExperience}
-        figmaProjects={figmaProjects}
-      />
       <ContactSection email="abdlatefkhatib@email.com" cvLink={CV_LINK} />
     </div>
   );

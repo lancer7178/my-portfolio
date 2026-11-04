@@ -1,356 +1,461 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import {
+  FaArrowLeft,
+  FaArrowRight,
+  FaExpand,
+  FaExternalLinkAlt,
+  FaTimes,
+} from "react-icons/fa";
 
-const FALLBACK_DATA_URI =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
+const LAYOUTS = {
+  mobile: {
+    unit: "screen",
+    grid: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4",
+    thumb: "aspect-3/5",
+    sizes:
+      "(min-width: 1280px) 290px, (min-width: 1024px) 23vw, (min-width: 640px) 31vw, 46vw",
+    viewerWidth: "max-w-110",
+    viewerSizes: "(min-width: 440px) 440px, 100vw",
+  },
+  web: {
+    unit: "page",
+    grid: "sm:grid-cols-2 lg:grid-cols-3",
+    thumb: "aspect-4/3",
+    sizes: "(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw",
+    viewerWidth: "max-w-5xl",
+    viewerSizes: "(min-width: 1024px) calc(100vw - 26rem), 100vw",
+  },
+};
 
-/* ─── 3D Tilt Card Hook ─── */
-function useTilt(intensity = 15) {
-  const ref = useRef(null);
-  const [style, setStyle] = useState({
-    transform: "perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)",
-    transition: "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
-  });
+/* ─── Full-size viewer (native <dialog> gives focus trapping and Esc) ─── */
+function ScreenViewer({ project, screens, index, onIndexChange, onClose }) {
+  const dialogRef = useRef(null);
+  const scrollRef = useRef(null);
+  const touchStart = useRef(null);
 
-  const onMouseMove = useCallback(
-    (e) => {
-      const el = ref.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -intensity;
-      const rotateY = ((x - centerX) / centerX) * intensity;
-      setStyle({
-        transform: `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`,
-        transition: "transform 0.1s ease-out",
-      });
-    },
-    [intensity],
-  );
+  const layout = LAYOUTS[project.layout];
+  const screen = screens[index];
+  const hasMany = screens.length > 1;
+  const step = (delta) =>
+    onIndexChange((index + delta + screens.length) % screens.length);
+  const neighbours = hasMany
+    ? [
+        screens[(index + 1) % screens.length],
+        screens[(index - 1 + screens.length) % screens.length],
+      ]
+    : [];
 
-  const onMouseLeave = useCallback(() => {
-    setStyle({
-      transform:
-        "perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)",
-      transition: "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
-    });
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    const previouslyFocused = document.activeElement;
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+
+    if (!dialog.open) dialog.showModal();
+    root.style.overflow = "hidden";
+
+    return () => {
+      root.style.overflow = previousOverflow;
+      if (dialog.open) dialog.close();
+      previouslyFocused?.focus?.({ preventScroll: true });
+    };
   }, []);
 
-  return { ref, style, onMouseMove, onMouseLeave };
-}
+  // Tall designs scroll inside the viewer, so always start each one at the top.
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 });
+  }, [index]);
 
-/* ─── 3D Experience Card ─── */
-function ExperienceCard({ item, idx }) {
-  const { ref, style, onMouseMove, onMouseLeave } = useTilt(12);
-  const icons = ["✦", "◆", "▲"];
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowRight") step(1);
+    if (e.key === "ArrowLeft") step(-1);
+  };
+
+  const handleTouchStart = (e) => {
+    const touch = e.changedTouches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStart.current) return;
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStart.current.x;
+    const dy = touch.clientY - touchStart.current.y;
+    touchStart.current = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      step(dx < 0 ? 1 : -1);
+    }
+  };
 
   return (
-    <motion.article
-      ref={ref}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      style={style}
-      className="tilt-card group relative flex flex-col rounded-2xl overflow-hidden p-6 sm:p-8 cursor-pointer"
-      initial={{ opacity: 0, y: 40, rotateX: -10 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: idx * 0.12, duration: 0.6, ease: "easeOut" }}
+    <dialog
+      ref={dialogRef}
+      aria-label={`${project.title} designs`}
+      onCancel={(e) => {
+        e.preventDefault();
+        onClose();
+      }}
+      onKeyDown={handleKeyDown}
+      className="fixed inset-0 m-0 w-screen h-dvh max-w-none max-h-none bg-dark/95 text-white backdrop-blur-sm"
     >
-      {/* Glow orb */}
-      <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent-cyan rounded-full blur-[60px] opacity-0 group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none" />
+      <div className="flex flex-col lg:flex-row w-full h-full">
+        <div
+          ref={scrollRef}
+          tabIndex={0}
+          aria-label="Design image, scrollable"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="flex-1 min-h-0 overflow-y-auto px-4 pt-4 lg:py-8"
+        >
+          <Image
+            key={screen.src}
+            src={screen.src}
+            alt={`${project.title}, ${screen.title}. ${screen.description}`}
+            width={screen.width}
+            height={screen.height}
+            sizes={layout.viewerSizes}
+            priority
+            className={`mx-auto w-full h-auto rounded-xl ${layout.viewerWidth}`}
+          />
+          {/* Load the next and previous designs early so paging feels instant. */}
+          {neighbours.map((item) => (
+            <Image
+              key={`preload-${item.src}`}
+              src={item.src}
+              alt=""
+              width={item.width}
+              height={item.height}
+              sizes={layout.viewerSizes}
+              loading="eager"
+              className="hidden"
+            />
+          ))}
+        </div>
 
-      {/* Step number */}
-      <div className="flex items-center gap-3 mb-3">
-        <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-linear-to-br from-accent-cyan/15 to-accent-indigo/10 border border-accent-cyan/20 text-accent-cyan text-sm font-bold font-mono">
-          {String(idx + 1).padStart(2, "0")}
-        </span>
-        <span className="text-lg text-accent-cyan/60">
-          {icons[idx % icons.length]}
-        </span>
+        <div className="shrink-0 lg:w-96 flex flex-col gap-3 lg:gap-5 p-4 lg:p-8 border-t lg:border-t-0 lg:border-l border-white/10 bg-dark-surface">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-txt-secondary" aria-live="polite">
+              {project.title}: {index + 1} of {screens.length}
+            </p>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close"
+              className="flex items-center justify-center w-11 h-11 shrink-0 rounded-full border border-white/15 bg-white/5 hover:bg-white/15 transition-colors duration-200"
+            >
+              <FaTimes aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="lg:flex-1">
+            <h4 className="text-lg lg:text-2xl font-bold font-outfit">
+              {screen.title}
+            </h4>
+            <p className="mt-1 lg:mt-3 text-sm lg:text-base text-txt-secondary leading-relaxed">
+              {screen.description}
+            </p>
+          </div>
+
+          {hasMany && (
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => step(-1)}
+                className="flex-1 flex items-center justify-center gap-2 min-h-11 rounded-xl border border-white/15 bg-white/5 text-sm font-semibold hover:bg-white/15 transition-colors duration-200"
+              >
+                <FaArrowLeft aria-hidden="true" /> Previous
+              </button>
+              <button
+                type="button"
+                onClick={() => step(1)}
+                className="flex-1 flex items-center justify-center gap-2 min-h-11 rounded-xl bg-accent-cyan text-dark text-sm font-semibold hover:bg-accent-cyan/85 transition-colors duration-200"
+              >
+                Next <FaArrowRight aria-hidden="true" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-
-      <h3 className="text-lg font-bold font-outfit text-txt-primary group-hover:text-accent-cyan transition-colors duration-300 mb-2">
-        {item.title}
-      </h3>
-      <div className="h-0.5 w-10 bg-linear-to-r from-accent-cyan/50 to-accent-indigo/30 rounded-full group-hover:w-16 transition-all duration-500 mb-4" />
-      <p className="text-sm text-txt-muted leading-relaxed flex-1">
-        {item.description}
-      </p>
-
-      {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-accent-cyan/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-    </motion.article>
+    </dialog>
   );
 }
 
-/* ─── 3D Project Card ─── */
-function ProjectCard3D({ project, idx, isActive, onSelect }) {
-  const { ref, style, onMouseMove, onMouseLeave } = useTilt(10);
+/* ─── One project: its details and every screen, filterable by flow ─── */
+function ProjectGallery({ project, previewCount }) {
+  const [activeFlow, setActiveFlow] = useState("all");
+  const [expanded, setExpanded] = useState(false);
+  const [viewerIndex, setViewerIndex] = useState(null);
+
+  const layout = LAYOUTS[project.layout];
+  const screens =
+    activeFlow === "all"
+      ? project.screens
+      : project.screens.filter((screen) => screen.flow === activeFlow);
+  const isTruncated = !expanded && screens.length > previewCount;
+  const visibleScreens = isTruncated ? screens.slice(0, previewCount) : screens;
+
+  const filters = project.flows
+    ? [
+        { id: "all", label: "All screens", count: project.screens.length },
+        ...project.flows.map((flow) => ({
+          ...flow,
+          count: project.screens.filter((screen) => screen.flow === flow.id)
+            .length,
+        })),
+      ]
+    : [];
 
   return (
-    <motion.article
-      ref={ref}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      style={style}
-      className={`project-card-3d group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer ${
-        isActive ? "ring-1 ring-accent-cyan/40" : ""
-      }`}
-      initial={{ opacity: 0, y: 50, rotateY: -8 }}
-      whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: idx * 0.1, duration: 0.6, ease: "easeOut" }}
-    >
-      {/* Image */}
-      <div className="relative w-full h-52 overflow-hidden bg-linear-to-br from-dark-card to-dark-surface">
-        <Image
-          src={project.image || FALLBACK_DATA_URI}
-          alt={project.title}
-          width={640}
-          height={280}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-          unoptimized={!project.image || project.image.startsWith("http")}
-        />
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-linear-to-t from-dark via-dark/30 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-        {/* Type badge */}
-        <span className="absolute top-3 left-3 mono text-[10px] text-white/70 bg-black/50 px-2.5 py-1 rounded-lg backdrop-blur-md border border-white/5">
-          {project.type || "DESIGN"}
-        </span>
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 flex flex-col p-6 gap-3 bg-[#0A0A14]/90">
-        <h4 className="text-lg font-bold font-outfit text-txt-primary group-hover:text-accent-cyan transition-colors duration-300">
+    <div className="mt-10">
+      <div className="max-w-3xl">
+        <p className="text-sm font-semibold text-accent-cyan mb-2">
+          {project.type}
+        </p>
+        <h3 className="text-3xl sm:text-4xl font-bold font-outfit text-white">
           {project.title}
-        </h4>
-        <div className="h-0.5 w-8 bg-linear-to-r from-accent-cyan/50 to-accent-indigo/30 rounded-full group-hover:w-14 transition-all duration-500" />
-        <p className="text-sm text-txt-muted leading-relaxed grow line-clamp-3">
+        </h3>
+        <p className="mt-3 text-base sm:text-lg text-txt-secondary leading-relaxed">
           {project.description}
         </p>
-
-        {/* Buttons */}
-        <div className="flex gap-3 pt-3 border-t border-dark-elevated/60">
-          {(project.embedUrl || project.liveEmbedUrl) && (
-            <button
-              type="button"
-              onClick={() => onSelect(idx)}
-              className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-sm text-white bg-linear-to-r from-accent-cyan/90 via-accent-indigo/85 to-accent-violet/80 hover:from-accent-cyan hover:via-accent-indigo hover:to-accent-violet transition-all duration-300 shadow-lg shadow-accent-indigo/12 hover:shadow-accent-indigo/25 hover:scale-[1.03] active:scale-95"
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 rounded-full text-xs text-txt-primary bg-white/5 border border-white/10"
             >
-              Preview
-            </button>
-          )}
+              {tag}
+            </span>
+          ))}
           {project.link && (
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center px-4 py-2.5 rounded-xl font-semibold text-sm text-accent-cyan bg-accent-cyan/5 border border-accent-cyan/12 hover:border-accent-cyan/50 hover:bg-accent-cyan/10 transition-all duration-300 hover:scale-[1.03] active:scale-95"
+              className="inline-flex items-center gap-2 min-h-11 px-3 text-sm font-semibold text-accent-cyan hover:text-white transition-colors duration-200"
             >
-              Open Figma
+              Open in Figma <FaExternalLinkAlt aria-hidden="true" className="text-xs" />
             </a>
           )}
         </div>
       </div>
 
-      {/* Hover glow effect */}
-      <div
-        className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{
-          boxShadow:
-            "inset 0 0 60px rgba(34,211,238,0.04), 0 8px 32px rgba(34,211,238,0.08)",
-        }}
-      />
-    </motion.article>
+      {filters.length > 0 && (
+        <div
+          role="group"
+          aria-label="Filter screens by flow"
+          className="mt-8 flex flex-wrap gap-2"
+        >
+          {filters.map((filter) => {
+            const isActive = activeFlow === filter.id;
+            return (
+              <button
+                key={filter.id}
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => setActiveFlow(filter.id)}
+                className={`min-h-11 px-4 rounded-full text-sm font-semibold border transition-colors duration-200 ${
+                  isActive
+                    ? "bg-white border-white text-dark"
+                    : "bg-white/5 border-white/10 text-txt-primary hover:bg-white/10"
+                }`}
+              >
+                {filter.label}{" "}
+                <span className={isActive ? "opacity-60" : "text-txt-secondary"}>
+                  {filter.count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      <p className="mt-6 text-sm text-txt-secondary">
+        Select any {layout.unit} to see it full size.
+      </p>
+
+      <ul className={`mt-4 grid gap-3 sm:gap-5 ${layout.grid}`}>
+        {visibleScreens.map((screen, index) => (
+          <li key={screen.src}>
+            <button
+              type="button"
+              onClick={() => setViewerIndex(index)}
+              className="group block w-full text-left rounded-2xl"
+            >
+              <span
+                className={`relative block overflow-hidden rounded-2xl border border-white/10 bg-dark-card group-hover:border-accent-cyan/60 transition-colors duration-300 ${layout.thumb}`}
+              >
+                <Image
+                  src={screen.src}
+                  alt={screen.description}
+                  fill
+                  sizes={layout.sizes}
+                  className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+                />
+                <span className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-full bg-black/70 text-white text-xs opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200">
+                  <FaExpand aria-hidden="true" />
+                </span>
+              </span>
+              <span className="block mt-2 px-1 text-sm font-semibold text-txt-primary group-hover:text-accent-cyan transition-colors duration-200">
+                {screen.title}
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {isTruncated && (
+        <div className="mt-8 text-center">
+          <button
+            type="button"
+            onClick={() => setExpanded(true)}
+            className="min-h-11 px-6 rounded-xl text-sm font-semibold text-dark bg-accent-cyan hover:bg-accent-cyan/85 transition-colors duration-200"
+          >
+            Show all {screens.length} {layout.unit}s
+          </button>
+        </div>
+      )}
+
+      {viewerIndex !== null && (
+        <ScreenViewer
+          project={project}
+          screens={screens}
+          index={viewerIndex}
+          onIndexChange={setViewerIndex}
+          onClose={() => setViewerIndex(null)}
+        />
+      )}
+    </div>
   );
 }
 
 /* ─── Main Section ─── */
 export default function UiUxFigmaSection({
   summary,
-  uiuxExperience = [],
-  figmaProjects = [],
-  figmaEmbedUrl,
+  projects = [],
+  process = [],
+  showHeader = true,
+  previewCount = Infinity,
 }) {
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-
-  const activeProject = figmaProjects[activeProjectIndex];
-  const activeEmbedUrl =
-    activeProject?.embedUrl || activeProject?.liveEmbedUrl || figmaEmbedUrl;
-
-  const projectsWithEmbed = useMemo(
-    () =>
-      figmaProjects.filter(
-        (project) => project?.embedUrl || project?.liveEmbedUrl,
-      ),
-    [figmaProjects],
-  );
+  const [activeId, setActiveId] = useState(projects[0]?.id);
+  const activeProject = projects.find((project) => project.id === activeId);
 
   return (
     <section
       id="uiux"
-      className="relative pt-20 md:pt-1 pb-6 md:pb-20 px-6 md:px-12 bg-linear-to-b from-dark via-[#05050A] to-dark text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-linear-to-b from-dark via-[#05050A] to-dark text-white overflow-hidden"
     >
-      {/* Ambient glow blobs */}
-      <div className="absolute top-0 left-1/4 w-125 h-125 bg-accent-indigo blur-[250px] opacity-[0.04] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-accent-cyan blur-[200px] opacity-[0.05] rounded-full pointer-events-none" />
-
-      {/* Orbiting dots */}
-      <div className="orbit-container absolute top-20 right-20 w-32 h-32 pointer-events-none hidden lg:block">
-        <span
-          className="orbit-dot"
-          style={{ "--orbit-size": "60px", "--orbit-dur": "8s" }}
-        />
-        <span
-          className="orbit-dot"
-          style={{
-            "--orbit-size": "60px",
-            "--orbit-dur": "8s",
-            animationDelay: "4s",
-          }}
-        />
-      </div>
-      <div className="orbit-container absolute bottom-40 left-10 w-24 h-24 pointer-events-none hidden lg:block">
-        <span
-          className="orbit-dot"
-          style={{ "--orbit-size": "44px", "--orbit-dur": "6s" }}
-        />
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          className="mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// UI/UX & FIGMA`}</p>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
-            <span className="text-white italic">DESIGN </span>
-            <span className="text-outline-accent italic">PROJECTS</span>
-          </h2>
-          <div className="flex gap-2 mt-6">
-            <div className="h-1 w-16 bg-linear-to-r from-accent-cyan to-accent-indigo rounded-full" />
-            <div className="h-1 w-8 bg-accent-indigo/50 rounded-full" />
-            <div className="h-1 w-4 bg-accent-violet/40 rounded-full" />
-          </div>
-          <p className="mt-6 text-lg text-txt-secondary max-w-2xl leading-relaxed">
-            Explore the thinking behind my interfaces.
-          </p>
-          <p className="mt-3 text-txt-muted max-w-2xl text-base leading-relaxed">
-            {summary ||
-              "A complete showcase of my design workflow, Figma projects, and user-centered process from idea to handoff."}
-          </p>
-        </motion.div>
-
-        {/* ─── Experience / Process Steps ─── */}
-        {uiuxExperience.length > 0 && (
-          <div className="mb-16">
-            <motion.p
-              className="mono text-xs text-accent-indigo tracking-[0.3em] mb-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            >{`// DESIGN PROCESS`}</motion.p>
-
-            <div className="relative grid md:grid-cols-3 gap-5">
-              {/* Connector line (desktop) */}
-              <div className="step-connector hidden md:block absolute top-8.5 left-[calc(16.66%+20px)] right-[calc(16.66%+20px)] h-0.5" />
-
-              {uiuxExperience.map((item, idx) => (
-                <ExperienceCard
-                  key={`${item.title}-${idx}`}
-                  item={item}
-                  idx={idx}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ─── Figma Live Preview ─── */}
-        {activeEmbedUrl && (
+        {showHeader ? (
           <motion.div
-            className="mb-16"
-            initial={{ opacity: 0, y: 40 }}
+            className="mb-10"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// LIVE PREVIEW`}</p>
-            <h3 className="text-2xl font-bold font-outfit text-white mb-6">
-              Figma Interactive Preview
-            </h3>
-            <div className="preview-frame rounded-2xl p-1 sm:p-1.5 overflow-hidden">
-              <div className="bg-dark-surface rounded-xl p-2 sm:p-3">
-                {/* Window chrome */}
-                <div className="flex items-center gap-2.5 mb-3 px-1">
-                  <span className="w-3 h-3 rounded-full bg-[#FF5F57]/80" />
-                  <span className="w-3 h-3 rounded-full bg-[#FFBD2E]/80" />
-                  <span className="w-3 h-3 rounded-full bg-[#27C93F]/80" />
-                  <span className="flex-1 mx-4 h-6 rounded-md bg-dark-card border border-dark-elevated" />
-                </div>
-                <iframe
-                  title={activeProject?.title || "Figma Project Preview"}
-                  src={activeEmbedUrl}
-                  className="w-full h-65 sm:h-90 lg:h-120 rounded-lg"
-                  allowFullScreen
-                  style={{ border: "1px solid rgba(34, 211, 238, 0.08)" }}
-                />
-              </div>
-            </div>
-            {activeProject?.title && (
-              <div className="mt-4 text-sm text-txt-muted">
-                Now viewing:{" "}
-                <span className="text-accent-cyan font-semibold">
-                  {activeProject.title}
-                </span>
-              </div>
+            <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// UI/UX DESIGN`}</p>
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
+              <span className="text-white italic">DESIGN </span>
+              <span className="text-outline-accent italic">PROJECTS</span>
+            </h2>
+            {summary && (
+              <p className="mt-6 text-lg text-txt-secondary max-w-3xl leading-relaxed">
+                {summary}
+              </p>
             )}
           </motion.div>
+        ) : (
+          <h2 className="sr-only">Design projects</h2>
         )}
 
-        {/* ─── Project Gallery ─── */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-3">{`// PORTFOLIO`}</p>
-            <h3 className="text-3xl font-bold font-outfit text-white mb-6">
-              Design Collection
-            </h3>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {figmaProjects.map((project, idx) => (
-              <ProjectCard3D
-                key={`${project.title}-${idx}`}
-                project={project}
-                idx={idx}
-                isActive={activeProjectIndex === idx}
-                onSelect={setActiveProjectIndex}
-              />
-            ))}
-          </div>
-
-          {projectsWithEmbed.length === 0 && figmaProjects.length > 0 && (
-            <p className="mt-4 text-sm text-txt-muted">
-              Add an embed URL to your project object to enable live preview
-              switching.
-            </p>
-          )}
+        <div
+          role="group"
+          aria-label="Choose a project"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3"
+        >
+          {projects.map((project) => {
+            const isActive = project.id === activeId;
+            const unit = LAYOUTS[project.layout].unit;
+            const count = project.screens.length;
+            return (
+              <button
+                key={project.id}
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => setActiveId(project.id)}
+                className={`text-left rounded-2xl overflow-hidden border-2 bg-dark-card transition-colors duration-200 ${
+                  isActive
+                    ? "border-accent-cyan"
+                    : "border-white/10 hover:border-white/30"
+                }`}
+              >
+                <span className="relative block aspect-video bg-dark-surface">
+                  <Image
+                    src={project.screens[0].src}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 240px, (min-width: 768px) 33vw, 50vw"
+                    className="object-cover object-top"
+                  />
+                </span>
+                <span className="block p-3">
+                  <span className="block text-sm sm:text-base font-bold font-outfit text-txt-primary">
+                    {project.title}
+                  </span>
+                  <span className="block mt-0.5 text-xs text-txt-secondary">
+                    {count} {unit}
+                    {count === 1 ? "" : "s"}
+                  </span>
+                </span>
+              </button>
+            );
+          })}
         </div>
+
+        {/* The key resets filters and "show all" when switching projects. */}
+        {activeProject && (
+          <ProjectGallery
+            key={activeProject.id}
+            project={activeProject}
+            previewCount={previewCount}
+          />
+        )}
+
+        {process.length > 0 && (
+          <div className="mt-20">
+            <h3 className="text-3xl font-bold font-outfit text-white mb-6">
+              How I design
+            </h3>
+            <ol
+              className={`grid gap-5 ${
+                process.length === 4
+                  ? "sm:grid-cols-2 lg:grid-cols-4"
+                  : "md:grid-cols-3"
+              }`}
+            >
+              {process.map((item, index) => (
+                <li
+                  key={item.title}
+                  className="rounded-2xl border border-white/10 bg-dark-card p-6"
+                >
+                  <p className="font-mono text-sm font-bold text-accent-cyan mb-2">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h4 className="text-lg font-bold font-outfit text-txt-primary mb-2">
+                    {item.title}
+                  </h4>
+                  <p className="text-sm text-txt-secondary leading-relaxed">
+                    {item.description}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
       </div>
     </section>
   );

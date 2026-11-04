@@ -1,24 +1,21 @@
 import UiUxPageIntro from "@/components/UiUxPageIntro";
 import UiUxFigmaSection from "@/components/UiUxFigmaSection";
-import { figmaProjects, figmaExperience, designProcess } from "@/data/figma";
-
-const uiuxSummary =
-  "I design clean and user-friendly interfaces in Figma, from early wireframes to clickable prototypes. My process focuses on usability, visual hierarchy, and responsive layout decisions before development starts.";
+import { designProjects, designProcess } from "@/data/figma";
 
 export const metadata = {
-  title: "UI/UX & Figma",
+  title: "UI/UX Designs",
   description:
-    "A showcase of my UI/UX design workflow, Figma projects, and user-centered process from research to developer handoff.",
+    "Browse my UI/UX designs: mobile apps and websites including Shara, Light Orbits, Ventura and SocialGram, plus my design process.",
 };
 
 export default function UiUxPage() {
   return (
-    <main className="min-h-screen bg-[#101014] text-white font-outfit pt-16">
-      <UiUxPageIntro designProcess={designProcess} />
+    <main className="min-h-screen bg-dark text-white font-outfit pt-6">
+      <UiUxPageIntro />
       <UiUxFigmaSection
-        summary={uiuxSummary}
-        uiuxExperience={figmaExperience}
-        figmaProjects={figmaProjects}
+        showHeader={false}
+        projects={designProjects}
+        process={designProcess}
       />
     </main>
   );

@@ -1,17 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaHome, FaUser, FaCode, FaBriefcase, FaEnvelope } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { FaHome, FaUser, FaCode, FaBriefcase, FaEnvelope, FaPenNib } from "react-icons/fa";
 
 const navItems = [
   { icon: <FaHome />, label: "Home", href: "#hero" },
   { icon: <FaBriefcase />, label: "Work", href: "#work" },
+  { icon: <FaPenNib />, label: "Designs", href: "#uiux" },
   { icon: <FaUser />, label: "About", href: "#about" },
   { icon: <FaCode />, label: "Skills", href: "#skills" },
   { icon: <FaEnvelope />, label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState("hero");
   const [currentTime, setCurrentTime] = useState("");
   const [isVisible, setIsVisible] = useState(false);
@@ -62,6 +65,9 @@ export default function Navbar() {
     if (el) {
       const offset = el.offsetTop - 20;
       window.scrollTo({ top: offset, behavior: "smooth" });
+    } else {
+      // On pages without this section (e.g. /ui-ux), go to it on the home page.
+      router.push(`/${href}`);
     }
   };
 
@@ -84,6 +90,7 @@ export default function Navbar() {
               key={item.label}
               onClick={() => handleClick(item.href)}
               title={item.label}
+              aria-label={item.label}
               className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 group ${
                 isActive
                   ? "bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet text-white scale-110 shadow-lg shadow-accent-indigo/30"
