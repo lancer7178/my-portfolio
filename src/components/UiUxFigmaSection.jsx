@@ -395,7 +395,7 @@ export default function UiUxFigmaSection({
               >
                 <span className="relative block aspect-video bg-dark-surface">
                   <Image
-                    src={project.screens[0].src}
+                    src={project.cover ?? project.screens[0].src}
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 240px, (min-width: 768px) 33vw, 50vw"

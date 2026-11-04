@@ -10,10 +10,10 @@ const FALLBACK_DATA_URI =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
 const AGENCIES = {
-  bowmen: { label: "BOWMEN", logo: "/bowmen.png", color: "#FF6B9D" },
+  bowmen: { label: "BOWMEN", logo: "/logo-company/bowmen.png", color: "#FF6B9D" },
   "design-ways": {
     label: "DESIGN WAYS",
-    logo: "/design-ways.png",
+    logo: "/logo-company/design-ways.png",
     color: "#22D3EE",
   },
 };

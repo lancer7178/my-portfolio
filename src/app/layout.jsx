@@ -33,13 +33,13 @@ export const metadata = {
     title: "Abdulatif — Frontend Engineer & Creative Developer",
     description: siteDescription,
     siteName: "Abdulatif Selem",
-    images: [{ url: "/parallax.png", width: 1200, height: 630 }],
+    images: [{ url: "/websites-cover/parallax.png", width: 1835, height: 887 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Abdulatif — Frontend Engineer & Creative Developer",
     description: siteDescription,
-    images: ["/parallax.png"],
+    images: ["/websites-cover/parallax.png"],
   },
 };
 

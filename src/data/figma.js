@@ -1,11 +1,13 @@
 const DESIGNS_DIR = "/ui-ux design projects";
 
+// Some file names contain spaces and "&", which must be URL-encoded to load.
+const toUrl = (path) => encodeURI(path).replaceAll("&", "%26");
+
 // Each screen is [file, width, height, title, description, flow (optional)].
 // Width and height are kept so the page never jumps while images load.
 const toScreens = (folder, rows) =>
   rows.map(([file, width, height, title, description, flow]) => ({
-    // Some file names contain spaces and "&", which must be URL-encoded to load.
-    src: encodeURI(file.startsWith("/") ? file : `${folder}/${file}`).replaceAll("&", "%26"),
+    src: toUrl(`${folder}/${file}`),
     width,
     height,
     title,
@@ -84,6 +86,7 @@ export const designProjects = [
       "A clean, light website for a personal finance product, built on a simple layout system with clear sections, plenty of space and one strong blue accent.",
     tags: ["Website", "5 pages", "Personal finance"],
     link: "https://www.figma.com/design/bPLCosPrx27QunpXHMB6VL/Ventura?node-id=0-1&t=rOnJ6MV8Rl3gRSAl-1",
+    cover: toUrl(`${DESIGNS_DIR}/ventora/cover.png`),
     screens: toScreens(`${DESIGNS_DIR}/ventora`, [
       ["Home.png", 2880, 5982, "Home", "The product pitch, partner logos, feature highlights and a call to action."],
       ["Products.png", 2880, 5150, "Products", "Product benefits with interface previews, followed by common questions."],
@@ -101,6 +104,7 @@ export const designProjects = [
       "A wireframe of a social media app, mapping the full experience in greyscale so structure and navigation come first: feed, search, posting, messaging and profiles.",
     tags: ["Mobile app", "Wireframes", "Social media"],
     link: "https://www.figma.com/design/o0OAb1LyQMwpeiNvmdqe6I/SocialGram?node-id=0-1",
+    cover: toUrl(`${DESIGNS_DIR}/SocialGram/cover.png`),
     screens: toScreens(`${DESIGNS_DIR}/SocialGram`, [
       ["Home.png", 786, 1624, "Home feed", "Stories across the top and a scrolling feed of posts above the main navigation."],
       ["Search.png", 393, 852, "Search", "A simple search screen, ready for typing."],
@@ -128,8 +132,8 @@ export const designProjects = [
       "A UI design system with reusable components, typography scales and color tokens for consistent design across projects.",
     tags: ["Design system", "Components", "Design tokens"],
     link: "https://www.figma.com/design/1awMsXZ0PImopkseWDuttI/Untitled-UI?node-id=0-1",
-    screens: toScreens("", [
-      ["/untitled.png", 576, 637, "Design system preview", "A preview of the Untitled-UI design system."],
+    screens: toScreens(`${DESIGNS_DIR}/untitled`, [
+      ["untitled.png", 576, 637, "Design system preview", "A preview of the Untitled-UI design system."],
     ]),
   },
 ];

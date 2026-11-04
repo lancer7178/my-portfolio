@@ -7,7 +7,7 @@ export const projects = [
     tagline: "Turn complex information into clear, interactive visual systems.",
     description:
       "An infinite node-based canvas for building mind maps, lore, timelines, system architectures, research structures, and knowledge graphs — anything that's easier to understand as a shape than a list. No account required, with full bilingual (English/Arabic) support.",
-    image: "/aetheris.png",
+    image: "/websites-cover/aetheris.png",
     link: "https://aetheris-canvas.vercel.app/",
     github: null,
     technologies: ["Next.js", "React Flow", "TypeScript", "Tailwind CSS", "Local-first"],
@@ -54,7 +54,7 @@ export const projects = [
     tagline: "The operating system for your agency.",
     description:
       "An all-in-one agency management platform with Kanban-based project tracking, financial tools for invoices and budgets, and a dedicated client portal that keeps clients updated automatically.",
-    image: "/parallax.png",
+    image: "/websites-cover/parallax.png",
     link: "https://parallax-agency.vercel.app",
     github: null,
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Product UX"],
@@ -101,7 +101,7 @@ export const projects = [
     tagline: "A profile, not a label.",
     description:
       "A private, on-device mental health screening tool offering a 55-question assessment across nine psychological well-being areas, built on validated clinical instruments like PHQ-9 and GAD-7, with no accounts, servers, or data retention.",
-    image: "/orenda.png",
+    image: "/websites-cover/orenda.png",
     link: "https://orenda-care.vercel.app",
     github: null,
     technologies: ["Next.js", "Local-first", "Privacy-first", "Accessibility"],
@@ -148,7 +148,7 @@ export const projects = [
     tagline: "Store-ready screenshots, processed entirely in your browser.",
     description:
       "An open-source screenshot conversion tool that resizes and formats app screenshots for App Store Connect and Google Play, with smart cropping, device frame generation, and batch ZIP downloads — all processed client-side with no accounts or storage.",
-    image: "/shot-craft.png",
+    image: "/websites-cover/shot-craft.png",
     link: "https://shot-craft-web.vercel.app",
     github: null,
     technologies: ["React", "TypeScript", "Client-side", "ZIP export"],
@@ -194,7 +194,7 @@ export const projects = [
     category: "Corporate Web · Bilingual",
     description:
       "A corporate site for an Egyptian pharmaceutical manufacturer, showcasing its in-house and partner-sourced product catalog with filtering, company news, and career listings, with full bilingual (English/Arabic) support.",
-    image: "/sato.png",
+    image: "/websites-cover/sato.png",
     link: "https://satopharma.com",
     github: null,
     technologies: ["react", "next.js", "Tailwind CSS", "framer-motion", "REST API"],
@@ -207,7 +207,7 @@ export const projects = [
     category: "Healthcare Web · Bilingual",
     description:
       "A responsive medical website powered by WordPress REST API, delivering real-time healthcare services, detailed treatments, and bilingual support. Features smooth animations and a modern design for seamless user engagement.",
-    image: "/medizen.png",
+    image: "/websites-cover/medizen.png",
     link: "https://medizenegypt.com",
     github: null,
     technologies: [
@@ -227,7 +227,7 @@ export const projects = [
     category: "Brand · Corporate Web",
     description:
       "A cutting-edge headless WordPress application. Built with React and Next.js, it merges sophisticated animations with a utility-first design to redefine modern web browsing.",
-    image: "/bowmenplus.png",
+    image: "/websites-cover/bowmenplus.png",
     link: "https://bowmenplus.com",
     github: null,
     technologies: [
@@ -247,7 +247,7 @@ export const projects = [
     category: "E-commerce · Headless Commerce",
     description:
       "A premium headless e-commerce experience designed to showcase cultural and heritage-inspired products with a focus on high-performance retail and immersive storytelling.",
-    image: "/underground-heritage.png",
+    image: "/websites-cover/underground-heritage.png",
     link: "https://undergroun-heritage-e-commerce-s.vercel.app/",
     github: null,
     technologies: [
@@ -268,7 +268,7 @@ export const projects = [
     category: "Healthcare Web",
     description:
       "An innovative healthcare platform focusing on neurology and wellness services. Built with modern tech stack, it provides detailed information about neurological treatments, specialist consultations, and patient management.",
-    image: "/neuro.png",
+    image: "/websites-cover/neuro.png",
     link: "https://neuro-bridge-website.vercel.app",
     github: null,
     technologies: [
@@ -286,7 +286,7 @@ export const projects = [
     category: "Interactive · 3D Web Experience",
     description:
       "An immersive space exploration website featuring stunning 3D visuals and interactive elements. Powered by Three.js, it educates users about universe exploration and astronomy with smooth animations and captivating design.",
-    image: "/nova.png",
+    image: "/websites-cover/nova.png",
     link: "https://explore-nova.vercel.app",
     github: null,
     technologies: [
@@ -304,7 +304,7 @@ export const projects = [
     category: "AI Product · Web App",
     description:
       "An AI-powered travel planning platform offering personalized itinerary recommendations, real-time travel assistance, and destination insights. Designed with intuitive navigation to revolutionize how travelers explore the world.",
-    image: "/voyageai.png",
+    image: "/websites-cover/voyageai.png",
     link: "https://voyage-ai-five.vercel.app",
     github: null,
     technologies: [
@@ -322,7 +322,7 @@ export const projects = [
     category: "Data · Analytics Dashboard",
     description:
       "Real-time gold market analytics and insights. Stay ahead of the curve with precision data.",
-    image: "/aurum.png",
+    image: "/websites-cover/aurum.png",
     link: "https://aurum-tracker-gold.vercel.app",
     github: null,
     technologies: [
@@ -340,7 +340,7 @@ export const projects = [
     category: "Healthcare Web · Bilingual",
     description:
       "A professional mental health clinic website providing comprehensive information about services, treatment options, and appointment booking. Built with React and Next.js, featuring smooth animations and bilingual support for accessibility.",
-    image: "/Dr.abdelMonem.png",
+    image: "/websites-cover/Dr.abdelMonem.png",
     link: "https://dr-abdel-moneim.vercel.app/",
     github: null,
     technologies: [
@@ -360,7 +360,7 @@ export const projects = [
     category: "Healthcare Web · Bilingual",
     description:
       "A sleek healthcare platform integrated with WordPress, offering real-time medical services, appointment booking, and comprehensive health information. Built with modern animations and bilingual interface for better accessibility.",
-    image: "/hayah.png",
+    image: "/websites-cover/hayah.png",
     link: "https://hayah-av.vercel.app",
     github: null,
     technologies: [
@@ -380,7 +380,7 @@ export const projects = [
     category: "Travel · Web App",
     description:
       "A comprehensive travel platform connecting travelers with beautiful destinations and personalized experiences. Features real-time booking, travel recommendations, and an intuitive interface powered by modern web technologies.",
-    image: "/next.png",
+    image: "/websites-cover/next.png",
     link: "https://next-travel-puce.vercel.app",
     github: null,
     technologies: [
@@ -400,7 +400,7 @@ export const projects = [
     category: "Healthcare · Corporate Web",
     description:
       "Renova Clinic is a Cairo-based plastic surgery center offering advanced aesthetic treatments, including body contouring, facelifts, and scar revision, in a modern medical setting. ",
-    image: "/renova.png",
+    image: "/websites-cover/renova.png",
     link: "https://dr-amirelboghdady.com",
     github: null,
     technologies: ["html", "Tailwind CSS", "php", "wordpress"],
@@ -413,7 +413,7 @@ export const projects = [
     category: "E-commerce · Web",
     description:
       "A modern e-commerce platform built with HTML, CSS, and Bootstrap, featuring a sleek interface and smooth user interactions with jQuery. Offers fast browsing, secure checkout, and an intuitive shopping experience for customers.",
-    image: "/CozaStore.png",
+    image: "/websites-cover/CozaStore.png",
     link: "https://lancer7178.github.io/Bdaya-e-commerce/",
     github: null,
     technologies: ["html", "css", "bootstrap", "js", "Jquery"],
@@ -425,7 +425,7 @@ export const projects = [
     category: "Web App · Utility",
     description:
       "A minimalist web application for anime enthusiasts to track watched shows. Built with Tailwind CSS and jQuery, it prioritizes simplicity and speed, providing a distraction-free interface for managing personal anime libraries.",
-    image: "/Ani.png",
+    image: "/websites-cover/Ani.png",
     link: "https://lancer7178.github.io/Ani-watched/",
     github: null,
     technologies: [
