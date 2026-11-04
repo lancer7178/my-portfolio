@@ -31,7 +31,7 @@ I design intuitive digital experiences and transform them into scalable, product
 | **51 design screens and pages** | UI/UX work you can browse full size, with no account or design tools |
 | **Motion that respects you** | Animated throughout, and calmer for visitors who prefer reduced motion |
 
-## Featured work
+## Product work
 
 | Project | What it does | Links |
 |---|---|---|
@@ -118,7 +118,7 @@ my-portfolio/
 
 Text and project details live in `src/data/`, so most updates don't touch a component.
 
-- **Add a web project:** put its cover in `public/websites-cover/`, then add an entry to `src/data/projects.js`. To give it a case study page, set `featured: true` and fill in the same case study details as the other featured projects.
+- **Add a web project:** put its cover in `public/websites-cover/`, then add an entry to `src/data/projects.js`. To give it a case study page, add a `caseStudy` entry like the other projects have. Set `featured: true` to show it in Featured Work, which is designed for three projects.
 - **Add a design:** put the screens in `public/ui-ux design projects/<project>/`, then add them to `src/data/figma.js` with their width, height, title and description.
 
 > [!TIP]

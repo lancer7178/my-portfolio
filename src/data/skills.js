@@ -1,35 +1,38 @@
 export const skillCategories = [
   {
-    label: "Core Stack",
-    tag: "// EVERY DAY",
-    skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"],
-  },
-  {
-    label: "Engineering",
-    tag: "// BEHIND THE INTERFACE",
+    label: "Frontend Engineering",
     skills: [
-      "Node.js",
-      "Express.js",
-      "PostgreSQL",
-      "Firebase",
-      "REST APIs",
-      "Git / GitHub",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "React Native",
+      "Flutter",
+      "Dart",
     ],
   },
   {
-    label: "Design",
-    tag: "// FROM IDEA TO SCREEN",
+    label: "Backend & APIs",
+    skills: [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "PostgreSQL",
+      "MySQL",
+      "Firebase",
+      "PHP",
+      "WordPress",
+      "Strapi",
+    ],
+  },
+  {
+    label: "UI/UX Design",
     skills: ["Figma", "UI/UX", "Design Systems", "Prototyping", "Wireframing"],
   },
   {
-    label: "Motion & Interaction",
-    tag: "// HOW IT MOVES",
-    skills: ["Framer Motion", "GSAP", "Three.js"],
-  },
-  {
-    label: "Additional",
-    tag: "// ALSO WORK WITH",
-    skills: ["React Native", "WordPress", "PHP", "MySQL", "Strapi"],
+    label: "Tools & Motion",
+    skills: ["Git / GitHub", "Docker", "Framer Motion", "GSAP", "Three.js"],
   },
 ];
 

@@ -98,12 +98,12 @@ export default function ContactSection({
     <section
       id="contact"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
+      className="relative py-16 sm:py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
     >
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-100 bg-cyan-400/4 rounded-full blur-[200px] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto">
-        <div ref={bigTextRef} className="text-center mb-20">
+        <div ref={bigTextRef} className="text-center mb-10">
           <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-6">
             {"// GET IN TOUCH"}
           </p>
@@ -113,13 +113,13 @@ export default function ContactSection({
             <br />
             <span className="text-outline-accent">IN MIND?</span>
           </h2>
-          <p className="mt-8 text-txt-muted text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="mt-6 text-txt-secondary text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
             Let&apos;s talk about what you&apos;re building. Whether it&apos;s a
             product, an interface, or a client project — I&apos;m happy to help.
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-12">
+        <div className="flex flex-wrap gap-3 sm:gap-4 items-center justify-center mb-8">
           <button
             onClick={handleCopy}
             className="flex items-center gap-2 px-6 py-3 rounded-full bg-dark-card border border-dark-elevated text-white hover:border-accent-cyan/30 transition-all duration-300 hover:scale-105 active:scale-95 mono text-xs"

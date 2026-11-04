@@ -20,7 +20,6 @@ export const experiences = [
       "Next Travel",
       "Renova",
     ],
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "REST API", "Framer Motion"],
   },
   {
     role: "Product & Frontend Builder",
@@ -29,13 +28,11 @@ export const experiences = [
     context:
       "Designing and building my own products end to end, from the first idea to the working interface.",
     bullets: [
-      "Shipped Parallax, an agency operating system connecting projects, approvals and invoices, with role-based access and TypeScript.",
-      "Built Orenda, a privacy-first, local-first mental wellness self-check-in with a one-question-at-a-time flow and RTL support.",
-      "Built Shot Craft, an open-source tool doing client-side image processing, device framing and ZIP export with no uploads.",
-      "Built Aetheris, a local-first, bilingual canvas for mapping complex information as nodes and connections.",
+      "Parallax: an agency operating system with role-based access, connecting projects, approvals and invoices.",
+      "Orenda: a privacy-first, local-first wellness check-in with RTL support.",
+      "Shot Craft: an open-source tool for client-side image processing, with no uploads.",
+      "Aetheris: a local-first, bilingual canvas for mapping complex information.",
     ],
-    products: ["Parallax", "Orenda", "Shot Craft", "Aetheris"],
-    technologies: ["Next.js", "TypeScript", "React Flow", "Product UX", "Client-side processing"],
   },
   {
     role: "UI/UX Designer",
@@ -44,11 +41,9 @@ export const experiences = [
     context:
       "Designing mobile apps and websites in Figma, from early wireframes to high-fidelity screens.",
     bullets: [
-      "Designed Shara, an Arabic-first rewards app, across 24 high-fidelity screens covering requests, points, levels and payouts.",
-      "Designed Light Orbits and Ventura, two multi-page websites with distinct visual identities.",
-      "Wireframed SocialGram, mapping the full structure of a social media app across 15 screens.",
+      "Shara: an Arabic-first rewards app, across 24 high-fidelity screens.",
+      "Light Orbits and Ventura: two multi-page websites with distinct visual identities.",
+      "SocialGram: wireframes mapping a social media app across 15 screens.",
     ],
-    products: ["Shara", "Light Orbits", "Ventura", "SocialGram"],
-    technologies: ["Figma", "UI/UX", "Design Systems", "Wireframing"],
   },
 ];

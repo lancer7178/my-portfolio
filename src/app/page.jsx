@@ -1,16 +1,15 @@
 import HeroSection from "@/components/HeroSection";
 import FeaturedWorkSection from "@/components/FeaturedWorkSection";
 import ProjectsSection from "@/components/ProjectsSection";
-import HowIBuildSection from "@/components/HowIBuildSection";
-import AboutSection from "@/components/AboutSection";
-import SkillsSection from "@/components/SkillsSection";
-import ExperienceSection from "@/components/ExperienceSection";
 import UiUxFigmaSection from "@/components/UiUxFigmaSection";
+import AboutSection from "@/components/AboutSection";
+import SkillsExperienceSection from "@/components/SkillsExperienceSection";
 import ContactSection from "@/components/ContactSection";
-import { aboutIntro, aboutSkills, aboutValues, aboutApproach } from "@/data/about";
+import { aboutIntro } from "@/data/about";
 import { featuredProjects, selectedProjects } from "@/data/projects";
 import { buildProcess } from "@/data/process";
-import { designProjects, figmaExperience } from "@/data/figma";
+import { designProjects } from "@/data/figma";
+import { skillCategories } from "@/data/skills";
 import { experiences } from "@/data/experience";
 
 const CV_LINK = "/Abdulatif_Selem_CV.pdf";
@@ -22,19 +21,15 @@ export default function Home() {
       <FeaturedWorkSection projects={featuredProjects} />
       <ProjectsSection projects={selectedProjects} />
       <UiUxFigmaSection
-        summary="Apps and interfaces I have designed, from first wireframes to polished screens. Explore any project to see every screen up close."
+        compact
+        summary="Apps and interfaces I have designed, from first wireframes to polished screens. Open any project to see every screen up close, no Figma needed."
         projects={designProjects}
-        process={figmaExperience}
       />
-      <HowIBuildSection steps={buildProcess} />
-      <AboutSection
-        intro={aboutIntro}
-        skills={aboutSkills}
-        values={aboutValues}
-        approach={aboutApproach}
+      <AboutSection intro={aboutIntro} steps={buildProcess} />
+      <SkillsExperienceSection
+        skills={skillCategories}
+        experiences={experiences}
       />
-      <SkillsSection />
-      <ExperienceSection experiences={experiences} />
       <ContactSection email="abdlatefkhatib@gmail.com" cvLink={CV_LINK} />
     </div>
   );

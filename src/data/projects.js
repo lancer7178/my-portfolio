@@ -143,7 +143,7 @@ export const projects = [
   {
     title: "shot craft",
     slug: "shot-craft",
-    featured: true,
+    featured: false,
     category: "Utility Product · Image Processing · Frontend Engineering",
     tagline: "Store-ready screenshots, processed entirely in your browser.",
     description:

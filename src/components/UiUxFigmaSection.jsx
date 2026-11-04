@@ -47,17 +47,23 @@ function ProjectCover({ project, isWide }) {
   );
 }
 
-function ProjectCard({ project, isWide }) {
+function ProjectCard({ project, isWide, compact }) {
   return (
     <li className={isWide ? "md:col-span-2" : ""}>
       <Link
         href={`/ui-ux/${project.id}`}
         className="group flex flex-col h-full rounded-2xl overflow-hidden border border-white/10 bg-dark-card hover:border-accent-cyan/50 transition-colors duration-300"
       >
-        <span className="relative block h-52 sm:h-60 lg:h-64 overflow-hidden bg-dark-surface">
+        <span
+          className={`relative block overflow-hidden bg-dark-surface ${
+            compact ? "h-40 sm:h-48" : "h-52 sm:h-60 lg:h-64"
+          }`}
+        >
           <ProjectCover project={project} isWide={isWide} />
         </span>
-        <span className="flex-1 flex flex-col p-5 sm:p-6">
+        <span
+          className={`flex-1 flex flex-col ${compact ? "p-4 sm:p-5" : "p-5 sm:p-6"}`}
+        >
           <span className="mono text-[11px] text-accent-cyan tracking-[0.15em]">
             {project.category}
             {project.role ? ` · ${project.role}` : ""}
@@ -65,10 +71,14 @@ function ProjectCard({ project, isWide }) {
           <span className="mt-2 text-xl sm:text-2xl font-bold font-outfit text-txt-primary group-hover:text-accent-cyan transition-colors duration-200">
             {project.title}
           </span>
-          <span className="mt-2 flex-1 text-sm text-txt-secondary leading-relaxed line-clamp-3">
+          <span
+            className={`mt-2 flex-1 text-sm text-txt-secondary leading-relaxed ${
+              compact ? "line-clamp-2" : "line-clamp-3"
+            }`}
+          >
             {project.description}
           </span>
-          {project.focus && (
+          {project.focus && !compact && (
             <span className="mt-3 text-sm text-txt-primary leading-relaxed">
               <span className="text-txt-secondary">Focus: </span>
               {project.focus}
@@ -99,12 +109,22 @@ export default function UiUxFigmaSection({
   projects = [],
   process = [],
   showHeader = true,
+  compact = false,
 }) {
   return (
     <section
       id="uiux"
-      className="relative py-20 px-6 md:px-12 bg-linear-to-b from-dark via-[#05050A] to-dark text-white overflow-hidden"
+      className="relative py-16 sm:py-20 px-6 md:px-12 bg-linear-to-b from-dark via-[#05050A] to-dark text-white overflow-hidden scroll-mt-20"
     >
+      {showHeader && (
+        <div
+          className="section-number top-10 left-0 sm:left-10 opacity-100"
+          style={{ WebkitTextStroke: "1px rgba(34, 211, 238, 0.04)" }}
+        >
+          04
+        </div>
+      )}
+
       <div className="relative z-10 max-w-7xl mx-auto">
         {showHeader ? (
           <motion.div
@@ -136,9 +156,22 @@ export default function UiUxFigmaSection({
               key={project.id}
               project={project}
               isWide={index === 0}
+              compact={compact}
             />
           ))}
         </ul>
+
+        {compact && (
+          <div className="mt-8 text-center">
+            <Link
+              href="/ui-ux"
+              className="inline-flex items-center gap-2 min-h-11 px-6 rounded-full mono text-xs text-accent-cyan bg-dark-card border border-accent-cyan/25 hover:border-accent-cyan/50 transition-colors duration-300"
+            >
+              VIEW ALL DESIGNS
+              <FaArrowRight aria-hidden="true" className="text-[10px]" />
+            </Link>
+          </div>
+        )}
 
         {process.length > 0 && (
           <div className="mt-20">

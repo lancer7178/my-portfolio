@@ -73,18 +73,18 @@ export default function FeaturedWorkSection({ projects = [] }) {
     <section
       id="work"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
+      className="relative py-16 sm:py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
     >
       <div
         ref={numberRef}
         className="section-number top-10 left-0 sm:left-10 opacity-100"
         style={{ WebkitTextStroke: "1px rgba(34, 211, 238, 0.04)" }}
       >
-        01
+        02
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <div ref={headerRef} className="mb-14 sm:mb-20">
+        <div ref={headerRef} className="mb-10">
           <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// FEATURED WORK`}</p>
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
             <span className="text-white italic">FEATURED </span>
@@ -95,13 +95,13 @@ export default function FeaturedWorkSection({ projects = [] }) {
             <div className="h-1 w-8 bg-accent-indigo/50 rounded-full" />
             <div className="h-1 w-4 bg-accent-violet/40 rounded-full" />
           </div>
-          <p className="mt-6 text-txt-muted max-w-2xl text-base leading-relaxed">
-            The three products that best represent how I think and build — from
-            SaaS systems to privacy-first UX and client-side engineering.
+          <p className="mt-6 text-txt-secondary max-w-2xl text-base leading-relaxed">
+            The three products that best represent how I think, design and
+            build.
           </p>
         </div>
 
-        <div ref={cardsRef} className="flex flex-col gap-8 sm:gap-12">
+        <div ref={cardsRef} className="flex flex-col gap-6 sm:gap-8">
           {projects.map((project, idx) => (
             <article
               key={project.slug}
@@ -140,19 +140,6 @@ export default function FeaturedWorkSection({ projects = [] }) {
                 <p className="text-base text-txt-secondary leading-relaxed mb-5">
                   {project.tagline}
                 </p>
-
-                {project.technologies?.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    {project.technologies.slice(0, 4).map((tech, i) => (
-                      <span
-                        key={`${tech}-${i}`}
-                        className="px-2.5 py-1 text-[10px] mono text-accent-cyan bg-accent-cyan/5 border border-accent-cyan/12 rounded-md"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
 
                 <div className="flex flex-wrap items-center gap-3">
                   <Link

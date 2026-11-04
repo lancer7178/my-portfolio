@@ -6,10 +6,10 @@ import { FaHome, FaUser, FaCode, FaBriefcase, FaEnvelope, FaPenNib } from "react
 
 const navItems = [
   { icon: <FaHome />, label: "Home", href: "#hero" },
-  { icon: <FaBriefcase />, label: "Work", href: "#work" },
-  { icon: <FaPenNib />, label: "Designs", href: "#uiux" },
+  { icon: <FaCode />, label: "Work", href: "#work" },
+  { icon: <FaPenNib />, label: "Design", href: "#uiux" },
   { icon: <FaUser />, label: "About", href: "#about" },
-  { icon: <FaCode />, label: "Skills", href: "#skills" },
+  { icon: <FaBriefcase />, label: "Experience", href: "#experience" },
   { icon: <FaEnvelope />, label: "Contact", href: "#contact" },
 ];
 

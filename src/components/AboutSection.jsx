@@ -3,14 +3,12 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { FaCheckCircle, FaCompass } from "react-icons/fa";
 
-export default function AboutSection({ intro, skills = [], values, approach }) {
+export default function AboutSection({ intro = [], steps = [] }) {
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const numberRef = useRef(null);
-  const contentRef = useRef(null);
-  const cardsRef = useRef(null);
+  const stepsRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -42,32 +40,16 @@ export default function AboutSection({ intro, skills = [], values, approach }) {
         },
       );
       gsap.fromTo(
-        contentRef.current?.children || [],
+        stepsRef.current?.children || [],
         { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          stagger: 0.2,
+          duration: 0.6,
+          stagger: 0.12,
           scrollTrigger: {
-            trigger: contentRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
-      gsap.fromTo(
-        cardsRef.current?.children || [],
-        { y: 50, opacity: 0, scale: 0.95 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.7,
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 80%",
+            trigger: stepsRef.current,
+            start: "top 85%",
             toggleActions: "play none none none",
           },
         },
@@ -81,24 +63,24 @@ export default function AboutSection({ intro, skills = [], values, approach }) {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
+      className="relative py-16 sm:py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
     >
       <div
         ref={numberRef}
         className="section-number top-10 left-0 sm:left-10 opacity-100"
         style={{ WebkitTextStroke: "1px rgba(34, 211, 238, 0.04)" }}
       >
-        03
+        05
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <div ref={headerRef} className="mb-20">
+        <div ref={headerRef} className="mb-10">
           <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">
             {"// THE PROFILE"}
           </p>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
-            <span className="text-white">ABOUT </span>
-            <span className="text-outline-accent">ME</span>
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
+            <span className="text-white">ABOUT &amp; MY </span>
+            <span className="text-outline-accent">APPROACH</span>
           </h2>
           <div className="flex gap-2 mt-6">
             <div className="h-1 w-16 bg-linear-to-r from-accent-cyan to-accent-indigo rounded-full" />
@@ -107,88 +89,41 @@ export default function AboutSection({ intro, skills = [], values, approach }) {
           </div>
         </div>
 
-        <div ref={contentRef} className="space-y-12 mb-20">
-          <p className="text-lg sm:text-xl text-txt-secondary leading-relaxed max-w-3xl">
-            {intro}
-          </p>
-          {skills.length > 0 && (
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
-              {skills.map((group) => (
-                <div
-                  key={group.label}
-                  className="p-5 sm:p-6 rounded-2xl bg-dark-card border border-dark-elevated"
-                >
-                  <h3 className="text-lg font-bold text-accent-cyan font-outfit">
-                    {group.label}
-                  </h3>
-                  <p className="mt-1 mb-4 text-sm text-txt-secondary leading-relaxed">
-                    {group.summary}
-                  </p>
-                  <ul className="flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <li
-                        key={item}
-                        className="px-3 py-1.5 text-xs text-txt-primary bg-white/5 border border-white/10 rounded-lg"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          )}
-          <div>
-            <h3 className="flex items-center gap-2 text-xl font-bold text-accent-indigo mb-6 font-outfit">
-              <FaCheckCircle className="text-accent-cyan" /> How I work
-            </h3>
-            <ul className="grid sm:grid-cols-2 gap-3 sm:gap-4">
-              {values.map((value, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-start gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-dark-card/60 border border-dark-elevated hover:border-accent-cyan/25 transition-all duration-300"
-                >
-                  <span className="w-2 h-2 mt-2 bg-linear-to-r from-accent-cyan to-accent-indigo rounded-full flex-shrink-0" />
-                  <span className="text-txt-secondary text-sm">{value}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="grid lg:grid-cols-2 gap-x-12 gap-y-4 mb-10">
+          {intro.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="text-base sm:text-lg text-txt-secondary leading-relaxed"
+            >
+              {paragraph}
+            </p>
+          ))}
         </div>
 
-        <div>
-          <h3 className="flex items-center gap-2 text-2xl sm:text-3xl font-black text-white mb-3 font-outfit">
-            <FaCompass className="text-accent-cyan" /> I don&apos;t just build pages.
-          </h3>
-          <p className="text-txt-muted max-w-2xl mb-8 leading-relaxed">
-            I think about the product behind the interface — here&apos;s what
-            that means in practice.
-          </p>
-          <div
-            ref={cardsRef}
-            className="grid sm:grid-cols-2 gap-4 sm:gap-6"
-          >
-            {approach.map((phase, idx) => (
-              <div
-                key={idx}
-                className="group relative p-4 sm:p-6 rounded-lg sm:rounded-2xl bg-dark-card border border-dark-elevated hover:border-accent-cyan/30 transition-all duration-500 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-linear-to-br from-accent-cyan/5 via-transparent to-accent-violet/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="relative z-10">
-                  <div className="mono text-[10px] text-txt-muted mb-3">
-                    SYS.{String(idx + 1).padStart(2, "0")}
-                  </div>
-                  <h4 className="text-lg font-bold text-accent-cyan mb-3 font-outfit">
-                    {phase.title}
-                  </h4>
-                  <p className="text-txt-muted text-sm leading-relaxed">
-                    {phase.description}
-                  </p>
-                </div>
+        <ol
+          ref={stepsRef}
+          aria-label="My design and build process"
+          className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4"
+        >
+          {steps.map((step) => (
+            <li
+              key={step.step}
+              className="flex lg:block gap-4 p-4 sm:p-5 rounded-2xl bg-dark-card/70 border border-dark-elevated hover:border-accent-cyan/30 transition-colors duration-500"
+            >
+              <span className="mono text-2xl font-black text-outline-accent shrink-0">
+                {step.step}
+              </span>
+              <div className="lg:mt-3">
+                <h3 className="text-lg font-bold font-outfit text-accent-cyan">
+                  {step.title}
+                </h3>
+                <p className="mt-1 text-sm text-txt-secondary leading-relaxed">
+                  {step.detail}
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
