@@ -16,7 +16,7 @@ export default function UiUxPageIntro() {
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-txt-secondary leading-relaxed">
           Apps and interfaces I have designed. No account or design tools
-          needed: select any design to see it full size.
+          needed: explore any project to see every screen up close.
         </p>
       </div>
     </section>

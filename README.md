@@ -48,7 +48,7 @@ I build digital products where engineering, interface design, and product thinki
 
 ## UI/UX designs
 
-Pick a project, select any screen, and see it full size. Use the buttons, arrow keys, or a swipe on your phone to move between designs.
+Pick a project, select any screen, and see it full size. Zoom in on the details, and use the buttons, arrow keys, or a swipe on your phone to move between designs.
 
 <a href="https://abdullatif-selem.vercel.app/ui-ux">
   <img src="docs/designs.webp" alt="UI/UX Designs page with a project picker and a gallery of the Shara app's mobile screens" width="100%" />
@@ -108,7 +108,7 @@ my-portfolio/
 │   ├── ui-ux design projects/  Design screens, one folder per project
 │   └── design-previews/        Web-sized copies of very large designs
 └── src/
-    ├── app/                    Pages: home, /ui-ux and /work/[slug]
+    ├── app/                    Pages: home, /ui-ux, /ui-ux/[slug] and /work/[slug]
     ├── components/             Page sections and shared UI
     ├── data/                   All site content
     └── styles/                 Global styles and design tokens

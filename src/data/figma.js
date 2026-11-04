@@ -15,15 +15,41 @@ const toScreens = (folder, rows) =>
     flow,
   }));
 
+// Each project's `id` is its page address: /ui-ux/<id>.
+//
+// `details` holds the facts shown beside the project overview. A block only
+// appears if it is listed, so add one only when you have real content for it:
+//   { label: "Project Goals", text: "..." }
+//   { label: "Design Decisions", items: ["...", "..."] }
+// The same applies to Target Audience, Design Challenges and Key Features.
+//
+// `galleryTitle` names the screenshots, e.g. "Wireframes" or "Design system".
+// `platform` is optional: add it when it says more than the category, e.g. "iOS".
 export const designProjects = [
   {
     id: "shara",
     title: "Shara",
-    type: "Mobile App",
+    category: "Mobile App",
+    unit: "screen",
+    galleryTitle: "High-fidelity designs",
     layout: "mobile",
+    details: [
+      { label: "Target Audience", text: "Tradespeople and technicians." },
+      {
+        label: "Key Features",
+        items: [
+          "A three-step request: location, invoice and installation media",
+          "Request tracking with a status timeline",
+          "A points wallet with a full history",
+          "Bronze, Silver and Gold levels with their own conversion rates",
+          "Cash collection at a branch with a pick-up code and receipt",
+          "A product catalog and nearby branches",
+        ],
+      },
+    ],
     description:
       "An Arabic-first rewards app for tradespeople. Technicians register their purchases and installations, earn points, move up through Bronze, Silver and Gold levels, and collect the cash value at a nearby branch.",
-    tags: ["Mobile app", "Arabic (right-to-left)", "Rewards & loyalty"],
+    tags: ["Arabic (right-to-left)", "Rewards & loyalty"],
     flows: [
       { id: "earn", label: "Earn points" },
       { id: "rewards", label: "Rewards" },
@@ -61,11 +87,25 @@ export const designProjects = [
   {
     id: "light-orbits",
     title: "Light Orbits",
-    type: "Website",
+    category: "Web Design",
+    unit: "page",
+    galleryTitle: "High-fidelity designs",
     layout: "web",
+    details: [
+      {
+        label: "Key Features",
+        items: [
+          "Service packages and client testimonials",
+          "Portfolio case studies with a responsive preview",
+          "Team profiles with role filters",
+          "A contact form, map and frequently asked questions",
+          "An Arabic and English language switch",
+        ],
+      },
+    ],
     description:
       "A six-page website for a digital marketing agency, with a bold space theme that carries through every page in deep navy, glowing teal and orbital artwork.",
-    tags: ["Website", "6 pages", "Marketing agency"],
+    tags: ["Marketing agency", "Space theme"],
     // The originals in public/ui-ux design projects are too large for the web,
     // so these are 1440px wide copies made from them.
     screens: toScreens("/design-previews/light-orbits", [
@@ -80,11 +120,25 @@ export const designProjects = [
   {
     id: "ventura",
     title: "Ventura",
-    type: "Website",
+    category: "Web Design",
+    unit: "page",
+    galleryTitle: "High-fidelity designs",
     layout: "web",
+    details: [
+      {
+        label: "Key Features",
+        items: [
+          "Product pages with interface previews",
+          "Download options for each platform",
+          "Personal and Team pricing plans",
+          "Frequently asked questions",
+          "A searchable, filterable blog",
+        ],
+      },
+    ],
     description:
       "A clean, light website for a personal finance product, built on a simple layout system with clear sections, plenty of space and one strong blue accent.",
-    tags: ["Website", "5 pages", "Personal finance"],
+    tags: ["Personal finance", "Landing pages"],
     link: "https://www.figma.com/design/bPLCosPrx27QunpXHMB6VL/Ventura?node-id=0-1&t=rOnJ6MV8Rl3gRSAl-1",
     cover: toUrl(`${DESIGNS_DIR}/ventora/cover.png`),
     screens: toScreens(`${DESIGNS_DIR}/ventora`, [
@@ -98,11 +152,25 @@ export const designProjects = [
   {
     id: "socialgram",
     title: "SocialGram",
-    type: "Mobile App",
+    category: "Mobile App",
+    unit: "screen",
+    galleryTitle: "Wireframes",
     layout: "mobile",
+    details: [
+      {
+        label: "Key Features",
+        items: [
+          "A home feed with stories",
+          "Search with live results",
+          "A two-step flow for creating a post",
+          "Notifications and one-to-one messaging",
+          "Profiles with followers and following lists",
+        ],
+      },
+    ],
     description:
       "A wireframe of a social media app, mapping the full experience in greyscale so structure and navigation come first: feed, search, posting, messaging and profiles.",
-    tags: ["Mobile app", "Wireframes", "Social media"],
+    tags: ["Social media", "Greyscale"],
     link: "https://www.figma.com/design/o0OAb1LyQMwpeiNvmdqe6I/SocialGram?node-id=0-1",
     cover: toUrl(`${DESIGNS_DIR}/SocialGram/cover.png`),
     screens: toScreens(`${DESIGNS_DIR}/SocialGram`, [
@@ -126,17 +194,30 @@ export const designProjects = [
   {
     id: "untitled-ui",
     title: "Untitled-UI",
-    type: "Design System",
+    category: "Design System",
+    unit: "preview",
+    galleryTitle: "Design system",
     layout: "web",
     description:
       "A UI design system with reusable components, typography scales and color tokens for consistent design across projects.",
-    tags: ["Design system", "Components", "Design tokens"],
+    tags: ["Components", "Design tokens"],
     link: "https://www.figma.com/design/1awMsXZ0PImopkseWDuttI/Untitled-UI?node-id=0-1",
     screens: toScreens(`${DESIGNS_DIR}/untitled`, [
       ["untitled.png", 576, 637, "Design system preview", "A preview of the Untitled-UI design system."],
     ]),
   },
 ];
+
+export const getDesignProjectById = (id) =>
+  designProjects.find((project) => project.id === id);
+
+export const categoryLabel = (project) =>
+  [project.category, project.platform].filter(Boolean).join(" · ");
+
+export const screenCountLabel = (project) => {
+  const count = project.screens.length;
+  return `${count} ${project.unit}${count === 1 ? "" : "s"}`;
+};
 
 export const designProcess = [
   {

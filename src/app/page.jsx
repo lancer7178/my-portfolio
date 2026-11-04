@@ -22,10 +22,9 @@ export default function Home() {
       <FeaturedWorkSection projects={featuredProjects} />
       <ProjectsSection projects={selectedProjects} />
       <UiUxFigmaSection
-        summary="Apps and interfaces I have designed, from first wireframes to polished screens. Select any design to see it full size."
+        summary="Apps and interfaces I have designed, from first wireframes to polished screens. Explore any project to see every screen up close."
         projects={designProjects}
         process={figmaExperience}
-        previewCount={8}
       />
       <HowIBuildSection steps={buildProcess} />
       <AboutSection
