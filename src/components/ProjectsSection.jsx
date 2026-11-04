@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import Link from "next/link";
+import { FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
 
 const FALLBACK_DATA_URI =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
@@ -220,6 +221,15 @@ export default function ProjectsSection({ projects = [] }) {
                       </span>
                     )}
                   </div>
+                )}
+
+                {project.caseStudy && (
+                  <Link
+                    href={`/work/${project.slug}`}
+                    className="mt-2 flex items-center justify-center gap-2 min-h-11 px-5 rounded-xl font-semibold text-sm text-accent-cyan bg-accent-cyan/5 border border-accent-cyan/15 hover:border-accent-cyan/50 transition-colors duration-300"
+                  >
+                    Read case study <FaArrowRight className="text-xs" />
+                  </Link>
                 )}
 
                 {project.link && (

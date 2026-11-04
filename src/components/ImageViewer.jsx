@@ -207,7 +207,7 @@ export default function ImageViewer({
               transition={{ duration: 0.2 }}
               className="mx-auto"
               style={{
-                width: `calc(min(100%, ${baseWidth}px) * ${zoom})`,
+                width: `calc(min(100%, ${image.viewerWidth ?? baseWidth}px) * ${zoom})`,
               }}
             >
               {/* Shown at original quality, so details stay sharp when zoomed. */}

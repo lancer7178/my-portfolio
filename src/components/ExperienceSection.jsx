@@ -137,6 +137,15 @@ export default function ExperienceSection({ experiences = [] }) {
                   </ul>
                 )}
 
+                {exp.products?.length > 0 && (
+                  <p className="text-xs sm:text-sm text-txt-secondary leading-relaxed mb-4">
+                    <span className="text-txt-primary font-semibold">
+                      Worked on:{" "}
+                    </span>
+                    {exp.products.join(", ")}
+                  </p>
+                )}
+
                 {exp.technologies?.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 pt-3 border-t border-dark-elevated">
                     {exp.technologies.map((tech, i) => (

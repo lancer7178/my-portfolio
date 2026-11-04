@@ -80,7 +80,7 @@ const particles = [
 
 export default function HeroSection({
   name = "Abdulatif",
-  subtitle = "I build digital products where engineering, interface design, and product thinking meet.",
+  subtitle = "I design intuitive digital experiences and transform them into scalable, production-ready products.",
   cvLink = "/Abdulatif_Selem_CV.pdf",
 }) {
   const sectionRef = useRef(null);
@@ -198,8 +198,8 @@ export default function HeroSection({
           <h2 className="text-5xl sm:text-7xl lg:text-8xl font-outfit font-black tracking-tight leading-none mb-4">
             <span className="hero-name cursor-pointer">{name}</span>
           </h2>
-          <p className="mono text-xs sm:text-sm text-txt-muted tracking-[0.3em] mb-6">
-            FRONTEND ENGINEER — CREATIVE DEVELOPER
+          <p className="mono text-xs sm:text-sm text-txt-secondary tracking-[0.3em] mb-6">
+            PRODUCT DESIGNER &amp; FRONTEND ENGINEER
           </p>
         </div>
 
@@ -207,9 +207,9 @@ export default function HeroSection({
           <p className="text-base sm:text-lg text-txt-secondary max-w-xl leading-relaxed">
             {subtitle}
           </p>
-          <p className="text-sm text-txt-muted max-w-lg leading-relaxed -mt-2">
-            I care about how a product feels, how it works, and how the pieces
-            connect behind the interface.
+          <p className="text-sm text-txt-secondary max-w-lg leading-relaxed -mt-2">
+            From user needs to design systems and responsive interfaces, I work
+            across both design and development.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <a
@@ -266,7 +266,7 @@ export default function HeroSection({
           <div className="pt-3 border-t border-dark-elevated">
             <span className="mono text-[10px] text-txt-muted">FOCUS / </span>
             <span className="mono text-[10px] text-accent-cyan">
-              PRODUCT ENGINEERING
+              PRODUCT DESIGN + ENGINEERING
             </span>
           </div>
         </div>

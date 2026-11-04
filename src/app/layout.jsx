@@ -17,12 +17,12 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = "https://abdullatif-selem.vercel.app";
 const siteDescription =
-  "Frontend Engineer and Creative Developer building thoughtful digital products, interactive interfaces, and modern web experiences.";
+  "Product Designer and Frontend Engineer who designs intuitive digital experiences and turns them into scalable, production-ready products.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Abdulatif — Frontend Engineer & Creative Developer",
+    default: "Abdulatif — Product Designer & Frontend Engineer",
     template: "%s | Abdulatif",
   },
   description: siteDescription,
@@ -30,14 +30,14 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    title: "Abdulatif — Frontend Engineer & Creative Developer",
+    title: "Abdulatif — Product Designer & Frontend Engineer",
     description: siteDescription,
     siteName: "Abdulatif Selem",
     images: [{ url: "/websites-cover/parallax.png", width: 1835, height: 887 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abdulatif — Frontend Engineer & Creative Developer",
+    title: "Abdulatif — Product Designer & Frontend Engineer",
     description: siteDescription,
     images: ["/websites-cover/parallax.png"],
   },

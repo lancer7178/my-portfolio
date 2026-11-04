@@ -6,6 +6,7 @@ import {
   FaExternalLinkAlt,
   FaGithub,
 } from "react-icons/fa";
+import CaseStudyJourney from "@/components/CaseStudyJourney";
 
 const FALLBACK_DATA_URI =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
@@ -26,6 +27,9 @@ function Block({ label, title, children }) {
 
 export default function CaseStudy({ project }) {
   const cs = project.caseStudy || {};
+  // Numbers follow the blocks a project actually has.
+  let blockNumber = 0;
+  const nextLabel = () => `// ${String(++blockNumber).padStart(2, "0")}`;
 
   return (
     <article className="relative py-16 sm:py-24 px-6 md:px-12 bg-dark text-white overflow-hidden">
@@ -68,19 +72,59 @@ export default function CaseStudy({ project }) {
         </div>
 
         {cs.problem && (
-          <Block label="// 01" title="The problem">
+          <Block label={nextLabel()} title="The problem">
             <p className="text-txt-secondary leading-relaxed">{cs.problem}</p>
           </Block>
         )}
 
         {cs.idea && (
-          <Block label="// 02" title="The idea">
+          <Block label={nextLabel()} title="The idea">
             <p className="text-txt-secondary leading-relaxed">{cs.idea}</p>
           </Block>
         )}
 
+        {cs.contribution && (
+          <Block label={nextLabel()} title="My contribution">
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                ["UI/UX design", cs.contribution.design],
+                ["Frontend implementation", cs.contribution.frontend],
+              ].map(([label, items]) => (
+                <div
+                  key={label}
+                  className="p-5 rounded-2xl bg-dark-card/70 border border-dark-elevated"
+                >
+                  <h3 className="text-base font-bold font-outfit text-accent-cyan mb-3">
+                    {label}
+                  </h3>
+                  <ul className="space-y-2">
+                    {items.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 mt-2 rounded-full bg-linear-to-r from-accent-cyan to-accent-indigo shrink-0" />
+                        <span className="text-sm text-txt-secondary leading-relaxed">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </Block>
+        )}
+
+        {cs.journey?.length > 0 && (
+          <Block label={nextLabel()} title="The shopping journey">
+            <CaseStudyJourney
+              title={project.title}
+              journey={cs.journey}
+              mobile={cs.mobile}
+            />
+          </Block>
+        )}
+
         {cs.built?.length > 0 && (
-          <Block label="// 03" title="What I built">
+          <Block label={nextLabel()} title="What I built">
             <ul className="space-y-3">
               {cs.built.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
@@ -95,7 +139,7 @@ export default function CaseStudy({ project }) {
         )}
 
         {cs.decisions?.length > 0 && (
-          <Block label="// 04" title="Key decisions">
+          <Block label={nextLabel()} title="Key decisions">
             <div className="grid gap-4">
               {cs.decisions.map((d, i) => (
                 <div
@@ -105,7 +149,7 @@ export default function CaseStudy({ project }) {
                   <h3 className="text-base font-bold font-outfit text-accent-cyan mb-2">
                     {d.title}
                   </h3>
-                  <p className="text-sm text-txt-muted leading-relaxed">
+                  <p className="text-sm text-txt-secondary leading-relaxed">
                     {d.detail}
                   </p>
                 </div>
@@ -115,7 +159,7 @@ export default function CaseStudy({ project }) {
         )}
 
         {cs.technology?.length > 0 && (
-          <Block label="// 05" title="Technology">
+          <Block label={nextLabel()} title="Technology">
             <div className="flex flex-wrap gap-2">
               {cs.technology.map((tech, i) => (
                 <span
@@ -130,7 +174,7 @@ export default function CaseStudy({ project }) {
         )}
 
         {cs.outcome && (
-          <Block label="// 06" title="Result">
+          <Block label={nextLabel()} title="Result">
             <p className="text-txt-secondary leading-relaxed">{cs.outcome}</p>
           </Block>
         )}

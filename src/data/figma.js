@@ -24,15 +24,106 @@ const toScreens = (folder, rows) =>
 // The same applies to Target Audience, Design Challenges and Key Features.
 //
 // `galleryTitle` names the screenshots, e.g. "Wireframes" or "Design system".
-// `platform` is optional: add it when it says more than the category, e.g. "iOS".
+// `role`, `deliverables`, `tools` and `focus` appear only when set, so list only
+// what is accurate. `caseStudy` adds extra sections to the project's page, and
+// each of its parts is optional.
 export const designProjects = [
   {
     id: "shara",
     title: "Shara",
     category: "Mobile App",
     unit: "screen",
-    galleryTitle: "High-fidelity designs",
+    galleryTitle: "Final screens",
     layout: "mobile",
+    role: "UI/UX Designer",
+    platform: "Mobile",
+    deliverables: "High-fidelity UI design",
+    tools: "Figma",
+    focus: "Clear multi-step tasks and rewards that are easy to understand",
+    // Written from what the screens show. No research or results are claimed.
+    caseStudy: {
+      problem:
+        "To reward tradespeople fairly, a program has to know that a purchase and installation really happened. Proving that means collecting a location, an invoice and photos, often from a phone on a job site, and that can easily feel like paperwork. Shara's challenge is to make submitting that proof feel quick, and to make the reward easy to see and collect.",
+      goals: [
+        "Make a request with several kinds of proof feel short",
+        "Show what points are worth, not only how many there are",
+        "Make it clear where every request stands",
+        "Take people from points to cash at a real branch",
+        "Read naturally in Arabic, from right to left",
+      ],
+      userFlow: [
+        { label: "Sign in", screen: "Login" },
+        { label: "Home", screen: "Home" },
+        { label: "Add location", screen: "New request: location" },
+        { label: "Add invoice", screen: "New request: invoice" },
+        { label: "Add media", screen: "New request: installation media" },
+        { label: "Track request", screen: "Request details" },
+        { label: "Check points", screen: "Points wallet" },
+        { label: "Request payout", screen: "Payout request" },
+        { label: "Show code", screen: "Collection code" },
+        { label: "Get receipt", screen: "Collection receipt" },
+      ],
+      decisions: [
+        {
+          title: "One kind of proof per step",
+          detail:
+            "A request is split into location, invoice and installation media, with a progress indicator, so each screen asks for one thing.",
+          screen: "New request: location",
+        },
+        {
+          title: "Guidance before the camera",
+          detail:
+            "The invoice step says what must be readable before the photo is taken, which helps people get it right the first time.",
+          screen: "New request: invoice",
+        },
+        {
+          title: "Points shown with their value",
+          detail:
+            "The wallet and payout screens show the balance next to its value in riyals, so the reward is concrete.",
+          screen: "Payout request",
+        },
+        {
+          title: "Status at two levels",
+          detail:
+            "The list uses filters and status badges for scanning. The details screen adds a timeline and the final decision for the full story.",
+          screen: "Request details",
+        },
+        {
+          title: "Everything for pick-up in one place",
+          detail:
+            "The collection code sits with its expiry time, the nearest branch, its opening hours and a map link, so there's no need to search for them.",
+          screen: "Collection code",
+        },
+        {
+          title: "A focused way in",
+          detail:
+            "Login asks only for a mobile number, followed by a code with a resend timer and a WhatsApp option.",
+          screen: "Code verification",
+        },
+      ],
+      visualDesign: {
+        summary:
+          "A warm cream background with deep green for main actions and soft gold for rewards. The screens share rounded cards, generous spacing and a clear jump in size between balances, titles and supporting text.",
+        colors: [
+          { name: "Deep green", use: "Main actions", hex: "#004111" },
+          { name: "Soft gold", use: "Rewards", hex: "#FED48C" },
+          { name: "Cream", use: "Background", hex: "#FDF9EC" },
+          { name: "White", use: "Cards", hex: "#FFFFFF" },
+          { name: "Ink", use: "Text", hex: "#1C1C14" },
+        ],
+      },
+      designSystem: {
+        summary:
+          "The same parts repeat across the app, so a new screen feels familiar straight away. These are taken directly from the final screens.",
+        components: [
+          { name: "Primary button", src: "/design-previews/shara-patterns/primary-button.png", width: 440, height: 68 },
+          { name: "Bottom navigation", src: "/design-previews/shara-patterns/bottom-navigation.png", width: 440, height: 56 },
+          { name: "Progress stepper", src: "/design-previews/shara-patterns/stepper.png", width: 440, height: 76 },
+          { name: "Request card with status", src: "/design-previews/shara-patterns/request-card.png", width: 440, height: 170 },
+          { name: "Level card", src: "/design-previews/shara-patterns/level-card.png", width: 440, height: 260 },
+        ],
+      },
+    },
     details: [
       { label: "Target Audience", text: "Tradespeople and technicians." },
       {
@@ -51,11 +142,11 @@ export const designProjects = [
       "An Arabic-first rewards app for tradespeople. Technicians register their purchases and installations, earn points, move up through Bronze, Silver and Gold levels, and collect the cash value at a nearby branch.",
     tags: ["Arabic (right-to-left)", "Rewards & loyalty"],
     flows: [
+      { id: "signin", label: "Onboarding" },
       { id: "earn", label: "Earn points" },
       { id: "rewards", label: "Rewards" },
       { id: "products", label: "Products & branches" },
       { id: "account", label: "Account & help" },
-      { id: "signin", label: "Sign in" },
     ],
     screens: toScreens(`${DESIGNS_DIR}/shara/app`, [
       ["Home - Shara.png", 440, 956, "Home", "Points balance, progress to the next payout, current level and latest requests.", "earn"],
@@ -91,6 +182,11 @@ export const designProjects = [
     unit: "page",
     galleryTitle: "High-fidelity designs",
     layout: "web",
+    role: "UI/UX Designer",
+    platform: "Web",
+    deliverables: "High-fidelity UI design",
+    tools: "Figma",
+    focus: "A distinctive visual identity carried across every page",
     details: [
       {
         label: "Key Features",
@@ -124,6 +220,11 @@ export const designProjects = [
     unit: "page",
     galleryTitle: "High-fidelity designs",
     layout: "web",
+    role: "UI/UX Designer",
+    platform: "Web",
+    deliverables: "High-fidelity UI design",
+    tools: "Figma",
+    focus: "A simple layout system with a clear visual hierarchy",
     details: [
       {
         label: "Key Features",
@@ -156,6 +257,18 @@ export const designProjects = [
     unit: "screen",
     galleryTitle: "Wireframes",
     layout: "mobile",
+    role: "UI/UX Designer",
+    platform: "Mobile",
+    deliverables: "Wireframes",
+    tools: "Figma",
+    focus: "App structure and navigation before visual styling",
+    flows: [
+      { id: "onboarding", label: "Onboarding" },
+      { id: "feed", label: "Feed & search" },
+      { id: "posting", label: "Posting" },
+      { id: "profiles", label: "Profiles & activity" },
+      { id: "messages", label: "Messages" },
+    ],
     details: [
       {
         label: "Key Features",
@@ -174,21 +287,21 @@ export const designProjects = [
     link: "https://www.figma.com/design/o0OAb1LyQMwpeiNvmdqe6I/SocialGram?node-id=0-1",
     cover: toUrl(`${DESIGNS_DIR}/SocialGram/cover.png`),
     screens: toScreens(`${DESIGNS_DIR}/SocialGram`, [
-      ["Home.png", 786, 1624, "Home feed", "Stories across the top and a scrolling feed of posts above the main navigation."],
-      ["Search.png", 393, 852, "Search", "A simple search screen, ready for typing."],
-      ["Search-2.png", 393, 852, "Search results", "Matching people listed as the user types."],
-      ["Posting.png", 393, 852, "New post: choose a photo", "Pick a photo from a large preview and a grid of recent images."],
-      ["Posting-2.png", 393, 852, "New post: share", "Add a description to the chosen photo, then share it."],
-      ["Notifications.png", 393, 852, "Notifications", "A list of activity, showing who liked which photo."],
-      ["Profile-me.png", 393, 812, "My profile", "Post and follower counts, a photo grid, and edit and share actions."],
-      ["Profile-other.png", 393, 812, "Another user's profile", "The same layout, with follow and message as the main actions."],
-      ["Chat.png", 393, 812, "Messages", "All conversations, with the latest message and when it was sent."],
-      ["Chat-2.png", 393, 812, "Conversation", "A one-to-one chat with timestamps and a message box."],
-      ["Followers.png", 393, 852, "Followers", "A list of followers, with a tab to switch to following."],
-      ["Following.png", 393, 852, "Following", "The accounts this user follows, under the same tabs."],
-      ["Login.png", 393, 844, "Login", "Username and password, with a link to register."],
-      ["Register.png", 393, 844, "Register", "A short form for name, username and password."],
-      ["Register-2.png", 393, 844, "Registration complete", "A thank-you message confirming the account, with a button to continue."],
+      ["Home.png", 786, 1624, "Home feed", "Stories across the top and a scrolling feed of posts above the main navigation.", "feed"],
+      ["Search.png", 393, 852, "Search", "A simple search screen, ready for typing.", "feed"],
+      ["Search-2.png", 393, 852, "Search results", "Matching people listed as the user types.", "feed"],
+      ["Posting.png", 393, 852, "New post: choose a photo", "Pick a photo from a large preview and a grid of recent images.", "posting"],
+      ["Posting-2.png", 393, 852, "New post: share", "Add a description to the chosen photo, then share it.", "posting"],
+      ["Notifications.png", 393, 852, "Notifications", "A list of activity, showing who liked which photo.", "profiles"],
+      ["Profile-me.png", 393, 812, "My profile", "Post and follower counts, a photo grid, and edit and share actions.", "profiles"],
+      ["Profile-other.png", 393, 812, "Another user's profile", "The same layout, with follow and message as the main actions.", "profiles"],
+      ["Chat.png", 393, 812, "Messages", "All conversations, with the latest message and when it was sent.", "messages"],
+      ["Chat-2.png", 393, 812, "Conversation", "A one-to-one chat with timestamps and a message box.", "messages"],
+      ["Followers.png", 393, 852, "Followers", "A list of followers, with a tab to switch to following.", "profiles"],
+      ["Following.png", 393, 852, "Following", "The accounts this user follows, under the same tabs.", "profiles"],
+      ["Login.png", 393, 844, "Login", "Username and password, with a link to register.", "onboarding"],
+      ["Register.png", 393, 844, "Register", "A short form for name, username and password.", "onboarding"],
+      ["Register-2.png", 393, 844, "Registration complete", "A thank-you message confirming the account, with a button to continue.", "onboarding"],
     ]),
   },
   {
@@ -198,8 +311,10 @@ export const designProjects = [
     unit: "preview",
     galleryTitle: "Design system",
     layout: "web",
+    platform: "Web",
+    focus: "How reusable components and design tokens fit together",
     description:
-      "A UI design system with reusable components, typography scales and color tokens for consistent design across projects.",
+      "The Untitled UI kit, which I use and study to understand how reusable components, typography scales and color tokens work together. It isn't my own design.",
     tags: ["Components", "Design tokens"],
     link: "https://www.figma.com/design/1awMsXZ0PImopkseWDuttI/Untitled-UI?node-id=0-1",
     screens: toScreens(`${DESIGNS_DIR}/untitled`, [
@@ -211,51 +326,43 @@ export const designProjects = [
 export const getDesignProjectById = (id) =>
   designProjects.find((project) => project.id === id);
 
-export const categoryLabel = (project) =>
-  [project.category, project.platform].filter(Boolean).join(" · ");
-
 export const screenCountLabel = (project) => {
   const count = project.screens.length;
   return `${count} ${project.unit}${count === 1 ? "" : "s"}`;
 };
 
-export const designProcess = [
-  {
-    title: "Discovery",
-    description:
-      "Understand goals, user needs, and business priorities before drawing screens.",
-  },
-  {
-    title: "Structure",
-    description:
-      "Build wireframes and information architecture for clear navigation and content flow.",
-  },
-  {
-    title: "Visual Design",
-    description:
-      "Apply typography, color hierarchy, spacing, and components with consistency.",
-  },
-  {
-    title: "Prototype & Handoff",
-    description:
-      "Create interactive prototypes and developer-ready specs for implementation.",
-  },
-];
-
 export const figmaExperience = [
   {
     title: "Research & User Flow",
     description:
-      "I map user journeys and key actions first, then translate goals into clear page structures that reduce friction and improve navigation.",
+      "Understand what the product needs to do, and for whom, before drawing screens.",
+    points: [
+      "Understand product requirements",
+      "Identify user needs",
+      "Define user journeys",
+      "Organize information architecture",
+    ],
   },
   {
     title: "Wireframing & Prototyping",
     description:
-      "I build low and high-fidelity wireframes in Figma, then create interactive prototypes to validate layout, spacing, and interaction patterns.",
+      "Explore solutions while changes are still cheap, and test how the structure holds up.",
+    points: [
+      "Structure layouts",
+      "Explore interface solutions",
+      "Build interactive prototypes",
+      "Validate decisions when possible",
+    ],
   },
   {
     title: "UI Systems & Handoff",
     description:
-      "I organize reusable components, typography scales, and spacing rules to make developer handoff smooth and keep designs consistent.",
+      "Turn decisions into a consistent system that developers can build from.",
+    points: [
+      "Establish visual consistency",
+      "Create reusable components",
+      "Define typography and color systems",
+      "Prepare designs and work with developers",
+    ],
   },
 ];

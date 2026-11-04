@@ -1,15 +1,15 @@
 import { notFound } from "next/navigation";
 import CaseStudy from "@/components/CaseStudy";
-import { featuredProjects, getProjectBySlug } from "@/data/projects";
+import { caseStudyProjects, getProjectBySlug } from "@/data/projects";
 
 export function generateStaticParams() {
-  return featuredProjects.map((p) => ({ slug: p.slug }));
+  return caseStudyProjects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  if (!project || !project.featured) return {};
+  if (!project || !project.caseStudy) return {};
 
   const title = project.title.replace(/\b\w/g, (c) => c.toUpperCase());
   const description = project.caseStudy?.idea || project.description;
@@ -29,7 +29,7 @@ export default async function WorkPage({ params }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
-  if (!project || !project.featured || !project.caseStudy) {
+  if (!project || !project.caseStudy) {
     notFound();
   }
 

@@ -1,11 +1,11 @@
 import UiUxPageIntro from "@/components/UiUxPageIntro";
 import UiUxFigmaSection from "@/components/UiUxFigmaSection";
-import { designProjects, designProcess } from "@/data/figma";
+import { designProjects, figmaExperience } from "@/data/figma";
 
 export const metadata = {
   title: "UI/UX Designs",
   description:
-    "Browse my UI/UX designs: mobile apps and websites including Shara, Light Orbits, Ventura and SocialGram, plus my design process.",
+    "Browse my UI/UX designs: mobile apps and websites including the Shara case study, Light Orbits, Ventura and SocialGram, plus how I design.",
 };
 
 export default function UiUxPage() {
@@ -15,7 +15,7 @@ export default function UiUxPage() {
       <UiUxFigmaSection
         showHeader={false}
         projects={designProjects}
-        process={designProcess}
+        process={figmaExperience}
       />
     </main>
   );

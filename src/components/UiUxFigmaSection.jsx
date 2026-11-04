@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
-import { categoryLabel, screenCountLabel } from "@/data/figma";
+import { screenCountLabel } from "@/data/figma";
 
 /* Tall phone screens lose too much when cropped into a wide card, so a mobile
    project without its own cover shows a row of its real screens instead. */
@@ -59,7 +59,8 @@ function ProjectCard({ project, isWide }) {
         </span>
         <span className="flex-1 flex flex-col p-5 sm:p-6">
           <span className="mono text-[11px] text-accent-cyan tracking-[0.15em]">
-            {categoryLabel(project)}
+            {project.category}
+            {project.role ? ` · ${project.role}` : ""}
           </span>
           <span className="mt-2 text-xl sm:text-2xl font-bold font-outfit text-txt-primary group-hover:text-accent-cyan transition-colors duration-200">
             {project.title}
@@ -67,12 +68,19 @@ function ProjectCard({ project, isWide }) {
           <span className="mt-2 flex-1 text-sm text-txt-secondary leading-relaxed line-clamp-3">
             {project.description}
           </span>
+          {project.focus && (
+            <span className="mt-3 text-sm text-txt-primary leading-relaxed">
+              <span className="text-txt-secondary">Focus: </span>
+              {project.focus}
+            </span>
+          )}
           <span className="mt-4 pt-4 flex items-center justify-between gap-3 border-t border-white/10 text-sm">
             <span className="text-txt-secondary">
+              {project.platform ? `${project.platform} · ` : ""}
               {screenCountLabel(project)}
             </span>
             <span className="inline-flex items-center gap-2 font-semibold text-txt-primary group-hover:text-accent-cyan transition-colors duration-200">
-              Explore
+              {project.caseStudy ? "View case study" : "Explore"}
               <FaArrowRight
                 aria-hidden="true"
                 className="text-xs group-hover:translate-x-0.5 transition-transform duration-200"
@@ -134,16 +142,14 @@ export default function UiUxFigmaSection({
 
         {process.length > 0 && (
           <div className="mt-20">
-            <h3 className="text-3xl font-bold font-outfit text-white mb-6">
+            <h3 className="text-3xl font-bold font-outfit text-white">
               How I design
             </h3>
-            <ol
-              className={`grid gap-5 ${
-                process.length === 4
-                  ? "sm:grid-cols-2 lg:grid-cols-4"
-                  : "md:grid-cols-3"
-              }`}
-            >
+            <p className="mt-2 mb-6 max-w-2xl text-txt-secondary leading-relaxed">
+              The stages I draw on, adapted to each project. Not every project
+              needs all of them.
+            </p>
+            <ol className="grid md:grid-cols-3 gap-5">
               {process.map((item, index) => (
                 <li
                   key={item.title}
@@ -158,6 +164,18 @@ export default function UiUxFigmaSection({
                   <p className="text-sm text-txt-secondary leading-relaxed">
                     {item.description}
                   </p>
+                  {item.points?.length > 0 && (
+                    <ul className="mt-4 pt-4 space-y-2 border-t border-white/10">
+                      {item.points.map((point) => (
+                        <li key={point} className="flex items-start gap-2.5">
+                          <span className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-cyan shrink-0" />
+                          <span className="text-sm text-txt-primary leading-relaxed">
+                            {point}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ol>

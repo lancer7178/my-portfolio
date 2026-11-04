@@ -2,9 +2,9 @@
 
 # Abdulatif Selem
 
-### Frontend Engineer & Creative Developer
+### Product Designer & Frontend Engineer
 
-I build digital products where engineering, interface design, and product thinking meet.
+I design intuitive digital experiences and transform them into scalable, production-ready products.
 
 **[View the live portfolio →](https://abdullatif-selem.vercel.app)**
 
@@ -27,7 +27,7 @@ I build digital products where engineering, interface design, and product thinki
 | | |
 |---|---|
 | **18 web projects** | From products and tools to company and clinic websites |
-| **4 in-depth case studies** | The problem, the decisions, and the result behind each product |
+| **6 in-depth case studies** | The problem, the decisions, and the result behind each product |
 | **51 design screens and pages** | UI/UX work you can browse full size, with no account or design tools |
 | **Motion that respects you** | Animated throughout, and calmer for visitors who prefer reduced motion |
 
@@ -62,7 +62,7 @@ Pick a project, select any screen, and see it full size. Zoom in on the details,
 | **Light Orbits** | Website | 6 pages | A space-themed site for a digital marketing agency |
 | **Ventura** | Website | 5 pages | A clean, light site for a personal finance product |
 | **SocialGram** | Mobile app | 15 screens | Greyscale wireframes of a social media app |
-| **Untitled-UI** | Design system | 1 preview | Reusable components, type scales and color tokens |
+| **Untitled-UI** | Design system | 1 preview | A third-party kit I use and study, not my own design |
 
 **[Browse all the designs →](https://abdullatif-selem.vercel.app/ui-ux)**
 

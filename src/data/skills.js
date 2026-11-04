@@ -34,4 +34,4 @@ export const skillCategories = [
 ];
 
 // Compact list used in the Hero core-stack card (no percentages).
-export const coreStack = ["React", "Next.js", "TypeScript", "Tailwind CSS"];
+export const coreStack = ["Figma", "React", "Next.js", "TypeScript", "Tailwind CSS"];

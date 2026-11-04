@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { FaCheckCircle, FaCompass } from "react-icons/fa";
 
-export default function AboutSection({ intro, values, approach }) {
+export default function AboutSection({ intro, skills = [], values, approach }) {
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const numberRef = useRef(null);
@@ -111,6 +111,33 @@ export default function AboutSection({ intro, values, approach }) {
           <p className="text-lg sm:text-xl text-txt-secondary leading-relaxed max-w-3xl">
             {intro}
           </p>
+          {skills.length > 0 && (
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+              {skills.map((group) => (
+                <div
+                  key={group.label}
+                  className="p-5 sm:p-6 rounded-2xl bg-dark-card border border-dark-elevated"
+                >
+                  <h3 className="text-lg font-bold text-accent-cyan font-outfit">
+                    {group.label}
+                  </h3>
+                  <p className="mt-1 mb-4 text-sm text-txt-secondary leading-relaxed">
+                    {group.summary}
+                  </p>
+                  <ul className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <li
+                        key={item}
+                        className="px-3 py-1.5 text-xs text-txt-primary bg-white/5 border border-white/10 rounded-lg"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
           <div>
             <h3 className="flex items-center gap-2 text-xl font-bold text-accent-indigo mb-6 font-outfit">
               <FaCheckCircle className="text-accent-cyan" /> How I work

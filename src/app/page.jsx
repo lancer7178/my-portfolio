@@ -7,7 +7,7 @@ import SkillsSection from "@/components/SkillsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import UiUxFigmaSection from "@/components/UiUxFigmaSection";
 import ContactSection from "@/components/ContactSection";
-import { aboutIntro, aboutValues, aboutApproach } from "@/data/about";
+import { aboutIntro, aboutSkills, aboutValues, aboutApproach } from "@/data/about";
 import { featuredProjects, selectedProjects } from "@/data/projects";
 import { buildProcess } from "@/data/process";
 import { designProjects, figmaExperience } from "@/data/figma";
@@ -29,12 +29,13 @@ export default function Home() {
       <HowIBuildSection steps={buildProcess} />
       <AboutSection
         intro={aboutIntro}
+        skills={aboutSkills}
         values={aboutValues}
         approach={aboutApproach}
       />
       <SkillsSection />
       <ExperienceSection experiences={experiences} />
-      <ContactSection email="abdlatefkhatib@email.com" cvLink={CV_LINK} />
+      <ContactSection email="abdlatefkhatib@gmail.com" cvLink={CV_LINK} />
     </div>
   );
 }

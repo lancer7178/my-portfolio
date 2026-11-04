@@ -250,6 +250,107 @@ export const projects = [
     image: "/websites-cover/underground-heritage.png",
     link: "https://undergroun-heritage-e-commerce-s.vercel.app/",
     github: null,
+    caseStudy: {
+      problem:
+        "A streetwear store sells attitude as much as clothing, but strong branding can easily get in the way of shopping. The experience had to feel bold while keeping the route from browsing to checkout short and clear.",
+      idea:
+        "Let the home page carry the brand, then let the design step back as people get closer to buying. A dark editorial style gives way to focused filters, a clear product page and a simple cart and checkout.",
+      contribution: {
+        design: [
+          "The dark, editorial visual direction",
+          "Page layouts for the full shopping journey",
+          "The product card, filters and order summary",
+          "Responsive layouts for desktop and mobile",
+        ],
+        frontend: [
+          "Building the store in Next.js and TypeScript",
+          "Search, filtering and sorting",
+          "Product options, favorites and the cart",
+          "The checkout form and its mock payment flow",
+        ],
+      },
+      journey: [
+        {
+          title: "Home and discovery",
+          detail:
+            "A large featured drop sets the tone, and a search field and clear navigation stay in the header for people who already know what they want.",
+          src: "/design-previews/underground-heritage/home.webp",
+          alt: "Underground Heritage home page with a featured product drop",
+        },
+        {
+          title: "Browsing with filters",
+          detail:
+            "Filters for color, size and price sit beside the products, with a live result count and sorting, so people can narrow things down without leaving the page.",
+          src: "/design-previews/underground-heritage/shop.webp",
+          alt: "Shop page with color and size filters beside a grid of products",
+        },
+        {
+          title: "Search results",
+          detail:
+            "Searching leads to the same layout with a category filter added, so there's nothing new to learn.",
+          src: "/design-previews/underground-heritage/search.webp",
+          alt: "Search results for tee, showing filters and matching products",
+        },
+        {
+          title: "Product details",
+          detail:
+            "An image gallery sits next to color, size and quantity, with Add to Cart and Buy Now, then product details and related items further down.",
+          src: "/design-previews/underground-heritage/product.webp",
+          alt: "Product page with a large image and color and size options",
+        },
+        {
+          title: "Shopping cart",
+          detail:
+            "Each item shows the chosen color and size and can be changed in place, with the costs and next step kept together in an order summary.",
+          src: "/design-previews/underground-heritage/cart.webp",
+          alt: "Shopping cart with one item and an order summary",
+        },
+        {
+          title: "Checkout",
+          detail:
+            "One page with contact, shipping and payment details beside the order summary. This is a demo: the card and PayPal options are mock, and no payment gateway is connected.",
+          src: "/design-previews/underground-heritage/checkout.webp",
+          alt: "Checkout form with payment options and an order summary",
+        },
+      ],
+      mobile: [
+        {
+          title: "Mobile home",
+          description: "The featured drop and navigation on a phone.",
+          src: "/design-previews/underground-heritage/mobile-home.webp",
+        },
+        {
+          title: "Mobile shop",
+          description: "The shop page adapted to a single column.",
+          src: "/design-previews/underground-heritage/mobile-shop.webp",
+        },
+        {
+          title: "Mobile product",
+          description: "The product image and options stacked for a phone.",
+          src: "/design-previews/underground-heritage/mobile-product.webp",
+        },
+      ],
+      decisions: [
+        {
+          title: "Bold first, focused later",
+          detail:
+            "Expressive layouts are saved for the home page. The shop, cart and checkout are calmer, so the brand doesn't compete with the task.",
+        },
+        {
+          title: "One product card everywhere",
+          detail:
+            "The same card appears on the home page, in the shop and under related items, so price, discount and favorite look the same wherever people find them.",
+        },
+        {
+          title: "The total is always visible",
+          detail:
+            "The cart and checkout both keep an order summary in view, so subtotal, tax and shipping are clear before anyone pays.",
+        },
+      ],
+      technology: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      outcome:
+        "A complete storefront journey from discovery to checkout, on desktop and mobile. Payments are still a demo, so connecting a real gateway would be the next step before launch.",
+    },
     technologies: [
       "Next.js",
       "React",
@@ -441,5 +542,6 @@ export const projects = [
 
 export const featuredProjects = projects.filter((p) => p.featured);
 export const selectedProjects = projects.filter((p) => !p.featured);
+export const caseStudyProjects = projects.filter((p) => p.caseStudy);
 export const getProjectBySlug = (slug) =>
   projects.find((p) => p.slug === slug);

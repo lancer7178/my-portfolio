@@ -1,5 +1,30 @@
 export const aboutIntro =
-  "I build digital products where frontend engineering, interface design, and product thinking meet. I care about how a product feels, how it works, and how the pieces connect behind the interface — not just how the page looks.";
+  "I'm a Product Designer and Frontend Engineer. I look at a product from the user's point of view, shape the experience, and then build it myself, so the decisions made in design carry through to the working product.";
+
+export const aboutSkills = [
+  {
+    label: "Design",
+    summary: "Working out what the product should be and how it should feel.",
+    items: [
+      "User Experience",
+      "Interface Design",
+      "Design Systems",
+      "Prototyping",
+      "Product Thinking",
+    ],
+  },
+  {
+    label: "Development",
+    summary: "Turning those decisions into something real people can use.",
+    items: [
+      "Frontend Engineering",
+      "React and Next.js",
+      "Responsive Development",
+      "Component Architecture",
+      "Translating Designs into Products",
+    ],
+  },
+];
 
 export const aboutValues = [
   "Understand the workflow before designing the screen",
