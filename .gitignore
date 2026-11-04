@@ -35,5 +35,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# public folder (kept locally only, so it is not in deploys built from git)
-/public/
+
