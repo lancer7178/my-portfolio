@@ -53,7 +53,13 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      className={`${outfit.variable} ${jetbrainsMono.variable}`}
+      // globals.css sets smooth scrolling; this lets Next.js turn it off
+      // during route changes so new pages start at the top instantly.
+      data-scroll-behavior="smooth"
+    >
       {/* Browser extensions (e.g. ColorZilla) add attributes to <body>,
           which would otherwise trigger a hydration mismatch warning. */}
       <body className="antialiased" suppressHydrationWarning>

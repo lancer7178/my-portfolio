@@ -217,7 +217,7 @@ export default function ImageViewer({
                 width={image.width}
                 height={image.height}
                 unoptimized
-                priority
+                loading="eager"
                 draggable={false}
                 onDoubleClick={(e) =>
                   applyZoom(zoom === 1 ? 2 : 1, { x: e.clientX, y: e.clientY })

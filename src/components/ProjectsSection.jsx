@@ -114,7 +114,7 @@ function ProjectCard({ project }) {
             alt=""
             width={12}
             height={12}
-            className="object-contain"
+            className="w-3 h-3 object-contain"
           />
           <span className="mono text-[9px] text-white">{agency.label}</span>
         </span>
