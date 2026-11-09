@@ -268,6 +268,125 @@ function ProjectCaseStudy({ project, study, openScreens }) {
   );
 }
 
+/* A titled grid of screens with optional flow filters. A project shows its
+   main gallery first, then any extra ones (e.g. an admin dashboard), each with
+   its own layout. */
+function ScreenGallery({
+  id,
+  title,
+  description,
+  unit,
+  screens: allScreens,
+  flows,
+  layoutName,
+  projectTitle,
+  openScreens,
+}) {
+  const [activeFlow, setActiveFlow] = useState("all");
+  const layout = LAYOUTS[layoutName];
+  const screens =
+    activeFlow === "all"
+      ? allScreens
+      : allScreens.filter((screen) => screen.flow === activeFlow);
+
+  const filters = flows
+    ? [
+        { id: "all", label: "All", count: allScreens.length },
+        ...flows.map((flow) => ({
+          ...flow,
+          count: allScreens.filter((screen) => screen.flow === flow.id).length,
+        })),
+      ]
+    : [];
+
+  return (
+    <section aria-labelledby={`${id}-heading`}>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+        <h2
+          id={`${id}-heading`}
+          className="text-2xl sm:text-3xl font-black font-outfit"
+        >
+          {title}{" "}
+          <span className="font-mono text-base font-normal text-txt-secondary">
+            {screens.length}
+          </span>
+        </h2>
+        <p className="text-sm text-txt-secondary">
+          Select any {unit} to view it full size and zoom in.
+        </p>
+      </div>
+
+      {description && (
+        <p className="mt-3 max-w-3xl text-txt-secondary leading-relaxed">
+          {description}
+        </p>
+      )}
+
+      {filters.length > 0 && (
+        <div
+          role="group"
+          aria-label={`Filter ${title} by user flow`}
+          className="mt-5 flex flex-wrap gap-2"
+        >
+          {filters.map((filter) => {
+            const isActive = activeFlow === filter.id;
+            return (
+              <button
+                key={filter.id}
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => setActiveFlow(filter.id)}
+                className={`min-h-11 px-4 rounded-full text-sm font-semibold border transition-colors duration-200 ${
+                  isActive
+                    ? "bg-white border-white text-dark"
+                    : "bg-white/5 border-white/10 text-txt-primary hover:bg-white/10"
+                }`}
+              >
+                {filter.label}{" "}
+                <span
+                  className={isActive ? "opacity-60" : "text-txt-secondary"}
+                >
+                  {filter.count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      <ul className={`mt-6 grid gap-3 sm:gap-5 ${layout.grid}`}>
+        {screens.map((screen, index) => (
+          <li key={screen.src}>
+            <button
+              type="button"
+              onClick={() => openScreens(screens, index, layout.viewerWidth)}
+              className="group block w-full text-left rounded-2xl cursor-zoom-in"
+            >
+              <span
+                className={`relative block overflow-hidden rounded-2xl border border-white/10 bg-dark-card group-hover:border-accent-cyan/60 transition-colors duration-300 ${layout.thumb}`}
+              >
+                <Image
+                  src={screen.src}
+                  alt={`${projectTitle}, ${screen.title}`}
+                  fill
+                  sizes={layout.sizes}
+                  className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+                />
+                <span className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-full bg-black/70 text-white text-xs opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200">
+                  <FaExpand aria-hidden="true" />
+                </span>
+              </span>
+              <span className="block mt-2 px-1 text-sm font-semibold text-txt-primary group-hover:text-accent-cyan transition-colors duration-200">
+                {screen.title}
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 function ProjectLink({ project, direction }) {
   const isNext = direction === "next";
   return (
@@ -298,29 +417,16 @@ export default function DesignProjectGallery({
   previousProject,
   nextProject,
 }) {
-  const [activeFlow, setActiveFlow] = useState("all");
   const [viewer, setViewer] = useState(null);
 
-  const layout = LAYOUTS[project.layout];
-  const screens =
-    activeFlow === "all"
-      ? project.screens
-      : project.screens.filter((screen) => screen.flow === activeFlow);
-
-  const filters = project.flows
-    ? [
-        { id: "all", label: "All", count: project.screens.length },
-        ...project.flows.map((flow) => ({
-          ...flow,
-          count: project.screens.filter((screen) => screen.flow === flow.id)
-            .length,
-        })),
-      ]
-    : [];
-
-  const openScreens = (list, index) =>
+  const openScreens = (
+    list,
+    index,
+    baseWidth = LAYOUTS[project.layout].viewerWidth,
+  ) =>
     setViewer({
       index,
+      baseWidth,
       images: list.map((screen) => ({
         ...screen,
         alt: `${project.title}, ${screen.title}. ${screen.description}`,
@@ -405,84 +511,32 @@ export default function DesignProjectGallery({
           />
         )}
 
-        <section aria-labelledby="gallery-heading">
-          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <h2
-              id="gallery-heading"
-              className="text-2xl sm:text-3xl font-black font-outfit"
-            >
-              {project.galleryTitle}{" "}
-              <span className="font-mono text-base font-normal text-txt-secondary">
-                {screens.length}
-              </span>
-            </h2>
-            <p className="text-sm text-txt-secondary">
-              Select any {project.unit} to view it full size and zoom in.
-            </p>
+        <ScreenGallery
+          id="gallery"
+          title={project.galleryTitle}
+          unit={project.unit}
+          screens={project.screens}
+          flows={project.flows}
+          layoutName={project.layout}
+          projectTitle={project.title}
+          openScreens={openScreens}
+        />
+
+        {project.galleries?.map((gallery) => (
+          <div key={gallery.id} className="mt-20">
+            <ScreenGallery
+              id={gallery.id}
+              title={gallery.title}
+              description={gallery.description}
+              unit={gallery.unit ?? project.unit}
+              screens={gallery.screens}
+              flows={gallery.flows}
+              layoutName={gallery.layout ?? project.layout}
+              projectTitle={project.title}
+              openScreens={openScreens}
+            />
           </div>
-
-          {filters.length > 0 && (
-            <div
-              role="group"
-              aria-label="Filter by user flow"
-              className="mt-5 flex flex-wrap gap-2"
-            >
-              {filters.map((filter) => {
-                const isActive = activeFlow === filter.id;
-                return (
-                  <button
-                    key={filter.id}
-                    type="button"
-                    aria-pressed={isActive}
-                    onClick={() => setActiveFlow(filter.id)}
-                    className={`min-h-11 px-4 rounded-full text-sm font-semibold border transition-colors duration-200 ${
-                      isActive
-                        ? "bg-white border-white text-dark"
-                        : "bg-white/5 border-white/10 text-txt-primary hover:bg-white/10"
-                    }`}
-                  >
-                    {filter.label}{" "}
-                    <span
-                      className={isActive ? "opacity-60" : "text-txt-secondary"}
-                    >
-                      {filter.count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
-
-          <ul className={`mt-6 grid gap-3 sm:gap-5 ${layout.grid}`}>
-            {screens.map((screen, index) => (
-              <li key={screen.src}>
-                <button
-                  type="button"
-                  onClick={() => openScreens(screens, index)}
-                  className="group block w-full text-left rounded-2xl cursor-zoom-in"
-                >
-                  <span
-                    className={`relative block overflow-hidden rounded-2xl border border-white/10 bg-dark-card group-hover:border-accent-cyan/60 transition-colors duration-300 ${layout.thumb}`}
-                  >
-                    <Image
-                      src={screen.src}
-                      alt={`${project.title}, ${screen.title}`}
-                      fill
-                      sizes={layout.sizes}
-                      className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-                    />
-                    <span className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-full bg-black/70 text-white text-xs opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200">
-                      <FaExpand aria-hidden="true" />
-                    </span>
-                  </span>
-                  <span className="block mt-2 px-1 text-sm font-semibold text-txt-primary group-hover:text-accent-cyan transition-colors duration-200">
-                    {screen.title}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </section>
+        ))}
 
         <nav
           aria-label="More projects"
@@ -498,7 +552,7 @@ export default function DesignProjectGallery({
           title={project.title}
           images={viewer.images}
           index={viewer.index}
-          baseWidth={layout.viewerWidth}
+          baseWidth={viewer.baseWidth}
           onIndexChange={(index) => setViewer({ ...viewer, index })}
           onClose={() => setViewer(null)}
         />

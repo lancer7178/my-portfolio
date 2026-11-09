@@ -41,7 +41,7 @@ export const experiences = [
     context:
       "Designing mobile apps and websites in Figma, from early wireframes to high-fidelity screens.",
     bullets: [
-      "Shara: an Arabic-first rewards app, across 24 high-fidelity screens.",
+      "Shara: an Arabic-first rewards app and its admin dashboard, across 40 high-fidelity screens.",
       "Light Orbits and Ventura: two multi-page websites with distinct visual identities.",
       "SocialGram: wireframes mapping a social media app across 15 screens.",
     ],

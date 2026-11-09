@@ -1,16 +1,20 @@
-import { Outfit, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/styles/globals.css";
 
-const outfit = Outfit({
-  subsets: ["latin"],
+// Self-hosted variable fonts (Latin subset, from Fontsource), so builds and
+// dev don't depend on reaching Google Fonts.
+const outfit = localFont({
+  src: "../fonts/outfit-variable.woff2",
+  weight: "100 900",
   variable: "--font-outfit-sans",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
+const jetbrainsMono = localFont({
+  src: "../fonts/jetbrains-mono-variable.woff2",
+  weight: "100 800",
   variable: "--font-mono-code",
   display: "swap",
 });
@@ -50,7 +54,9 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
-      <body className="antialiased">
+      {/* Browser extensions (e.g. ColorZilla) add attributes to <body>,
+          which would otherwise trigger a hydration mismatch warning. */}
+      <body className="antialiased" suppressHydrationWarning>
         {children}
         <Footer year={new Date().getFullYear()} name="Abdulatef selem" />
         <Navbar />

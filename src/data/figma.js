@@ -26,17 +26,18 @@ const toScreens = (folder, rows) =>
 // `galleryTitle` names the screenshots, e.g. "Wireframes" or "Design system".
 // `role`, `deliverables`, `tools` and `focus` appear only when set, so list only
 // what is accurate. `caseStudy` adds extra sections to the project's page, and
-// each of its parts is optional.
+// each of its parts is optional. `galleries` adds more screen sets after the
+// main one, each with its own title, layout, description and flows.
 export const designProjects = [
   {
     id: "shara",
     title: "Shara",
-    category: "Mobile App",
+    category: "Mobile App & Dashboard",
     unit: "screen",
-    galleryTitle: "Final screens",
+    galleryTitle: "Mobile app screens",
     layout: "mobile",
     role: "UI/UX Designer",
-    platform: "Mobile",
+    platform: "Mobile & Web",
     deliverables: "High-fidelity UI design",
     tools: "Figma",
     focus: "Clear multi-step tasks and rewards that are easy to understand",
@@ -135,12 +136,13 @@ export const designProjects = [
           "Bronze, Silver and Gold levels with their own conversion rates",
           "Cash collection at a branch with a pick-up code and receipt",
           "A product catalog and nearby branches",
+          "An admin dashboard for reviews, payouts, reports and permissions",
         ],
       },
     ],
     description:
-      "An Arabic-first rewards app for tradespeople. Technicians register their purchases and installations, earn points, move up through Bronze, Silver and Gold levels, and collect the cash value at a nearby branch.",
-    tags: ["Arabic (right-to-left)", "Rewards & loyalty"],
+      "An Arabic-first rewards app for tradespeople, plus the admin dashboard that runs it. Technicians register their purchases and installations, earn points, move up through Bronze, Silver and Gold levels, and collect the cash value at a nearby branch.",
+    tags: ["Arabic (right-to-left)", "Rewards & loyalty", "Admin dashboard"],
     flows: [
       { id: "signin", label: "Onboarding" },
       { id: "earn", label: "Earn points" },
@@ -174,6 +176,43 @@ export const designProjects = [
       ["OTP Verification - Shara.png", 440, 956, "Code verification", "Enter the six-digit code, with a resend timer and a WhatsApp option.", "signin"],
       ["Register - Shara.png", 440, 956, "Create account", "A short sign-up asking only for name, city and an optional specialty.", "signin"],
     ]),
+    galleries: [
+      {
+        id: "admin-dashboard",
+        title: "Admin dashboard screens",
+        layout: "web",
+        description:
+          "The web dashboard the Shara team uses behind the app: reviewing requests, managing tradespeople and levels, paying out cash at branches, and controlling who can do what.",
+        flows: [
+          { id: "overview", label: "Overview & reports" },
+          { id: "review", label: "Reviews & approvals" },
+          { id: "people", label: "Tradespeople" },
+          { id: "loyalty", label: "Levels & payouts" },
+          { id: "operations", label: "Branches & content" },
+          { id: "system", label: "Access & security" },
+        ],
+        // Two file names don't match what they show: "Interactive Reports.png"
+        // is the staff list and "User Management.png" is the reports page.
+        screens: toScreens(`${DESIGNS_DIR}/shara/admin dashboard`, [
+          ["Main Indicators Dashboard.png", 1312, 1368, "Main indicators", "Active technicians, requests awaiting review and points issued and redeemed, with purchases by city and the top branches.", "overview"],
+          ["User Management.png", 1314, 2016, "Interactive reports", "Six official reports with shared filters for date, city, branch, level and category, exportable to Excel or PDF.", "overview"],
+          ["Review and Operation Performance.png", 1313, 2046, "Review performance", "Review speed, AI accuracy and approval rates, hourly request flow, rejection reasons and each reviewer's output.", "overview"],
+          ["Review Queue.png", 1598, 1024, "Review queue", "Requests waiting for review with the AI check result and waiting time, plus bulk approve, reject or assign.", "review"],
+          ["Frame 7.png", 1314, 1070, "Account approvals", "New sign-ups to approve, reject or ask for more information, with every decision logged with a reason.", "review"],
+          ["Craftsmen List.png", 1312, 1048, "Tradespeople list", "Every registered tradesperson, filterable by city, level and status, with points balance and total purchases.", "people"],
+          ["Tradesperson Profile.png", 1318, 1048, "Tradesperson profile", "One person's balance, its cash value, progress to their next goal, personal details and account status.", "people"],
+          ["Manual Adjustments.png", 1312, 1049, "Manual adjustments", "Add or deduct points and change a level, with a required reason and a history of recent changes.", "people"],
+          ["Levels Management.png", 1310, 1052, "Levels management", "Conversion rates and upgrade rules for Bronze, Silver and Gold, with a live example of what points are worth.", "loyalty"],
+          ["Cash Disbursement Requests.png", 1310, 1158, "Cash payouts", "Branch staff check a payout code and the person's identity, then confirm the cash handover and issue a receipt.", "loyalty"],
+          ["Branch Management.png", 1318, 1051, "Branches", "Branch details and status, with a map showing how branches are spread across the country.", "operations"],
+          ["Product and category management.png", 1310, 1052, "Products & categories", "Add, edit and organize products and their categories, with status and date added.", "operations"],
+          ["Terms and Conditions, Privacy Policy, FAQs.png", 1312, 1041, "Static pages", "Edit the terms, privacy policy and FAQs, with a version number and a reason for each update.", "operations"],
+          ["Interactive Reports.png", 1312, 1459, "Staff & roles", "Staff accounts with their role, branch scope, two-factor status and last sign-in.", "system"],
+          ["Permissions matrix.png", 1312, 2939, "Permissions matrix", "Set what each role can view, add, edit, approve or export, with high-risk actions needing two-factor approval.", "system"],
+          ["Audit Log.png", 1312, 2884, "Audit log", "A tamper-proof record of every sensitive action: who did it, what changed, and full details for each entry.", "system"],
+        ]),
+      },
+    ],
   },
   {
     id: "light-orbits",
@@ -326,8 +365,12 @@ export const designProjects = [
 export const getDesignProjectById = (id) =>
   designProjects.find((project) => project.id === id);
 
+// Counts every gallery, so a project with an extra one (e.g. an admin
+// dashboard) shows its full total.
 export const screenCountLabel = (project) => {
-  const count = project.screens.length;
+  const count =
+    project.screens.length +
+    (project.galleries ?? []).reduce((sum, g) => sum + g.screens.length, 0);
   return `${count} ${project.unit}${count === 1 ? "" : "s"}`;
 };
 
