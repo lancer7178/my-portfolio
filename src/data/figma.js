@@ -29,7 +29,7 @@ const toScreens = (folder, rows) =>
 // each of its parts is optional. `galleries` adds more screen sets after the
 // main one, each with its own title, layout, description and flows.
 export const designProjects = [
-  {
+    {
     id: "shara",
     title: "Shara",
     category: "Mobile App & Dashboard",
@@ -215,8 +215,63 @@ export const designProjects = [
     ],
   },
   {
+    
+    id: "bloom-her",
+    title: "Bloom Her",
+    category: "Mobile App Design",
+    unit: "screen",
+    galleryTitle: "High-fidelity screens",
+    layout: "mobile",
+    role: "UI/UX Designer",
+    platform: "Mobile",
+    deliverables: "High-fidelity UI design",
+    tools: "Figma",
+    focus: "Personal skincare guidance that feels clear, supportive and easy to follow",
+    details: [
+      {
+        label: "Key Features",
+        items: [
+          "Personalized onboarding for skin type, concerns and goals",
+          "Daily skincare routines with step-by-step product guidance",
+          "Product scanning with a safety score and ingredient analysis",
+          "Risk alerts with explanations and safer alternatives",
+          "A searchable skincare education hub",
+          "Reminders, blocked ingredients and privacy preferences",
+        ],
+      },
+    ],
+    description:
+      "A mobile skincare companion that personalizes routines around each user's skin type, concerns and goals, then helps them scan products, understand ingredient risks and build consistent daily habits.",
+    tags: ["First design", "Skincare", "Personalization"],
+    flows: [
+      { id: "routine", label: "Daily routine" },
+      { id: "scan", label: "Product scan" },
+      { id: "education", label: "Education" },
+      { id: "onboarding", label: "Onboarding" },
+      { id: "account", label: "Account" },
+    ],
+    screens: toScreens(`${DESIGNS_DIR}/bloom-her (first design )`, [
+      ["Home page.png", 390, 1036, "Home", "A personalized greeting, daily streak, weather tip, product scan shortcut and morning routine progress.", "routine"],
+      ["Routine details page.png", 390, 1462, "Routine details", "Product instructions, today's progress, key ingredients and the step's impact on the user's skincare goals.", "routine"],
+      ["Ingredient page.png", 390, 1242, "Ingredient scanner", "A product-label scanner with a safety score and a clear breakdown of safe and potentially irritating ingredients.", "scan"],
+      ["Ingredient Alert page.png", 414, 1502, "Ingredient alert", "Why a product was flagged, its risky ingredients, safer alternatives and an option to add it to the blocked list.", "scan"],
+      ["Education Hub page.png", 466, 1146, "Education hub", "Search, featured skincare categories and the latest ingredient, skin science and routine guides.", "education"],
+      ["Bloom Her Screen.png", 585, 1326, "Launch screen", "Bloom Her's floral identity, tagline and loading state introduce the app in its signature pink palette.", "onboarding"],
+      ["login page.png", 398, 895, "Sign in", "Email and password sign-in with password recovery and Google or Apple options.", "onboarding"],
+      ["Register page.png", 390, 1114, "Create account", "The first registration step collects the details needed to begin personalizing the experience.", "onboarding"],
+      ["Reset passwoard page.png", 390, 894, "Reset password", "A focused email step for starting password recovery.", "onboarding"],
+      ["Reset sent page.png", 398, 884, "Reset link sent", "Confirmation that recovery instructions have been sent, with a clear way back to sign in.", "onboarding"],
+      ["Onboarding skin type page.png", 614, 1180, "Choose skin type", "Step two of onboarding: choose oily, dry, combination or sensitive skin.", "onboarding"],
+      ["Onboarding skin concerns page.png", 596, 866, "Choose skin concerns", "Select concerns such as breakouts, fine lines, pigmentation, texture, pores or redness.", "onboarding"],
+      ["Onboarding goals page.png", 430, 1073, "Choose skincare goals", "Complete setup by choosing goals including hydration, anti-aging, brightening, clearer skin and sun protection.", "onboarding"],
+      ["Profile page.png", 390, 1072, "Profile", "A snapshot of the user's streak and safety score, with access to their skin profile, alerts, reminders and education.", "account"],
+      ["Settings page.png", 390, 1437, "Settings", "Account details, routine reminders, ingredient alerts, blocked ingredients, privacy and support preferences.", "account"],
+    ]),
+  },
+
+  {
     id: "light-orbits",
-    title: "Light Orbits",
+    title: "Light Orbits marketing",
     category: "Web Design",
     unit: "page",
     galleryTitle: "High-fidelity designs",

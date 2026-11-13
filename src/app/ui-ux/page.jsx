@@ -5,7 +5,7 @@ import { designProjects, figmaExperience } from "@/data/figma";
 export const metadata = {
   title: "UI/UX Designs",
   description:
-    "Browse my UI/UX designs: mobile apps and websites including the Shara case study, Light Orbits, Ventura and SocialGram, plus how I design.",
+    "Browse my UI/UX designs: mobile apps and websites including Bloom Her, the Shara case study, Light Orbits, Ventura and SocialGram, plus how I design.",
 };
 
 export default function UiUxPage() {
