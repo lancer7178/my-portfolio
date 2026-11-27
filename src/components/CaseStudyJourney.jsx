@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import ImageViewer from "@/components/ImageViewer";
+import dynamic from "next/dynamic";
+
+const ImageViewer = dynamic(() => import("@/components/ImageViewer"));
 
 const DESKTOP = { width: 2880, height: 1800 };
 const MOBILE = { width: 780, height: 1688, viewerWidth: 390 };

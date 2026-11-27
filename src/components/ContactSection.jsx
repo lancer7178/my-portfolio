@@ -1,216 +1,37 @@
-"use client";
+import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import ContactForm, { CopyEmail } from "@/components/ContactForm";
+import ProfileLinks from "@/components/ProfileLinks";
+import { profile } from "@/data/profile";
 
-import { useRef, useState, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import {
-  FaRegCopy,
-  FaCheck,
-  FaDownload,
-  FaPaperPlane,
-  FaGithub,
-  FaLinkedin,
-} from "react-icons/fa";
-import emailjs from "@emailjs/browser";
-
-export default function ContactSection({
-  email = "abdlatefkhatib@gmail.com",
-  cvLink = "/Abdulatif_Selem_CV.pdf",
-}) {
-  const [copied, setCopied] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const form = useRef(null);
-  const sectionRef = useRef(null);
-  const bigTextRef = useRef(null);
-  const formRef = useRef(null);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    emailjs
-      .sendForm(
-        "service_pzh78vj",
-        "template_g48ufwr",
-        form.current,
-        "-vAphwlP-xaTdFksd",
-      )
-      .then(
-        () => {
-          setIsLoading(false);
-          setSubmitted(true);
-          form.current.reset();
-          setTimeout(() => setSubmitted(false), 3000);
-        },
-        () => {
-          setIsLoading(false);
-          alert("❌ Failed to send message. Please try again.");
-        },
-      );
-  };
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        bigTextRef.current,
-        { y: 100, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: bigTextRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
-      gsap.fromTo(
-        formRef.current,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: formRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
+export default function ContactSection() {
   return (
-    <section
-      id="contact"
-      ref={sectionRef}
-      className="relative py-16 sm:py-20 px-6 md:px-12 bg-dark text-white overflow-hidden scroll-mt-20"
-    >
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-100 bg-cyan-400/4 rounded-full blur-[200px] pointer-events-none" />
-
-      <div className="relative z-10 max-w-4xl mx-auto">
-        <div ref={bigTextRef} className="text-center mb-10">
-          <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-6">
-            {"// GET IN TOUCH"}
-          </p>
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
-            <span className="text-white">HAVE A </span>
-            <span className="gradient-text">PRODUCT</span>
-            <br />
-            <span className="text-outline-accent">IN MIND?</span>
+    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-dark px-6 py-16 sm:py-20 md:px-12">
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 h-100 w-150 -translate-x-1/2 rounded-full bg-cyan-400/4 blur-[200px]" />
+      <div className="relative z-10 mx-auto max-w-4xl">
+        <header data-reveal className="mb-8 text-center">
+          <p className="mono mb-6 text-xs tracking-[0.3em] text-accent-cyan">{"// GET IN TOUCH"}</p>
+          <h2 id="contact-title" className="text-[clamp(2.1rem,8vw,4.5rem)] leading-none font-black tracking-tight uppercase">
+            Let’s Build <span className="gradient-text">Something</span><br /> <span className="text-outline-accent">Meaningful.</span>
           </h2>
-          <p className="mt-6 text-txt-secondary text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Let&apos;s talk about what you&apos;re building. Whether it&apos;s a
-            product, an interface, or a client project — I&apos;m happy to help.
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-txt-secondary sm:text-lg">
+            I’m open to software development opportunities, full-stack engineering roles, mobile development, and collaborations on innovative digital products.
           </p>
+          <p className="mx-auto mt-3 max-w-xl leading-relaxed text-txt-secondary">
+            Whether you need a complete web application, backend integration, mobile solution, or e-commerce platform, I’m interested in discussing how technology can solve your business challenges.
+          </p>
+        </header>
+        <div className="mb-4 flex flex-wrap justify-center gap-3">
+          <a href={`mailto:${profile.email}`} className="action action-primary">Get in Touch</a>
+          <a href={profile.resume.href} className="action action-secondary">View Resume</a>
+          <CopyEmail email={profile.email} />
+          <ProfileLinks />
         </div>
-
-        <div className="flex flex-wrap gap-3 sm:gap-4 items-center justify-center mb-8">
-          <button
-            onClick={handleCopy}
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-dark-card border border-dark-elevated text-white hover:border-accent-cyan/30 transition-all duration-300 hover:scale-105 active:scale-95 mono text-xs"
-          >
-            {copied ? (
-              <FaCheck className="text-accent-cyan" />
-            ) : (
-              <FaRegCopy className="text-txt-muted" />
-            )}
-            {copied ? "EMAIL COPIED!" : "COPY MY EMAIL"}
-          </button>
-          <a
-            href={cvLink}
-            download
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet text-black font-bold mono text-xs hover:opacity-90 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-accent-indigo/15"
-          >
-            <FaDownload className="text-xs" /> DOWNLOAD CV
-          </a>
-          <a
-            href="https://github.com/lancer7178"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-dark-card border border-dark-elevated text-white hover:border-accent-cyan/30 hover:text-accent-cyan transition-all duration-300 hover:scale-105 active:scale-95 mono text-xs"
-          >
-            <FaGithub /> GITHUB
-          </a>
-          <a
-            href="https://linkedin.com/in/abdul-atif-selem-8521a7281"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-dark-card border border-dark-elevated text-white hover:border-accent-indigo/30 hover:text-accent-indigo transition-all duration-300 hover:scale-105 active:scale-95 mono text-xs"
-          >
-            <FaLinkedin /> LINKEDIN
-          </a>
-        </div>
-
-        <div ref={formRef} className="glass rounded-2xl p-6 sm:p-8">
-          <form
-            ref={form}
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-5"
-          >
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <input
-                type="text"
-                name="from_name"
-                placeholder="Your Name"
-                required
-                className="flex-1 px-4 sm:px-5 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-dark-surface border border-dark-elevated text-white placeholder-txt-muted focus:border-accent-cyan/40 focus:outline-none focus:ring-1 focus:ring-accent-cyan/20 transition-all duration-300 font-outfit text-sm"
-              />
-              <input
-                type="email"
-                name="from_email"
-                placeholder="Your Email"
-                required
-                className="flex-1 px-4 sm:px-5 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-dark-surface border border-dark-elevated text-white placeholder-txt-muted focus:border-accent-cyan/40 focus:outline-none focus:ring-1 focus:ring-accent-cyan/20 transition-all duration-300 font-outfit text-sm"
-              />
-            </div>
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows="4"
-              required
-              className="px-4 sm:px-5 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-dark-surface border border-dark-elevated text-white placeholder-txt-muted focus:border-accent-cyan/40 focus:outline-none focus:ring-1 focus:ring-accent-cyan/20 transition-all duration-300 resize-none font-outfit text-sm"
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`flex items-center justify-center gap-2 py-4 rounded-xl font-bold font-outfit text-lg transition-all duration-300 ${isLoading ? "bg-dark-elevated text-txt-muted cursor-not-allowed" : "bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet text-black hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-accent-indigo/15"}`}
-            >
-              {isLoading ? (
-                <>
-                  <span className="w-4 h-4 border-2 border-t-transparent border-txt-muted rounded-full animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                <>
-                  <FaPaperPlane className="text-sm" />
-                  Send Message
-                </>
-              )}
-            </button>
-            {submitted && (
-              <div className="text-accent-cyan text-center font-medium mt-2 mono text-sm">
-                ✅ Thank you! Your message was sent successfully.
-              </div>
-            )}
-          </form>
-        </div>
+        <address className="mb-6 flex flex-wrap items-center justify-center gap-x-5 text-sm font-normal not-italic text-txt-secondary">
+          <a href={`mailto:${profile.email}`} className="inline-flex min-h-11 items-center gap-2 rounded-md hover:text-accent-cyan"><FaEnvelope aria-hidden="true" /> {profile.email}</a>
+          <a href={`tel:${profile.phone.replaceAll(" ", "")}`} className="inline-flex min-h-11 items-center gap-2 rounded-md hover:text-accent-cyan"><FaPhoneAlt aria-hidden="true" /> {profile.phone}</a>
+          <span className="inline-flex min-h-11 items-center gap-2"><FaMapMarkerAlt aria-hidden="true" /> {profile.location}</span>
+        </address>
+        <ContactForm email={profile.email} />
       </div>
     </section>
   );

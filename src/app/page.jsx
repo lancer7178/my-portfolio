@@ -1,36 +1,36 @@
 import HeroSection from "@/components/HeroSection";
+import PortfolioMotion from "@/components/PortfolioMotion";
 import FeaturedWorkSection from "@/components/FeaturedWorkSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import UiUxFigmaSection from "@/components/UiUxFigmaSection";
 import AboutSection from "@/components/AboutSection";
-import SkillsExperienceSection from "@/components/SkillsExperienceSection";
 import ContactSection from "@/components/ContactSection";
-import { aboutIntro } from "@/data/about";
-import { featuredProjects, selectedProjects } from "@/data/projects";
-import { buildProcess } from "@/data/process";
+import { EngineeringApproach, EngineeringCapabilities, ProfessionalExperience, TechnicalExpertise } from "@/components/EngineeringSections";
+import { toCatalogEntries } from "@/data/catalog";
+import { designLabDescription } from "@/data/engineering";
 import { designProjects } from "@/data/figma";
-import { skillCategories } from "@/data/skills";
-import { experiences } from "@/data/experience";
+import { profile } from "@/data/profile";
+import { featuredEngineeringProjects, selectedProjects } from "@/data/projects";
+import { homeTitle, pageMetadata } from "@/data/seo";
 
-const CV_LINK = "/Abdulatif_Selem_CV.pdf";
+export const metadata = {
+  ...pageMetadata({ path: "/", title: homeTitle, description: profile.description, home: true }),
+  title: { absolute: homeTitle },
+};
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-dark text-white font-outfit">
-      <HeroSection name="Abdulatif" cvLink={CV_LINK} />
-      <FeaturedWorkSection projects={featuredProjects} />
-      <ProjectsSection projects={selectedProjects} />
-      <UiUxFigmaSection
-        compact
-        summary="Apps and interfaces I have designed, from first wireframes to polished screens. Open any project to see every screen up close, no Figma needed."
-        projects={designProjects}
-      />
-      <AboutSection intro={aboutIntro} steps={buildProcess} />
-      <SkillsExperienceSection
-        skills={skillCategories}
-        experiences={experiences}
-      />
-      <ContactSection email="abdlatefkhatib@gmail.com" cvLink={CV_LINK} />
-    </div>
+    <PortfolioMotion>
+      <HeroSection />
+      <EngineeringCapabilities />
+      <FeaturedWorkSection projects={featuredEngineeringProjects} />
+      <TechnicalExpertise />
+      <ProfessionalExperience />
+      <ProjectsSection entries={toCatalogEntries(selectedProjects)} />
+      <EngineeringApproach />
+      <AboutSection />
+      <UiUxFigmaSection compact summary={designLabDescription} projects={designProjects.slice(0, 2)} />
+      <ContactSection />
+    </PortfolioMotion>
   );
 }

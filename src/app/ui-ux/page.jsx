@@ -1,22 +1,21 @@
 import UiUxPageIntro from "@/components/UiUxPageIntro";
 import UiUxFigmaSection from "@/components/UiUxFigmaSection";
+import { designLabDescription } from "@/data/engineering";
 import { designProjects, figmaExperience } from "@/data/figma";
+import { pageMetadata } from "@/data/seo";
 
-export const metadata = {
-  title: "UI/UX Designs",
-  description:
-    "Browse my UI/UX designs: mobile apps and websites including Bloom Her, the Shara case study, Light Orbits, Ventura and SocialGram, plus how I design.",
-};
+export const metadata = pageMetadata({
+  path: "/ui-ux",
+  title: "Design Lab",
+  description: designLabDescription,
+  image: designProjects[0].cover ?? designProjects[0].screens[0].src,
+});
 
 export default function UiUxPage() {
   return (
-    <main className="min-h-screen bg-dark text-white font-outfit pt-6">
+    <main id="main-content" tabIndex={-1}>
       <UiUxPageIntro />
-      <UiUxFigmaSection
-        showHeader={false}
-        projects={designProjects}
-        process={figmaExperience}
-      />
+      <UiUxFigmaSection projects={designProjects} process={figmaExperience} />
     </main>
   );
 }

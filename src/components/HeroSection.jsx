@@ -2,14 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import {
-  FaMapMarkerAlt,
-  FaLayerGroup,
-  FaArrowRight,
-  FaDownload,
-} from "react-icons/fa";
-import { coreStack } from "@/data/skills";
+import { FaArrowRight, FaDownload, FaLayerGroup, FaMapMarkerAlt } from "react-icons/fa";
+import { capabilities } from "@/data/engineering";
+import { profile } from "@/data/profile";
+import ProfileLinks from "@/components/ProfileLinks";
 
 const particles = [
   {
@@ -78,11 +74,9 @@ const particles = [
   },
 ];
 
-export default function HeroSection({
-  name = "Abdulatif",
-  subtitle = "I design intuitive digital experiences and transform them into scalable, production-ready products.",
-  cvLink = "/Abdulatif_Selem_CV.pdf",
-}) {
+const cairoTime = new Intl.DateTimeFormat("en", { timeZone: "Africa/Cairo", hour: "2-digit", minute: "2-digit", timeZoneName: "short" });
+
+export default function HeroSection() {
   const sectionRef = useRef(null);
   const nameRef = useRef(null);
   const contentRef = useRef(null);
@@ -90,208 +84,99 @@ export default function HeroSection({
   const [currentTime, setCurrentTime] = useState("");
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setCurrentTime(
-        now.toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true,
-        }) + " EET",
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
+    const update = () => setCurrentTime(cairoTime.format(new Date()));
+    update();
+    const timer = setInterval(update, 15_000);
+    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    gsap.registerPlugin(ScrollTrigger);
+    const media = gsap.matchMedia();
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const timeline = gsap.timeline({ defaults: { duration: 0.55, ease: "power3.out" } });
 
-      tl.fromTo(
-        nameRef.current,
-        { y: 60, opacity: 0, scale: 0.95 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.2 },
-      );
-      tl.fromTo(
-        contentRef.current?.children || [],
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 },
-        "-=0.5",
-      );
-      tl.fromTo(
-        cardsRef.current?.children || [],
-        { y: 30, opacity: 0, scale: 0.95 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.7, stagger: 0.2 },
-        "-=0.6",
-      );
-
-      // Particles fade in
-      gsap.fromTo(
-        ".particle",
-        { opacity: 0, scale: 0 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1.5,
-          stagger: 0.15,
-          ease: "back.out(1.4)",
-          delay: 0.8,
-        },
-      );
+      timeline
+        .fromTo(nameRef.current, { y: 22, opacity: 0.82 }, { y: 0, opacity: 1, clearProps: "transform,opacity" })
+        .fromTo(contentRef.current.children, { y: 14, opacity: 0.8 }, { y: 0, opacity: 1, stagger: 0.075, clearProps: "transform,opacity" }, 0.12)
+        .fromTo(cardsRef.current.children, { y: 18, opacity: 0.8 }, { y: 0, opacity: 1, stagger: 0.1, clearProps: "transform,opacity" }, 0.3);
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => media.revert();
   }, []);
 
   return (
     <section
       id="hero"
+      aria-labelledby="hero-title"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-dark px-4 sm:px-6 pt-6 pb-24"
+      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-dark px-4 pt-14 pb-24 sm:px-6"
     >
-      {/* Ambient Glow */}
-      <div className="absolute -top-25 -left-25 w-125 h-125 bg-accent-cyan blur-[220px] opacity-[0.07] rounded-full pointer-events-none" />
-      <div className="absolute -bottom-30 -right-30 w-125 h-125 bg-accent-violet blur-[220px] opacity-[0.05] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-75 h-75 bg-accent-indigo blur-[180px] opacity-[0.06] rounded-full pointer-events-none" />
-
-      {/* Floating Particles */}
-      {particles.map((p, i) => (
-        <span
-          key={i}
-          className="particle"
-          style={{
-            width: p.size,
-            height: p.size,
-            backgroundColor: p.color,
-            top: p.top,
-            left: p.left,
-            right: p.right,
-            "--dur": p.dur,
-            "--delay": p.delay,
-          }}
-        />
+      <div aria-hidden="true" className="pointer-events-none absolute -top-25 -left-25 size-125 rounded-full bg-accent-cyan opacity-[0.07] blur-[220px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-30 -bottom-30 size-125 rounded-full bg-accent-violet opacity-[0.05] blur-[220px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute top-1/3 right-1/4 size-75 rounded-full bg-accent-indigo opacity-[0.06] blur-[180px]" />
+      {particles.map(({ size, color, top, left, right, dur, delay }, index) => (
+        <span key={index} aria-hidden="true" className="particle" style={{ width: size, height: size, backgroundColor: color, top, left, right, "--dur": dur, "--delay": delay }} />
       ))}
 
-      {/* Top bar */}
-      <div className="absolute top-6 left-6 sm:left-10 flex items-center gap-3">
-        <div className="w-10 h-10 bg-dark-card border border-dark-elevated rounded-xl flex items-center justify-center">
-          <span className="bg-linear-to-r from-accent-cyan to-accent-indigo bg-clip-text text-transparent font-bold text-sm font-mono">
-            AS
-          </span>
+      <div className="absolute top-6 left-6 flex items-center gap-3 sm:left-10">
+        <div aria-hidden="true" className="grid size-10 place-items-center rounded-xl border border-dark-elevated bg-dark-card">
+          <span className="gradient-text font-mono text-sm font-bold">AS</span>
         </div>
       </div>
-      <div className="absolute top-6 right-6 sm:right-10">
-        <span className="mono text-[11px] text-txt-muted tracking-widest">
-          PRODUCT-MINDED BUILDER
-        </span>
-      </div>
+      <p className="mono absolute top-9 right-6 text-[10px] tracking-widest text-txt-muted sm:right-10 sm:text-[11px]">Software &amp; Product Engineering</p>
 
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto mt-12 sm:mt-0">
+      <div className="relative z-10 mx-auto mt-8 flex w-full max-w-4xl flex-col items-center text-center sm:mt-0">
         <div ref={nameRef}>
-          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-outfit font-black tracking-tight leading-none mb-4">
-            <span className="hero-name cursor-pointer">{name}</span>
-          </h2>
-          <p className="mono text-xs sm:text-sm text-txt-secondary tracking-[0.3em] mb-6">
-            PRODUCT DESIGNER &amp; FRONTEND ENGINEER
-          </p>
+          <h1 id="hero-title" className="mb-4 text-[clamp(2.75rem,8vw,6rem)] leading-none font-black tracking-tight">
+            <span className="hero-name">{profile.name}</span>
+            <span className="sr-only"> — {profile.title}</span>
+          </h1>
+          <p aria-hidden="true" className="mono mb-4 text-sm font-semibold tracking-[0.3em] text-txt-primary sm:text-base">{profile.title}</p>
         </div>
-
-        <div ref={contentRef} className="flex flex-col items-center gap-6">
-          <p className="text-base sm:text-lg text-txt-secondary max-w-xl leading-relaxed">
-            {subtitle}
+        <div ref={contentRef} className="flex flex-col items-center gap-4">
+          <p className="text-lg font-semibold text-txt-primary">Full-Stack &amp; Mobile Development</p>
+          <p className="max-w-xl text-base leading-relaxed text-txt-secondary sm:text-lg">
+            I build scalable web applications, backend systems, and cross-platform mobile experiences — from application architecture, databases, and APIs to intuitive user interfaces.
           </p>
-          <p className="text-sm text-txt-secondary max-w-lg leading-relaxed -mt-2">
-            From user needs to design systems and responsive interfaces, I work
-            across both design and development.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <a
-              href="#work"
-              className="hero-btn group flex items-center gap-3 px-8 py-4 bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet text-black font-extrabold font-outfit rounded-full shadow-lg shadow-accent-indigo/20"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById("work");
-                if (el)
-                  window.scrollTo({
-                    top: el.offsetTop - 20,
-                    behavior: "smooth",
-                  });
-              }}
-            >
-              VIEW MY WORK
-              <FaArrowRight className="transition-transform group-hover:translate-x-1" />
-            </a>
-
-            <a
-              href={cvLink}
-              download
-              className="flex items-center gap-2 px-6 py-4 rounded-full bg-dark-card border border-dark-elevated text-txt-primary hover:border-accent-cyan/40 hover:text-accent-cyan mono text-sm transition-all duration-300"
-            >
-              <FaDownload className="text-xs" /> DOWNLOAD CV
-            </a>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a href="#work" className="hero-btn group flex min-h-12 items-center gap-3 rounded-full bg-linear-to-r from-accent-cyan via-accent-indigo to-accent-violet px-5 py-3.5 font-extrabold sm:px-7 text-black shadow-lg shadow-accent-indigo/20">Explore Projects <FaArrowRight aria-hidden="true" className="transition-transform group-hover:translate-x-1" /></a>
+            <a href={profile.resume.href} download={profile.resume.filename} className="action action-secondary !px-3.5 sm:!px-5"><FaDownload aria-hidden="true" /> Download CV</a>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-x-5">
+            <a href="#contact" className="action action-text !px-0">Get in Touch</a>
+            <ProfileLinks />
           </div>
         </div>
       </div>
 
-      {/* Info Cards */}
-      <div
-        ref={cardsRef}
-        className="relative z-10 flex flex-col sm:flex-row gap-4 mt-12 sm:mt-16 w-full max-w-4xl px-2"
-      >
-        {/* Status Card */}
-        <div className="flex-1 hero-card">
-          <div className="flex items-center justify-between mb-4">
-            <span className="mono text-[10px] text-txt-muted">
-              STATUS / AVAILABLE
-            </span>
-            <div className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-accent-cyan rounded-full pulse-dot" />
-              <span className="w-2 h-2 bg-accent-cyan/30 rounded-full" />
+      <div ref={cardsRef} className="relative z-10 mt-7 flex w-full max-w-4xl flex-col gap-3 px-2 sm:mt-12 sm:gap-4 sm:flex-row">
+        <div className="min-w-0 flex-1">
+          <div className="hero-card h-full">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="mono text-[10px] text-txt-muted">Location</p>
+              <span aria-hidden="true" className="pulse-dot size-2 rounded-full bg-accent-cyan" />
             </div>
-          </div>
-          <div className="flex items-center gap-2 mb-3">
-            <FaMapMarkerAlt className="text-accent-cyan text-sm" />
-            <span className="text-xl font-bold font-outfit">EGYPT, EG</span>
-            <span className="mono text-[10px] text-txt-muted ml-1">
-              {currentTime}
-            </span>
-          </div>
-          <div className="pt-3 border-t border-dark-elevated">
-            <span className="mono text-[10px] text-txt-muted">FOCUS / </span>
-            <span className="mono text-[10px] text-accent-cyan">
-              PRODUCT DESIGN + ENGINEERING
-            </span>
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <FaMapMarkerAlt aria-hidden="true" className="text-sm text-accent-cyan" />
+              <span className="text-xl font-bold">{profile.location}</span>
+              <span className="mono min-w-[12ch] whitespace-nowrap text-[10px] text-txt-muted">{currentTime}</span>
+            </div>
+            <p className="mono border-t border-dark-elevated pt-3 text-[10px] text-accent-cyan">Full-Stack · Backend · Mobile · E-commerce</p>
           </div>
         </div>
-
-        {/* Core Stack Card */}
-        <div className="flex-1 hero-card">
-          <div className="flex items-center justify-between mb-4">
-            <span className="mono text-[10px] text-txt-muted">
-              CORE STACK / DAILY
-            </span>
-            <FaLayerGroup className="text-accent-cyan text-sm" />
+        <div className="min-w-0 flex-1">
+          <div className="hero-card h-full">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="mono text-[10px] text-txt-muted">Engineering Capabilities</p>
+              <FaLayerGroup aria-hidden="true" className="text-sm text-accent-cyan" />
+            </div>
+            <ul className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+              {capabilities.filter(({ summary }) => summary).map(({ id, summary }) => (
+                <li key={id} className="mono flex items-center rounded-lg border border-accent-cyan/12 bg-accent-cyan/5 px-2 py-1.5 text-[10px] leading-snug text-accent-cyan sm:px-3 sm:text-[11px]">{summary}</li>
+              ))}
+            </ul>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {coreStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-3 py-1.5 text-xs mono text-accent-cyan bg-accent-cyan/5 border border-accent-cyan/12 rounded-lg"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-          <p className="mono text-[10px] text-txt-muted mt-4 leading-relaxed">
-            The tools I reach for to turn ideas into products.
-          </p>
         </div>
       </div>
     </section>

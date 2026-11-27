@@ -9,8 +9,10 @@ import {
   FaExpand,
   FaExternalLinkAlt,
 } from "react-icons/fa";
-import ImageViewer from "@/components/ImageViewer";
+import dynamic from "next/dynamic";
 import { screenCountLabel } from "@/data/figma";
+
+const ImageViewer = dynamic(() => import("@/components/ImageViewer"));
 
 const LAYOUTS = {
   mobile: {
@@ -447,8 +449,7 @@ export default function DesignProjectGallery({
             href="/ui-ux"
             className="inline-flex items-center gap-2 min-h-11 mono text-xs text-txt-secondary hover:text-accent-cyan transition-colors"
           >
-            <FaArrowLeft aria-hidden="true" className="text-[10px]" /> All
-            designs
+            <FaArrowLeft aria-hidden="true" className="text-[10px]" /> Design Lab
           </Link>
           <Link
             href="/"

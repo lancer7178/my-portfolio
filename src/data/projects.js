@@ -1,175 +1,22 @@
-export const projects = [
-   {
-    title: "Aetheris",
-    slug: "aetheris",
-    featured: true,
-    category: "Product · Visual Knowledge Tools · Bilingual",
-    tagline: "Turn complex information into clear, interactive visual systems.",
-    description:
-      "An infinite node-based canvas for building mind maps, lore, timelines, system architectures, research structures, and knowledge graphs — anything that's easier to understand as a shape than a list. No account required, with full bilingual (English/Arabic) support.",
-    image: "/websites-cover/aetheris.png",
-    link: "https://aetheris-canvas.vercel.app/",
-    github: null,
-    technologies: ["Next.js", "React Flow", "TypeScript", "Tailwind CSS", "Local-first"],
-    caseStudy: {
-      problem:
-        "Complex information — a story's cast, a system's architecture, a research structure — naturally has shape: hierarchy, causality, connection. Most tools force it into a list or a slide deck anyway, flattening the structure and losing the relationships that mattered.",
-      idea:
-        "Give people an infinite canvas where nodes and connections are the primary unit, not an afterthought bolted onto a document editor — one tool for mind maps, lore bibles, timelines, architecture diagrams and knowledge graphs, anything that's easier to understand as a shape than a list.",
-      built: [
-        "Infinite pan-and-zoom canvas built on React Flow for node-based diagrams",
-        "Freeform node and edge creation for mind maps, timelines and knowledge graphs",
-        "Local-first boards — start building instantly with no account required",
-        "Full bilingual interface with English/Arabic and RTL support",
-        "Light and dark themes with a calm, focused visual language",
-        "A guided demo board to explore the canvas before building from scratch",
-      ],
-      decisions: [
-        {
-          title: "Shape over lists",
-          detail:
-            "The canvas treats nodes and connections as the core unit of the product, so structure that's normally lost in documents and slides stays visible and editable.",
-        },
-        {
-          title: "No account, no friction",
-          detail:
-            "Boards are stored on-device so anyone can start building the moment they land on the page, with accounts planned as an addition later rather than a gate up front.",
-        },
-        {
-          title: "Bilingual from the start",
-          detail:
-            "English/Arabic and RTL support are built into the interface itself rather than patched on after, so the canvas reads naturally in either direction.",
-        },
-      ],
-      technology: ["Next.js", "React Flow", "TypeScript", "Tailwind CSS"],
-      outcome:
-        "A focused canvas tool that treats structure as the point — where a mind map, a system diagram, or a piece of lore can be built and explored as the shape it actually is.",
-    },
-  },
+import { featuredProjects } from "./featured-projects";
+
+/** @type {import("./project-types").Project[]} */
+const additionalProjects = [
   {
-    title: "parallax",
-    slug: "parallax",
-    featured: true,
-    category: "Product · SaaS · Agency Operations",
-    tagline: "The operating system for your agency.",
-    description:
-      "An all-in-one agency management platform with Kanban-based project tracking, financial tools for invoices and budgets, and a dedicated client portal that keeps clients updated automatically.",
-    image: "/websites-cover/parallax.png",
-    link: "https://parallax-agency.vercel.app",
-    github: null,
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Product UX"],
-    caseStudy: {
-      problem:
-        "Agencies run their work and their money in different tools — projects live in one app, client communication in another, approvals in email, and invoices in a spreadsheet. Nothing is connected, so nobody can answer a simple question: is this project actually profitable?",
-      idea:
-        "Connect agency work and agency money in a single workspace, so every task, approval and invoice traces back to the project it belongs to. The core product idea is money attached to work.",
-      built: [
-        "Agency dashboard with project health and an Attention Center surfacing what needs action",
-        "Kanban-based project and task management",
-        "Client portal with automatic status updates",
-        "Approval flow that turns delivered work into billable items",
-        "Invoices, budgets and revenue tracking tied to each project",
-        "Role-based access for team members and clients",
-      ],
-      decisions: [
-        {
-          title: "Money attached to work",
-          detail:
-            "Instead of a separate finance module, invoices and revenue are derived from the actual project and its approvals — the numbers can never drift from the work.",
-        },
-        {
-          title: "One connected workflow",
-          detail:
-            "Project → work → client → approval → invoice → payment → revenue. Every screen is a step in that loop rather than an isolated feature.",
-        },
-        {
-          title: "Attention over dashboards",
-          detail:
-            "Rather than more charts, the dashboard leads with an Attention Center that tells the user what to do next.",
-        },
-      ],
-      technology: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-      outcome:
-        "A single workspace where an agency can see projects, clients, approvals and revenue in one place — and always know whether the work and the money line up.",
-    },
-  },
-  {
-    title: "orenda",
-    slug: "orenda",
-    featured: true,
-    category: "Mental Wellness · Product UX · Privacy-first",
-    tagline: "A profile, not a label.",
-    description:
-      "A private, on-device mental health screening tool offering a 55-question assessment across nine psychological well-being areas, built on validated clinical instruments like PHQ-9 and GAD-7, with no accounts, servers, or data retention.",
-    image: "/websites-cover/orenda.png",
-    link: "https://orenda-care.vercel.app",
-    github: null,
-    technologies: ["Next.js", "Local-first", "Privacy-first", "Accessibility"],
-    caseStudy: {
-      problem:
-        "Self-check-in tools for mental wellbeing often ask people to hand over sensitive answers to a server, and then hand back a blunt label. That's both a privacy risk and a design responsibility — a screening is not a diagnosis, and it shouldn't feel like one.",
-      idea:
-        "A calm, private self-check-in that runs entirely on the person's own device. It builds a profile across nine areas of wellbeing rather than reducing someone to a single label, and it's honest about what it is: screening, not diagnosis.",
-      built: [
-        "A 55-question assessment across nine psychological wellbeing areas",
-        "One-question-at-a-time flow designed to reduce pressure",
-        "Local-first architecture — no accounts, no servers, no data retention",
-        "Results presented as a profile with methodology transparency",
-        "Clear screening-vs-diagnosis framing and safety considerations",
-        "Calm, emotionally considered interface with RTL support",
-      ],
-      decisions: [
-        {
-          title: "Local-first by default",
-          detail:
-            "Answers never leave the device. Privacy isn't a setting — it's the architecture, which also removes an entire class of data risk.",
-        },
-        {
-          title: "A profile, not a label",
-          detail:
-            "Results describe patterns across nine areas instead of assigning a diagnosis, keeping the experience responsible and non-alarming.",
-        },
-        {
-          title: "Grounded in validated instruments",
-          detail:
-            "The assessment builds on established clinical screeners such as PHQ-9 and GAD-7, with transparent methodology.",
-        },
-      ],
-      technology: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
-      outcome:
-        "A sensitive product that respects the person using it — private by design, calm to move through, and honest about being a starting point rather than a verdict.",
-    },
-  },
-  {
-    title: "Rahlet Umrah",
-    slug: "rahlet-umrah",
-    featured: false,
-    category: "Travel Marketplace · Bilingual",
-    description:
-      "A bilingual Umrah marketplace for comparing packages from licensed providers, with transparent pricing, guided booking, and a two-stage payment journey built around visa approval.",
-    image: "/websites-cover/rahlet-umrah.png",
-    link: "https://rehletumrah.com",
-    github: null,
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-        agency: "design-ways",
-  },
-  {
-    title: "shot craft",
+    title: "Shot Craft",
     slug: "shot-craft",
-    featured: false,
+    filters: ["web", "open-source"],
     category: "Utility Product · Image Processing · Frontend Engineering",
-    tagline: "Store-ready screenshots, processed entirely in your browser.",
     description:
       "An open-source screenshot conversion tool that resizes and formats app screenshots for App Store Connect and Google Play, with smart cropping, device frame generation, and batch ZIP downloads — all processed client-side with no accounts or storage.",
     image: "/websites-cover/shot-craft.png",
     link: "https://shot-craft-web.vercel.app",
-    github: null,
-    technologies: ["React", "TypeScript", "Client-side", "ZIP export"],
+    github: "https://github.com/lancer7178/shot-craft",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     caseStudy: {
-      problem:
+      role: "Built the client-side screenshot conversion and batch export workflow.",
+      requirements:
         "Shipping an app means preparing screenshots to strict, repetitive store specs — the right sizes for App Store Connect and Google Play, framed and cropped consistently. Doing it by hand in a design tool is slow, and most online converters ask you to upload your assets to their servers.",
-      idea:
-        "A focused utility that does the tedious work in seconds and never uploads anything. All processing happens client-side in the browser, so there are no accounts, no storage, and nothing to trust with your files.",
       built: [
         "Client-side image processing — nothing is uploaded to a server",
         "Smart cropping and resizing to App Store and Google Play specs",
@@ -178,6 +25,7 @@ export const projects = [
         "One-click ZIP export of the finished set",
         "Account-free, storage-free workflow",
       ],
+      data: "Image processing and ZIP creation happen inside the browser. The tool requires no upload or account.",
       decisions: [
         {
           title: "Everything client-side",
@@ -195,190 +43,82 @@ export const projects = [
             "A utility should be usable in the moment. No sign-up, no storage — open it and get store-ready output.",
         },
       ],
-      technology: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+      stack: [{ layer: "Application", technologies: ["Next.js", "TypeScript", "React", "Tailwind CSS"] }],
       outcome:
         "An open-source tool that turns a fiddly, privacy-sensitive chore into a fast, in-browser workflow — store-ready screenshots exported as a ZIP without a single upload.",
     },
   },
   {
-    title: "Sato pharmacy",
-    slug: "sato-pharmacy",
-    featured: false,
-    category: "Corporate Web · Bilingual",
+    title: "Orenda",
+    slug: "orenda",
+    filters: ["web"],
+    category: "Mental Wellness · Product UX · Privacy-first",
     description:
-      "A corporate site for an Egyptian pharmaceutical manufacturer, showcasing its in-house and partner-sourced product catalog with filtering, company news, and career listings, with full bilingual (English/Arabic) support.",
-    image: "/websites-cover/sato.png",
-    link: "https://satopharma.com",
+      "A private, on-device mental health screening tool offering a 55-question assessment across nine psychological well-being areas, built on validated clinical instruments like PHQ-9 and GAD-7, with no accounts, servers, or data retention.",
+    image: "/websites-cover/orenda.png",
+    link: "https://orenda-care.vercel.app",
     github: null,
-    technologies: ["react", "next.js", "Tailwind CSS", "framer-motion", "REST API"],
-    agency: "design-ways",
-  },
-  {
-    title: "Medizen Medical Website",
-    slug: "medizen",
-    featured: false,
-    category: "Healthcare Web · Bilingual",
-    description:
-      "A responsive medical website powered by WordPress REST API, delivering real-time healthcare services, detailed treatments, and bilingual support. Features smooth animations and a modern design for seamless user engagement.",
-    image: "/websites-cover/medizen.png",
-    link: "https://medizenegypt.com",
-    github: null,
-    technologies: [
-      "react",
-      "next.js",
-      "Tailwind CSS",
-      "framer-motion",
-      "WordPress",
-      "REST API",
-    ],
-    agency: "bowmen",
-  },
-  {
-    title: "Bowmen plus",
-    slug: "bowmen-plus",
-    featured: false,
-    category: "Brand · Corporate Web",
-    description:
-      "A cutting-edge headless WordPress application. Built with React and Next.js, it merges sophisticated animations with a utility-first design to redefine modern web browsing.",
-    image: "/websites-cover/bowmenplus.png",
-    link: "https://bowmenplus.com",
-    github: null,
-    technologies: [
-      "react",
-      "next.js",
-      "Tailwind CSS",
-      "WordPress",
-      "REST API",
-      "framer-motion",
-    ],
-    agency: "bowmen",
-  },
-  {
-    title: "Underground Heritage",
-    slug: "underground-heritage",
-    featured: false,
-    category: "E-commerce · Headless Commerce",
-    description:
-      "A premium headless e-commerce experience designed to showcase cultural and heritage-inspired products with a focus on high-performance retail and immersive storytelling.",
-    image: "/websites-cover/underground-heritage.png",
-    link: "https://undergroun-heritage-e-commerce-s.vercel.app/",
-    github: null,
+    technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     caseStudy: {
-      problem:
-        "A streetwear store sells attitude as much as clothing, but strong branding can easily get in the way of shopping. The experience had to feel bold while keeping the route from browsing to checkout short and clear.",
-      idea:
-        "Let the home page carry the brand, then let the design step back as people get closer to buying. A dark editorial style gives way to focused filters, a clear product page and a simple cart and checkout.",
-      contribution: {
-        design: [
-          "The dark, editorial visual direction",
-          "Page layouts for the full shopping journey",
-          "The product card, filters and order summary",
-          "Responsive layouts for desktop and mobile",
-        ],
-        frontend: [
-          "Building the store in Next.js and TypeScript",
-          "Search, filtering and sorting",
-          "Product options, favorites and the cart",
-          "The checkout form and its mock payment flow",
-        ],
-      },
-      journey: [
-        {
-          title: "Home and discovery",
-          detail:
-            "A large featured drop sets the tone, and a search field and clear navigation stay in the header for people who already know what they want.",
-          src: "/design-previews/underground-heritage/home.webp",
-          alt: "Underground Heritage home page with a featured product drop",
-        },
-        {
-          title: "Browsing with filters",
-          detail:
-            "Filters for color, size and price sit beside the products, with a live result count and sorting, so people can narrow things down without leaving the page.",
-          src: "/design-previews/underground-heritage/shop.webp",
-          alt: "Shop page with color and size filters beside a grid of products",
-        },
-        {
-          title: "Search results",
-          detail:
-            "Searching leads to the same layout with a category filter added, so there's nothing new to learn.",
-          src: "/design-previews/underground-heritage/search.webp",
-          alt: "Search results for tee, showing filters and matching products",
-        },
-        {
-          title: "Product details",
-          detail:
-            "An image gallery sits next to color, size and quantity, with Add to Cart and Buy Now, then product details and related items further down.",
-          src: "/design-previews/underground-heritage/product.webp",
-          alt: "Product page with a large image and color and size options",
-        },
-        {
-          title: "Shopping cart",
-          detail:
-            "Each item shows the chosen color and size and can be changed in place, with the costs and next step kept together in an order summary.",
-          src: "/design-previews/underground-heritage/cart.webp",
-          alt: "Shopping cart with one item and an order summary",
-        },
-        {
-          title: "Checkout",
-          detail:
-            "One page with contact, shipping and payment details beside the order summary. This is a demo: the card and PayPal options are mock, and no payment gateway is connected.",
-          src: "/design-previews/underground-heritage/checkout.webp",
-          alt: "Checkout form with payment options and an order summary",
-        },
+      role: "Built the browser-based assessment, on-device results and bilingual experience.",
+      requirements:
+        "Self-check-in tools for mental wellbeing often ask people to hand over sensitive answers to a server, and then hand back a blunt label. That's both a privacy risk and a design responsibility — a screening is not a diagnosis, and it shouldn't feel like one.",
+      built: [
+        "A 55-question assessment across nine psychological wellbeing areas",
+        "One-question-at-a-time flow designed to reduce pressure",
+        "Local-first architecture — no accounts, no servers, no data retention",
+        "Results presented as a profile with methodology transparency",
+        "Clear screening-vs-diagnosis framing and safety considerations",
+        "Calm, emotionally considered interface with RTL support",
       ],
-      mobile: [
-        {
-          title: "Mobile home",
-          description: "The featured drop and navigation on a phone.",
-          src: "/design-previews/underground-heritage/mobile-home.webp",
-        },
-        {
-          title: "Mobile shop",
-          description: "The shop page adapted to a single column.",
-          src: "/design-previews/underground-heritage/mobile-shop.webp",
-        },
-        {
-          title: "Mobile product",
-          description: "The product image and options stacked for a phone.",
-          src: "/design-previews/underground-heritage/mobile-product.webp",
-        },
-      ],
+      data: "The assessment runs on-device and does not send responses to a server.",
       decisions: [
         {
-          title: "Bold first, focused later",
+          title: "Local-first by default",
           detail:
-            "Expressive layouts are saved for the home page. The shop, cart and checkout are calmer, so the brand doesn't compete with the task.",
+            "Answers never leave the device. Privacy isn't a setting — it's the architecture, which also removes an entire class of data risk.",
         },
         {
-          title: "One product card everywhere",
+          title: "A profile, not a label",
           detail:
-            "The same card appears on the home page, in the shop and under related items, so price, discount and favorite look the same wherever people find them.",
+            "Results describe patterns across nine areas instead of assigning a diagnosis, keeping the experience responsible and non-alarming.",
         },
         {
-          title: "The total is always visible",
+          title: "Grounded in validated instruments",
           detail:
-            "The cart and checkout both keep an order summary in view, so subtotal, tax and shipping are clear before anyone pays.",
+            "The assessment builds on established clinical screeners such as PHQ-9 and GAD-7, with transparent methodology.",
         },
       ],
-      technology: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      stack: [{ layer: "Application", technologies: ["Next.js", "React", "Tailwind CSS", "Framer Motion"] }],
       outcome:
-        "A complete storefront journey from discovery to checkout, on desktop and mobile. Payments are still a demo, so connecting a real gateway would be the next step before launch.",
+        "A sensitive product that respects the person using it — private by design, calm to move through, and honest about being a starting point rather than a verdict.",
     },
+  },
+  {
+    title: "Bowmen Plus",
+    slug: "bowmen-plus",
+    filters: ["cms", "web"],
+    category: "Brand · Corporate Web",
+    description:
+      "A headless WordPress website with a Next.js frontend for Bowmen’s corporate and marketing content.",
+    image: "/websites-cover/bowmenplus.png",
+    originalLink: "https://bowmenplus.com",
+    status: "Live site unavailable",
+    github: null,
     technologies: [
-      "Next.js",
       "React",
+      "Next.js",
       "Tailwind CSS",
-      "TypeScript",
-      "WooCommerce REST API",
+      "WordPress",
+      "REST API",
       "Framer Motion",
-      "Stripe",
     ],
     agency: "bowmen",
   },
   {
     title: "Neuro Bridge",
     slug: "neuro-bridge",
-    featured: false,
+    filters: ["web"],
     category: "Healthcare Web",
     description:
       "An innovative healthcare platform focusing on neurology and wellness services. Built with modern tech stack, it provides detailed information about neurological treatments, specialist consultations, and patient management.",
@@ -386,17 +126,17 @@ export const projects = [
     link: "https://neuro-bridge-website.vercel.app",
     github: null,
     technologies: [
-      "react",
-      "next.js",
+      "React",
+      "Next.js",
       "Tailwind CSS",
-      "firebase",
-      "framer-motion",
+      "Firebase",
+      "Framer Motion",
     ],
   },
   {
     title: "Nova Space",
     slug: "nova-space",
-    featured: false,
+    filters: ["web"],
     category: "Interactive · 3D Web Experience",
     description:
       "An immersive space exploration website featuring stunning 3D visuals and interactive elements. Powered by Three.js, it educates users about universe exploration and astronomy with smooth animations and captivating design.",
@@ -404,17 +144,17 @@ export const projects = [
     link: "https://explore-nova.vercel.app",
     github: null,
     technologies: [
-      "react",
-      "next.js",
+      "React",
+      "Next.js",
       "Tailwind CSS",
       "Three.js",
-      "framer-motion",
+      "Framer Motion",
     ],
   },
   {
     title: "Voyage AI",
     slug: "voyage-ai",
-    featured: false,
+    filters: ["web"],
     category: "AI Product · Web App",
     description:
       "An AI-powered travel planning platform offering personalized itinerary recommendations, real-time travel assistance, and destination insights. Designed with intuitive navigation to revolutionize how travelers explore the world.",
@@ -422,35 +162,53 @@ export const projects = [
     link: "https://voyage-ai-five.vercel.app",
     github: null,
     technologies: [
-      "react",
-      "next.js",
+      "React",
+      "Next.js",
       "Tailwind CSS",
-      "huggingface",
-      "framer-motion",
+      "Hugging Face",
+      "Framer Motion",
     ],
   },
   {
     title: "Aurum",
     slug: "aurum",
-    featured: false,
-    category: "Data · Analytics Dashboard",
+    filters: ["web", "mobile"],
+    category: "Market Analytics · Web & Mobile",
+    type: "Web dashboard and React Native client",
     description:
-      "Real-time gold market analytics and insights. Stay ahead of the curve with precision data.",
+      "A gold-market dashboard with a separate React Native client for viewing prices and market information. The live link opens the web dashboard.",
     image: "/websites-cover/aurum.png",
+    imageAlt: "Aurum web dashboard showing gold price and market data",
     link: "https://aurum-tracker-gold.vercel.app",
     github: null,
     technologies: [
-      "react",
-      "next.js",
+      "React",
+      "Next.js",
       "Tailwind CSS",
       "GoldAPI",
-      "framer-motion",
+      "React Native",
+      "Expo",
+      "Framer Motion",
     ],
+    caseStudy: {
+      requirements: "Show gold prices and market figures in a web dashboard and on mobile, with an Arabic and English experience.",
+      stack: [
+        { layer: "Web dashboard", technologies: ["Next.js", "React", "Tailwind CSS"] },
+        { layer: "Mobile client", technologies: ["React Native", "Expo", "TypeScript"] },
+        { layer: "Market data", technologies: ["GoldAPI"] },
+      ],
+      built: ["Gold prices in Egyptian pounds", "Arabic and English price views", "Mobile pull-to-refresh with loading and error states"],
+      businessLogic: "The mobile client derives karat prices from the spot price when the data provider does not supply a specific purity price.",
+      challenges: [
+        { title: "Keeping market updates manageable", detail: "The mobile client shares request logic between polling and pull-to-refresh. It avoids concurrent requests and limits rapid refreshes." },
+      ],
+      outcome: "The web dashboard is publicly available. The React Native client is documented as an implementation, with public distribution still unconfirmed.",
+    },
   },
   {
     title: "Dr. Abdel-Moneim's Clinic",
     slug: "dr-abdel-moneim",
-    featured: false,
+    filters: ["cms", "web"],
     category: "Healthcare Web · Bilingual",
     description:
       "A professional mental health clinic website providing comprehensive information about services, treatment options, and appointment booking. Built with React and Next.js, featuring smooth animations and bilingual support for accessibility.",
@@ -458,10 +216,10 @@ export const projects = [
     link: "https://dr-abdel-moneim.vercel.app/",
     github: null,
     technologies: [
-      "react",
-      "next.js",
+      "React",
+      "Next.js",
       "Tailwind CSS",
-      "framer-motion",
+      "Framer Motion",
       "WordPress",
       "REST API",
     ],
@@ -470,7 +228,7 @@ export const projects = [
   {
     title: "Hayah Ava Healthcare",
     slug: "hayah-ava",
-    featured: false,
+    filters: ["cms", "web"],
     category: "Healthcare Web · Bilingual",
     description:
       "A sleek healthcare platform integrated with WordPress, offering real-time medical services, appointment booking, and comprehensive health information. Built with modern animations and bilingual interface for better accessibility.",
@@ -478,10 +236,10 @@ export const projects = [
     link: "https://hayah-av.vercel.app",
     github: null,
     technologies: [
-      "react",
-      "next.js",
+      "React",
+      "Next.js",
       "Tailwind CSS",
-      "framer-motion",
+      "Framer Motion",
       "WordPress",
       "REST API",
     ],
@@ -490,19 +248,19 @@ export const projects = [
   {
     title: "Next Travel",
     slug: "next-travel",
-    featured: false,
+    filters: ["cms", "web"],
     category: "Travel · Web App",
     description:
-      "A comprehensive travel platform connecting travelers with beautiful destinations and personalized experiences. Features real-time booking, travel recommendations, and an intuitive interface powered by modern web technologies.",
+      "A Next.js travel website that integrates Strapi content for destination discovery and travel information.",
     image: "/websites-cover/next.png",
     link: "https://next-travel-puce.vercel.app",
     github: null,
     technologies: [
-      "react",
-      "next.js",
+      "React",
+      "Next.js",
       "Tailwind CSS",
-      "framer-motion",
-      "strapi",
+      "Framer Motion",
+      "Strapi",
       "REST API",
     ],
     agency: "bowmen",
@@ -510,32 +268,32 @@ export const projects = [
   {
     title: "Renova",
     slug: "renova",
-    featured: false,
+    filters: ["cms", "web"],
     category: "Healthcare · Corporate Web",
     description:
       "Renova Clinic is a Cairo-based plastic surgery center offering advanced aesthetic treatments, including body contouring, facelifts, and scar revision, in a modern medical setting. ",
     image: "/websites-cover/renova.png",
     link: "https://dr-amirelboghdady.com",
     github: null,
-    technologies: ["html", "Tailwind CSS", "php", "wordpress"],
+    technologies: ["HTML5", "Tailwind CSS", "PHP", "WordPress"],
     agency: "bowmen",
   },
   {
     title: "Coza Store",
     slug: "coza-store",
-    featured: false,
+    filters: ["commerce", "web"],
     category: "E-commerce · Web",
     description:
-      "A modern e-commerce platform built with HTML, CSS, and Bootstrap, featuring a sleek interface and smooth user interactions with jQuery. Offers fast browsing, secure checkout, and an intuitive shopping experience for customers.",
+      "A storefront demo built with Bootstrap and jQuery, with product browsing and shopping interface interactions.",
     image: "/websites-cover/CozaStore.png",
     link: "https://lancer7178.github.io/Bdaya-e-commerce/",
     github: null,
-    technologies: ["html", "css", "bootstrap", "js", "Jquery"],
+    technologies: ["HTML5", "CSS3", "Bootstrap", "JavaScript", "jQuery"],
   },
   {
     title: "AniWatched",
     slug: "aniwatched",
-    featured: false,
+    filters: ["web"],
     category: "Web App · Utility",
     description:
       "A minimalist web application for anime enthusiasts to track watched shows. Built with Tailwind CSS and jQuery, it prioritizes simplicity and speed, providing a distraction-free interface for managing personal anime libraries.",
@@ -543,18 +301,23 @@ export const projects = [
     link: "https://lancer7178.github.io/Ani-watched/",
     github: null,
     technologies: [
-      "html",
-      "css",
+      "HTML5",
+      "CSS3",
       "Tailwind CSS",
-      "bootstrap",
-      "javaScript",
-      "Jquery",
+      "Bootstrap",
+      "JavaScript",
+      "jQuery",
     ],
   },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured);
-export const selectedProjects = projects.filter((p) => !p.featured);
-export const caseStudyProjects = projects.filter((p) => p.caseStudy);
-export const getProjectBySlug = (slug) =>
-  projects.find((p) => p.slug === slug);
+/** @type {import("./project-types").Project[]} */
+export const projects = [
+  ...featuredProjects,
+  ...additionalProjects,
+];
+
+export const featuredEngineeringProjects = projects.filter((project) => project.featured);
+export const selectedProjects = projects.filter((project) => !project.featured);
+export const caseStudyProjects = projects.filter((project) => project.caseStudy);
+export const getProjectBySlug = (slug) => projects.find((project) => project.slug === slug);

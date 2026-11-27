@@ -1,10 +1,8 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import { screenCountLabel } from "@/data/figma";
+import SectionHeading from "@/components/SectionHeading";
 
 /* Tall phone screens lose too much when cropped into a wide card, so a mobile
    project without its own cover shows a row of its real screens instead. */
@@ -42,7 +40,7 @@ function ProjectCover({ project, isWide }) {
           ? "(min-width: 768px) 800px, 100vw"
           : "(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
       }
-      className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+      className="project-image object-cover object-top"
     />
   );
 }
@@ -52,7 +50,7 @@ function ProjectCard({ project, isWide, compact }) {
     <li className={isWide ? "md:col-span-2" : ""}>
       <Link
         href={`/ui-ux/${project.id}`}
-        className="group flex flex-col h-full rounded-2xl overflow-hidden border border-white/10 bg-dark-card hover:border-accent-cyan/50 transition-colors duration-300"
+        className="group panel-hover flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-dark-card"
       >
         <span
           className={`relative block overflow-hidden bg-dark-surface ${
@@ -68,7 +66,7 @@ function ProjectCard({ project, isWide, compact }) {
             {project.category}
             {project.role ? ` · ${project.role}` : ""}
           </span>
-          <span className="mt-2 text-xl sm:text-2xl font-bold font-outfit text-txt-primary group-hover:text-accent-cyan transition-colors duration-200">
+          <span className="mt-2 text-xl sm:text-2xl font-bold font-outfit project-title text-txt-primary">
             {project.title}
           </span>
           <span
@@ -93,7 +91,7 @@ function ProjectCard({ project, isWide, compact }) {
               {project.caseStudy ? "View case study" : "Explore"}
               <FaArrowRight
                 aria-hidden="true"
-                className="text-xs group-hover:translate-x-0.5 transition-transform duration-200"
+                className="text-xs motion-safe:group-hover:translate-x-0.5 transition-transform duration-200"
               />
             </span>
           </span>
@@ -104,109 +102,40 @@ function ProjectCard({ project, isWide, compact }) {
 }
 
 /* ─── Main Section ─── */
-export default function UiUxFigmaSection({
-  summary,
-  projects = [],
-  process = [],
-  showHeader = true,
-  compact = false,
-}) {
+export default function UiUxFigmaSection({ summary, projects, process = [], compact = false }) {
   return (
-    <section
-      id="uiux"
-      className="relative py-16 sm:py-20 px-6 md:px-12 bg-linear-to-b from-dark via-[#05050A] to-dark text-white overflow-hidden scroll-mt-20"
-    >
-      {showHeader && (
-        <div
-          className="section-number top-10 left-0 sm:left-10 opacity-100"
-          style={{ WebkitTextStroke: "1px rgba(34, 211, 238, 0.04)" }}
-        >
-          04
-        </div>
-      )}
-
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {showHeader ? (
-          <motion.div
-            className="mb-10"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <p className="mono text-xs text-accent-cyan tracking-[0.3em] mb-4">{`// UI/UX DESIGN`}</p>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-outfit font-black tracking-tight leading-none">
-              <span className="text-white italic">DESIGN </span>
-              <span className="text-outline-accent italic">PROJECTS</span>
-            </h2>
-            {summary && (
-              <p className="mt-6 text-lg text-txt-secondary max-w-3xl leading-relaxed">
-                {summary}
-              </p>
-            )}
-          </motion.div>
+    <section id="uiux" aria-labelledby={compact ? "design-lab-title" : "design-projects-title"} className="relative overflow-hidden bg-linear-to-b from-dark via-[#05050A] to-dark">
+      {compact && <span aria-hidden="true" className="section-number top-10 left-0 sm:left-10">04</span>}
+      <div className="section-wrap section-space relative z-10">
+        {compact ? (
+          <SectionHeading id="design-lab-title" label="UI/UX Design" accent="Lab" italic description={summary}>Design</SectionHeading>
         ) : (
-          <h2 className="sr-only">Design projects</h2>
+          <h2 id="design-projects-title" className="sr-only">Design Projects</h2>
         )}
 
-        {/* The first project spans two columns, so five cards fill the grid. */}
-        <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <ul className={`grid gap-5 md:grid-cols-2 ${compact ? "" : "lg:grid-cols-3"}`}>
           {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              isWide={index === 0}
-              compact={compact}
-            />
+            <ProjectCard key={project.id} project={project} isWide={!compact && index === 0} compact={compact} />
           ))}
         </ul>
 
         {compact && (
-          <div className="mt-8 text-center">
-            <Link
-              href="/ui-ux"
-              className="inline-flex items-center gap-2 min-h-11 px-6 rounded-full mono text-xs text-accent-cyan bg-dark-card border border-accent-cyan/25 hover:border-accent-cyan/50 transition-colors duration-300"
-            >
-              VIEW ALL DESIGNS
-              <FaArrowRight aria-hidden="true" className="text-[10px]" />
-            </Link>
-          </div>
+          <Link href="/ui-ux" className="action action-secondary mt-6">
+            Explore the Design Lab <FaArrowRight aria-hidden="true" />
+          </Link>
         )}
 
-        {process.length > 0 && (
-          <div className="mt-20">
-            <h3 className="text-3xl font-bold font-outfit text-white">
-              How I design
-            </h3>
-            <p className="mt-2 mb-6 max-w-2xl text-txt-secondary leading-relaxed">
-              The stages I draw on, adapted to each project. Not every project
-              needs all of them.
-            </p>
-            <ol className="grid md:grid-cols-3 gap-5">
-              {process.map((item, index) => (
-                <li
-                  key={item.title}
-                  className="rounded-2xl border border-white/10 bg-dark-card p-6"
-                >
-                  <p className="font-mono text-sm font-bold text-accent-cyan mb-2">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h4 className="text-lg font-bold font-outfit text-txt-primary mb-2">
-                    {item.title}
-                  </h4>
-                  <p className="text-sm text-txt-secondary leading-relaxed">
-                    {item.description}
-                  </p>
-                  {item.points?.length > 0 && (
-                    <ul className="mt-4 pt-4 space-y-2 border-t border-white/10">
-                      {item.points.map((point) => (
-                        <li key={point} className="flex items-start gap-2.5">
-                          <span className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-cyan shrink-0" />
-                          <span className="text-sm text-txt-primary leading-relaxed">
-                            {point}
-                          </span>
-                        </li>
-                      ))}
+        {!!process.length && (
+          <div className="mt-12">
+            <h3 className="mb-5 text-2xl font-bold">Design Approach</h3>
+            <ol className="grid gap-5 md:grid-cols-3">
+              {process.map((item) => (
+                <li key={item.title} className="rounded-xl border border-white/10 bg-dark-card p-5">
+                  <h4 className="mb-2 text-lg font-bold">{item.title}</h4>
+                  <p className="text-sm leading-relaxed text-txt-secondary">{item.description}</p>
+                  {!!item.points?.length && (
+                    <ul className="mt-4 list-disc space-y-2 border-t border-white/10 pt-4 pl-4 text-sm text-txt-secondary marker:text-accent-cyan">
+                      {item.points.map((point) => <li key={point}>{point}</li>)}
                     </ul>
                   )}
                 </li>
