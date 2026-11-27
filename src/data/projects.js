@@ -141,6 +141,19 @@ export const projects = [
     },
   },
   {
+    title: "Rahlet Umrah",
+    slug: "rahlet-umrah",
+    featured: false,
+    category: "Travel Marketplace · Bilingual",
+    description:
+      "A bilingual Umrah marketplace for comparing packages from licensed providers, with transparent pricing, guided booking, and a two-stage payment journey built around visa approval.",
+    image: "/websites-cover/rahlet-umrah.png",
+    link: "https://rehletumrah.com",
+    github: null,
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+        agency: "design-ways",
+  },
+  {
     title: "shot craft",
     slug: "shot-craft",
     featured: false,
